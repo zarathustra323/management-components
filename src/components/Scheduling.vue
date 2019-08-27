@@ -8,19 +8,27 @@
       </ul>
     </div>
     <div class="card-body">
-
+      <add-website-schedule v-if="selected === 'website'" />
+      <add-magazine-schedule v-else-if="selected === 'magazine'" />
+      <add-newsletter-schedule v-else-if="selected === 'newsletter'" />
     </div>
   </div>
 </template>
 
 <script>
 import NavLink from './NavLink.vue';
+import AddWebsiteSchedule from './AddWebsiteSchedule.vue';
+import AddMagazineSchedule from './AddMagazineSchedule.vue';
+import AddNewsletterSchedule from './AddNewsletterSchedule.vue';
 
 export default {
   name: 'scheduling',
   data: () => ({ selected: 'website' }),
   components: {
     NavLink,
+    AddWebsiteSchedule,
+    AddMagazineSchedule,
+    AddNewsletterSchedule,
   },
   methods: {
     changeNav(id) {
