@@ -1,14 +1,23 @@
 <template>
-  <div class="list-group-item">
+  <div class="list-group-item d-flex justify-content-between">
     <div>
       <p>{{ site.name }} - {{ section.fullName }} ({{ option.name }})</p>
       <time :datetime="start.toISOString()">{{ start.format('MM/DD/YYYY h:mma') }}</time>
+    </div>
+
+    <div>
+      <div class="btn-group" role="group">
+        <edit-button />
+        <delete-button />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment';
+import EditButton from '../buttons/edit.vue';
+import DeleteButton from '../buttons/delete.vue';
 
 export default {
   /**
@@ -36,6 +45,8 @@ export default {
       default: null,
     },
   },
+
+  components: { EditButton, DeleteButton },
 
   /**
    *
