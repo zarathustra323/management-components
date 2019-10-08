@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'scheduling-nav-item',
   props: {
     id: String,
     selected: String,
