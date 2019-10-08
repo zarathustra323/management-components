@@ -7,7 +7,7 @@
       list="websites"
       class="form-control"
       autocomplete="off"
-      :readonly="$apollo.loading"
+      :readonly="isLoadingWebsites"
       :placeholder="placeholder"
     />
     <datalist id="websites">
@@ -40,8 +40,11 @@ export default {
    *
    */
   computed: {
+    isLoadingWebsites() {
+      return this.$apollo.queries.websites.loading;
+    },
     placeholder() {
-      if (this.$apollo.loading) return 'Loading websites...';
+      if (this.isLoadingWebsites) return 'Loading websites...';
       return 'Select a website...';
     },
   },
