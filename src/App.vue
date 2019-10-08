@@ -10,7 +10,7 @@
 
 <script>
 import 'bootstrap/scss/bootstrap.scss';
-import Scheduling from './components/Scheduling.vue';
+import Scheduling from './components/scheduling/index.vue';
 
 export default {
   name: 'app',

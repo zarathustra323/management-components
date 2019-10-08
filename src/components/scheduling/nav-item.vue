@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'scheduling-nav-item',
   props: {
     id: String,
     selected: String,
@@ -20,7 +21,7 @@ export default {
       return this.id === this.selected;
     },
     anchor() {
-      return `#add-${this.id}-schedule`;
+      return `#manage-scheduling-${this.id}`;
     },
     linkClasses() {
       const classes = ['nav-link'];
