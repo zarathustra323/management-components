@@ -31,6 +31,16 @@ export default {
   /**
    *
    */
+  props: {
+    contentId: {
+      type: Number,
+      required: true,
+    },
+  },
+
+  /**
+   *
+   */
   data: () => ({
     items: [
       { id: 'websites', label: 'Websites', component: WebsiteSchedules },
