@@ -10,6 +10,7 @@
     <list-item
       v-for="(schedule) in schedules"
       :key="schedule.id"
+      :id="schedule.id"
       :site="schedule.site"
       :section="schedule.section"
       :option="schedule.option"

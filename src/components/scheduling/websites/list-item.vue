@@ -7,8 +7,8 @@
 
     <div class="ml-2">
       <div class="btn-group" role="group">
-        <edit-button />
-        <delete-button />
+        <edit-button @click="editSchedule" />
+        <delete-button @click="deleteSchedule" />
       </div>
     </div>
   </div>
@@ -24,6 +24,10 @@ export default {
    *
    */
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     site: {
       type: Object,
       required: true,
@@ -58,6 +62,18 @@ export default {
     end() {
       if (this.endDate) return moment(this.endDate);
       return null;
+    },
+  },
+
+  /**
+   *
+   */
+  methods: {
+    editSchedule() {
+      console.log('edit schedule', this.id);
+    },
+    deleteSchedule() {
+      console.log('delete schedule', this.id);
     },
   },
 };
