@@ -7,6 +7,16 @@ export default {
   /**
    *
    */
+  props: {
+    contentId: {
+      type: Number,
+      required: true,
+    },
+  },
+
+  /**
+   *
+   */
   mounted() {
     console.log('mounted magazines');
   },
