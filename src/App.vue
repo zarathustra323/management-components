@@ -28,7 +28,7 @@
   </div>
   <div v-else class="container-fluid">
     <div class="row mt-3">
-      <div class="col-4">
+      <div class="col-6">
         <component :is="currentComponent" v-bind="currentProps"></component>
       </div>
     </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import 'bootstrap/scss/bootstrap.scss';
+import './scss/styles.scss';
 import Scheduling from './components/scheduling/index.vue';
 
 export default {
