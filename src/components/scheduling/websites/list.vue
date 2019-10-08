@@ -1,6 +1,8 @@
 <template>
   <div class="list-group">
-    <div v-if="isLoading" class="list-group-item text-muted">Loading schedules...</div>
+    <div v-if="isLoading" class="spinner-grow" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
     <div
       v-if="!isLoading && !schedules.length"
       class="list-group-item text-muted"
