@@ -47,7 +47,7 @@ export default {
       { id: 'magazines', label: 'Magazines', component: MagazineSchedules },
       { id: 'newsletters', label: 'Newsletters', component: NewsletterSchedules },
     ],
-    selected: 'magazines',
+    selected: 'websites',
   }),
 
   /**
