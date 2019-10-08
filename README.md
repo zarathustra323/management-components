@@ -1,4 +1,5 @@
-# base-vue-components
+# BaseCMS Management Components
+Pluggable Vue components for BaseCMS management interfaces.
 
 ## Project setup
 ```
