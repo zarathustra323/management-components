@@ -15,7 +15,7 @@
     </div>
     <div class="card-body">
       <keep-alive>
-        <component v-bind:is="schedulingComponent"></component>
+        <component :is="schedulingComponent" :contentId="contentId"></component>
       </keep-alive>
     </div>
   </div>
