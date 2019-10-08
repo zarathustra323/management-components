@@ -5,7 +5,7 @@
       <time :datetime="start.toISOString()">{{ start.format('MM/DD/YYYY h:mma') }}</time>
     </div>
 
-    <div>
+    <div class="ml-2">
       <div class="btn-group" role="group">
         <edit-button />
         <delete-button />
