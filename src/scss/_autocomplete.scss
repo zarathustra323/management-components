@@ -37,7 +37,6 @@
     margin: 0;
     margin-top: .25rem;
     overflow: scroll;
-    color: $input-color;
     background-color: $input-bg;
     border: $input-border-width solid $input-border-color;
 
@@ -76,6 +75,10 @@
     font-size: $font-size-sm;
     font-weight: $font-weight-normal;
     color: $gray-600;
+  }
+
+  &__section-name {
+    font-weight: $font-weight-bold;
   }
 
   &--empty {

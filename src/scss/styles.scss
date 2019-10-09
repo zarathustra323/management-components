@@ -2,6 +2,8 @@
 
 @import "../../node_modules/bootstrap/scss/functions";
 
+
+$gray-900: #212529 !default;
 $font-family-sans-serif: "Roboto", sans-serif !default;
 $enable-shadows: true !default;
 $list-group-item-padding-x: .75rem !default;
@@ -9,6 +11,8 @@ $font-size-base: .875rem !default;
 $paragraph-margin-bottom: .875rem !default;
 $spacer: .875rem !default;
 $font-weight-bold: 500 !default;
+$input-color: $gray-900 !default;
+
 
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
