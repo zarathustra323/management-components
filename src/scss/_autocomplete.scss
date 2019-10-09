@@ -1,3 +1,13 @@
+@mixin calculate-autocomplete-height(
+  $font-size: $input-font-size,
+  $lint-height: $input-line-height,
+  $padding-y: $input-padding-y,
+  $border-width: $input-border-width,
+  $num: 8,
+) {
+  max-height: calc((((#{$font-size} * #{$lint-height}) + (#{$padding-y * 2})) * #{$num}) + #{$border-width * 2});
+}
+
 .autocomplete {
   @extend .form-group;
   position: relative;
@@ -17,12 +27,12 @@
   &__results {
     @include border-radius($input-border-radius);
     @include box-shadow($dropdown-box-shadow);
+    @include calculate-autocomplete-height();
     position: absolute;
     top: 100%;
     right: 0;
     left: 0;
     z-index: $zindex-dropdown;
-    max-height: 300px;
     padding: 0;
     margin: 0;
     margin-top: .25rem;
@@ -41,6 +51,13 @@
     &:hover {
       color: $white;
       background-color: $primary;
+    }
+
+    &--empty {
+      &:hover {
+        color: $input-color;
+        background-color: initial;
+      }
     }
   }
 }

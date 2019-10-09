@@ -8,7 +8,7 @@
         autocomplete="off"
         v-model="phrase"
         @focus="open"
-        :readonly="websitesAreLoading"
+        :readonly="sectionsAreLoading"
         :placeholder="placeholder"
       />
       <div class="autocomplete__input-group-append">
@@ -25,12 +25,19 @@
 
     <ul v-show="isOpen" class="autocomplete__results">
       <li
-        v-for="(website) in websites"
-        :key="website.id"
-        class="autocomplete__result"
-        @click="setResult(website.name)"
+        v-if="!sectionsAreLoading && !sections.length"
+        class="autocomplete__result autocomplete__result--empty"
+        @click="close"
       >
-        {{ website.name }}
+        No sections found.
+      </li>
+      <li
+        v-for="(section) in sections"
+        :key="section.id"
+        class="autocomplete__result"
+        @click="setResult(section.fullName)"
+      >
+        {{ section.fullName }}
       </li>
     </ul>
   </div>
@@ -60,12 +67,12 @@ export default {
    *
    */
   computed: {
-    websitesAreLoading() {
-      return this.$apollo.queries.websites.loading;
+    sectionsAreLoading() {
+      return this.$apollo.queries.sections.loading;
     },
     placeholder() {
-      if (this.websitesAreLoading) return 'Loading websites...';
-      return 'Select a website...';
+      if (this.sectionsAreLoading) return 'Loading sections...';
+      return 'Select a section...';
     },
     canClear() {
       return Boolean(this.phrase);
@@ -97,39 +104,42 @@ export default {
   /**
    *
    */
-  apollo: {
-    websites: {
-      query: gql`
-        query WebsiteSchedulingWebsiteSelect {
-          websiteSites(input: { sort: { field: name }, pagination: { limit: 100 } }) {
-            edges {
-              node {
-                id
-                name
-              }
-            }
-          }
-        }
-      `,
-      update({ websiteSites }) {
-        return mapNodes(websiteSites);
-      },
-    },
-  },
-
-  /**
-   *
-   */
   mounted() {
-    console.log('mounted websites');
     document.addEventListener('click', this.handleBlur);
   },
 
   /**
    *
    */
-  created() {
-    console.log('created websites');
+  destroyed() {
+    document.removeEventListener('click', this.handleBlur);
+  },
+
+  /**
+   *
+   */
+  apollo: {
+    sections: {
+      query: gql`
+        query BMCSchedulingSelectSection {
+          websiteSections(input: { sort: { field: fullName, order: asc }, pagination: { limit: 0 } }) {
+            edges {
+              node {
+                id
+                fullName
+                site {
+                  id
+                  name
+                }
+              }
+            }
+          }
+        }
+      `,
+      update({ websiteSections }) {
+        return mapNodes(websiteSections);
+      },
+    },
   },
 };
 </script>
