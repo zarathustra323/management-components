@@ -1,23 +1,30 @@
 <template>
-  <div class="list-group">
-    <div v-if="isLoading" class="spinner" role="status">
-      <span class="spinner__loading-message">Loading...</span>
+  <div class="card">
+    <!-- @todo handle errors -->
+    <div class="card-header">
+      Current Schedules
+      <span>({{ totalCount }})</span>
     </div>
-    <div
-      v-if="!isLoading && !schedules.length"
-      class="list-group-item list-group-item--muted"
-    >
-      No schedules found.
+    <div class="list-group list-group-flush">
+      <div v-if="isLoading" class="spinner" role="status">
+        <span class="spinner__loading-message">Loading...</span>
+      </div>
+      <div
+        v-if="!isLoading && !schedules.length"
+        class="list-group-item list-group-item--muted"
+      >
+        None found
+      </div>
+      <list-item
+        v-for="(schedule) in schedules"
+        :key="schedule.id"
+        :id="schedule.id"
+        :site="schedule.site"
+        :section="schedule.section"
+        :option="schedule.option"
+        :start-date="schedule.startDate"
+      />
     </div>
-    <list-item
-      v-for="(schedule) in schedules"
-      :key="schedule.id"
-      :id="schedule.id"
-      :site="schedule.site"
-      :section="schedule.section"
-      :option="schedule.option"
-      :start-date="schedule.startDate"
-    />
   </div>
 </template>
 
@@ -43,6 +50,7 @@ export default {
   data() {
     return {
       schedules: [],
+      totalCount: 0,
     };
   },
 
@@ -68,6 +76,7 @@ export default {
       query: gql`
         query WebsiteSchedulingListSchedules($input: ContentWebsiteSchedulesQueryInput!) {
           contentWebsiteSchedules(input: $input) {
+            totalCount
             edges {
               node {
                 id
@@ -98,6 +107,7 @@ export default {
         return { input };
       },
       update({ contentWebsiteSchedules }) {
+        this.totalCount = contentWebsiteSchedules.totalCount;
         return mapNodes(contentWebsiteSchedules);
       },
     },
