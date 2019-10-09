@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="btn btn-scheduling btn-scheduling--edit"
+    class="btn btn--icon btn--secondary-outline"
     :title="title"
     @click="emitClick"
   >

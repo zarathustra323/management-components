@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="btn btn-scheduling btn-scheduling--delete"
+    class="btn btn--icon btn--danger-outline"
     :title="title"
     @click="emitClick"
   >

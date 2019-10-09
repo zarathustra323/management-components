@@ -51,7 +51,40 @@ $enable-shadows: true !default;
   height: 1rem;
 }
 
+.btn {
+  // @extend .btn;
+  &--icon {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    line-height: 1;
+  }
+
+  &--secondary-outline {
+    @extend .btn-outline-secondary;
+    svg {
+      fill: $gray-600;
+    }
+
+    &:hover svg {
+      fill: $white;
+    }
+  }
+
+  &--danger-outline {
+    @extend .btn-outline-danger;
+    svg {
+      fill: $danger;
+    }
+
+    &:hover svg {
+      fill: $white;
+    }
+  }
+}
+
 .btn-icon {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   line-height: 1;
 }
 
