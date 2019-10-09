@@ -14,6 +14,15 @@
     placeholder="Select section(s); type to filter..."
   >
     <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+    <label
+      slot="option-label"
+      slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
+      :class="labelClassName"
+      @click="toggleSiteExapand(node)"
+    >
+      {{ node.label }}
+      <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
+    </label>
   </tree-select>
 </template>
 
@@ -51,6 +60,15 @@ export default {
     /**
      *
      */
+    toggleSiteExapand(node) {
+      const { isSite } = node.raw;
+      // eslint-disable-next-line no-param-reassign
+      if (isSite) node.isExpanded = !node.isExpanded;
+    },
+
+    /**
+     *
+     */
     async loadOptions({ action }) {
       const variables = {
         siteInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
@@ -68,6 +86,7 @@ export default {
             label: site.title,
             title: site.title,
             isDisabled: true,
+            isSite: true,
             ...(children.length && { children }),
           };
         });
