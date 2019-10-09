@@ -5,10 +5,12 @@
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <div class="list-group list-group-flush">
-      <div v-if="isLoading" class="spinner" role="status">
+    <div v-if="isLoading" class="card-body">
+      <div class="spinner" role="status">
         <span class="spinner__loading-message">Loading...</span>
       </div>
+    </div>
+    <div class="list-group list-group-flush">
       <div
         v-if="!isLoading && !schedules.length"
         class="list-group-item list-group-item--muted"
@@ -47,12 +49,10 @@ export default {
   /**
    *
    */
-  data() {
-    return {
-      schedules: [],
-      totalCount: 0,
-    };
-  },
+  data: () => ({
+    schedules: [],
+    totalCount: 0,
+  }),
 
   /**
    *
