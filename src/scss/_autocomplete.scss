@@ -6,6 +6,14 @@
     @extend .form-control;
   }
 
+  &__input-group {
+    @extend .input-group;
+  }
+
+  &__input-group-append {
+    @extend .input-group-append;
+  }
+
   &__results {
     @include border-radius($input-border-radius);
     @include box-shadow($dropdown-box-shadow);
