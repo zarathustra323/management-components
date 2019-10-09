@@ -69,43 +69,13 @@ $list-group-item-padding-x: .75rem !default;
     &:hover svg {
       fill: $white;
     }
+
+    &:disabled svg {
+      fill: $gray-600;
+    }
   }
 
   &--danger-outline {
-    @extend .btn-outline-danger;
-    svg {
-      fill: $danger;
-    }
-
-    &:hover svg {
-      fill: $white;
-    }
-  }
-}
-
-.btn-icon {
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  line-height: 1;
-}
-
-.btn-scheduling {
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  line-height: 1;
-
-  &--edit {
-    @extend .btn-outline-secondary;
-    svg {
-      fill: $gray-600;
-    }
-
-    &:hover svg {
-      fill: $white;
-    }
-  }
-
-  &--delete {
     @extend .btn-outline-danger;
     svg {
       fill: $danger;
