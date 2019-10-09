@@ -1,5 +1,5 @@
 .spinner {
-  @extend .spinner-border;
+  @extend .spinner-grow;
   @extend .text-primary;
 
   &__loading-message {
