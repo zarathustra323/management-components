@@ -1,17 +1,29 @@
 <template>
-  <button type="button" class="btn btn-scheduling btn-scheduling--delete" @click="onClick">
-    <icon-x />
+  <button
+    type="button"
+    class="btn btn-scheduling btn-scheduling--delete"
+    :title="title"
+    @click="emitClick"
+  >
+    <icon-trashcan />
   </button>
 </template>
 
 <script>
-import IconX from '../../icons/x.vue';
+import IconTrashcan from '../../icons/trashcan.vue';
 
 export default {
-  components: { IconX },
+  props: {
+    title: {
+      type: String,
+      default: 'Delete',
+    },
+  },
+
+  components: { IconTrashcan },
 
   methods: {
-    onClick() {
+    emitClick() {
       this.$emit('click');
     },
   },
