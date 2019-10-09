@@ -1,4 +1,8 @@
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: $font-size-base;
+  height: $font-size-base;
+  svg {
+    width: $font-size-base;
+    height: $font-size-base;
+  }
 }

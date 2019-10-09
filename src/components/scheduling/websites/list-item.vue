@@ -1,7 +1,8 @@
 <template>
-  <div class="list-group__item">
+  <div class="list-group-item list-group-item--schedules">
     <div>
-      <p>{{ site.name }} - {{ section.fullName }} ({{ option.name }})</p>
+      <div class="list-group-item__product-name">{{ site.name }}</div>
+      <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
       <time :datetime="start.toISOString()">{{ start.format('MM/DD/YYYY h:mma') }}</time>
     </div>
 

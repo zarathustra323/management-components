@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="btn btn--icon btn--danger-outline"
+    class="btn btn--danger-outline"
     :title="title"
     @click="emitClick"
   >

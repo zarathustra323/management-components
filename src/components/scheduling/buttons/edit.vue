@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="btn btn--icon btn--secondary-outline"
+    class="btn btn--secondary-outline"
     :title="title"
     @click="emitClick"
   >

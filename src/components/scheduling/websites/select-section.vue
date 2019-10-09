@@ -14,7 +14,7 @@
       <div class="autocomplete__input-group-append">
         <button
           :disabled="!canClear"
-          class="btn btn--icon btn--secondary-outline"
+          class="btn btn--secondary-outline"
           type="button"
           @click="clear"
         >
