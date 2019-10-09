@@ -37,7 +37,7 @@
         :data-id="section.id"
         :data-name="section.term"
         class="autocomplete-result"
-        @click="setResult(section.fullName)"
+        @click="select(section)"
       >
         <span class="autocomplete-result__product-name">{{ section.site.name }}</span>
         <span class="autocomplete-result__section-name">{{ section.fullName }}</span>
@@ -98,8 +98,8 @@ export default {
     handleBlur(event) {
       if (!this.$el.contains(event.target)) this.close();
     },
-    setResult(result) {
-      this.phrase = result;
+    select(section) {
+      this.phrase = section.fullName;
       this.isOpen = false;
     },
   },
