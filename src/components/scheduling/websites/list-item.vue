@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group-item d-flex justify-content-between">
+  <div class="list-group__item">
     <div>
       <p>{{ site.name }} - {{ section.fullName }} ({{ option.name }})</p>
       <time :datetime="start.toISOString()">{{ start.format('MM/DD/YYYY h:mma') }}</time>

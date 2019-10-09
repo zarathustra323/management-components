@@ -1,0 +1,21 @@
+.list-group {
+  $self: &;
+
+  // @extend .list-group;
+
+  &__item {
+    @extend .list-group-item;
+    &--muted {
+      @extend .text-muted;
+    }
+  }
+
+  &--schedules {
+    #{ $self } {
+      &__item {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

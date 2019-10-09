@@ -1,11 +1,11 @@
 <template>
-  <div class="list-group">
-    <div v-if="isLoading" class="spinner-grow" role="status">
-      <span class="sr-only">Loading...</span>
+  <div class="list-group list-group--schedules">
+    <div v-if="isLoading" class="spinner" role="status">
+      <span class="spinner__loading-message">Loading...</span>
     </div>
     <div
       v-if="!isLoading && !schedules.length"
-      class="list-group-item text-muted"
+      class="list-group__item list-group__item--muted"
     >
       No schedules found.
     </div>

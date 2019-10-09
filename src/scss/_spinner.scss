@@ -1,0 +1,8 @@
+.spinner {
+  @extend .spinner-border;
+  @extend .text-primary;
+
+  &__loading-message {
+    @include sr-only();
+  }
+}
