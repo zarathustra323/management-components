@@ -35,11 +35,10 @@
         v-for="(section) in sections"
         :key="section.id"
         :data-id="section.id"
-        :data-name="section.term"
         class="autocomplete-result"
         @click="select(section)"
       >
-        <span class="autocomplete-result__product-name">{{ section.site.name }}</span>
+        <span class="autocomplete-result__product-name">{{ section.site.title }}</span>
         <span class="autocomplete-result__section-name">{{ section.fullName }}</span>
       </li>
     </ul>
@@ -99,7 +98,7 @@ export default {
       if (!this.$el.contains(event.target)) this.close();
     },
     select(section) {
-      this.phrase = section.fullName;
+      this.phrase = `${section.site.name}: ${section.fullName}`;
       this.isOpen = false;
     },
   },
@@ -129,7 +128,7 @@ export default {
             edges {
               node {
                 id
-                name
+                title
                 sections(input: { sort: { field: fullName, order: asc }, pagination: { limit: 0 } }) {
                   edges {
                     node {
@@ -147,7 +146,7 @@ export default {
         const websites = mapNodes(websiteSites);
         return websites.reduce((arr, site) => {
           const sections = mapNodes(site.sections)
-            .map(section => ({ ...section, site: { id: site.id, name: site.name }, term: `${site.name}: ${section.fullName}` }));
+            .map(section => ({ ...section, site, term: `${site.title}: ${section.fullName}` }));
           arr.push(...sections);
           return arr;
         }, []);

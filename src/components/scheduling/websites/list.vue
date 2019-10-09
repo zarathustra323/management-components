@@ -73,7 +73,7 @@ export default {
                 id
                 site {
                   id
-                  name
+                  title
                 }
                 section {
                   id
@@ -93,7 +93,7 @@ export default {
       variables() {
         const input = {
           contentId: this.contentId,
-          pagination: { limit: 50 },
+          pagination: { limit: 0 },
         };
         return { input };
       },
