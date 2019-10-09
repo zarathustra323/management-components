@@ -27,12 +27,12 @@
   &__results {
     @include border-radius($input-border-radius);
     @include box-shadow($dropdown-box-shadow);
-    @include calculate-autocomplete-height();
     position: absolute;
     top: 100%;
     right: 0;
     left: 0;
     z-index: $zindex-dropdown;
+    max-height: 300px;
     padding: 0;
     margin: 0;
     margin-top: .25rem;
@@ -40,24 +40,48 @@
     color: $input-color;
     background-color: $input-bg;
     border: $input-border-width solid $input-border-color;
+
+    &--website-sections {
+      max-height:
+        calc(
+          (
+            (
+              (#{$input-font-size} * #{$input-line-height}) + (.8rem * #{$input-line-height}) + (#{$input-padding-y * 2})
+            ) * 6
+          )
+        );
+    }
+  }
+}
+
+.autocomplete-result {
+  $self: &;
+  padding: $input-padding-y $input-padding-x;
+  text-align: left;
+  list-style: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $white;
+    background-color: $primary;
+    #{ $self } {
+      &__site-name {
+        color: $gray-200;
+      }
+    }
   }
 
-  &__result {
-    padding: $input-padding-y $input-padding-x;
-    text-align: left;
-    list-style: none;
-    cursor: pointer;
+  &__site-name {
+    display: block;
+    font-size: .8rem;
+    font-weight: $font-weight-normal;
+    color: $gray-600;
+  }
 
+  &--empty {
     &:hover {
-      color: $white;
-      background-color: $primary;
-    }
-
-    &--empty {
-      &:hover {
-        color: $input-color;
-        background-color: initial;
-      }
+      color: $input-color;
+      background-color: initial;
     }
   }
 }

@@ -8,7 +8,7 @@
         autocomplete="off"
         v-model="phrase"
         @focus="open"
-        :readonly="sectionsAreLoading"
+        :readonly="isLoading"
         :placeholder="placeholder"
       />
       <div class="autocomplete__input-group-append">
@@ -23,10 +23,10 @@
       </div>
     </div>
 
-    <ul v-show="isOpen" class="autocomplete__results">
+    <ul v-show="isOpen" class="autocomplete__results autocomplete__results--website-sections">
       <li
-        v-if="!sectionsAreLoading && !sections.length"
-        class="autocomplete__result autocomplete__result--empty"
+        v-if="!isLoading && !sections.length"
+        class="autocomplete-result autocomplete-result--empty"
         @click="close"
       >
         No sections found.
@@ -34,10 +34,13 @@
       <li
         v-for="(section) in sections"
         :key="section.id"
-        class="autocomplete__result"
+        :data-id="section.id"
+        :data-name="section.term"
+        class="autocomplete-result"
         @click="setResult(section.fullName)"
       >
-        {{ section.fullName }}
+        <span class="autocomplete-result__site-name">{{section.site.name}}</span>
+        <span class="autocomplete-result__section-name">{{ section.fullName }}</span>
       </li>
     </ul>
   </div>
@@ -67,11 +70,11 @@ export default {
    *
    */
   computed: {
-    sectionsAreLoading() {
-      return this.$apollo.queries.sections.loading;
+    isLoading() {
+      return this.$apollo.loading;
     },
     placeholder() {
-      if (this.sectionsAreLoading) return 'Loading sections...';
+      if (this.isLoading) return 'Loading sections...';
       return 'Select a section...';
     },
     canClear() {
@@ -122,22 +125,32 @@ export default {
     sections: {
       query: gql`
         query BMCSchedulingSelectSection {
-          websiteSections(input: { sort: { field: fullName, order: asc }, pagination: { limit: 0 } }) {
+          websiteSites(input: { sort: { field: name, order: asc }, pagination: { limit: 0 } }) {
             edges {
               node {
                 id
-                fullName
-                site {
-                  id
-                  name
+                name
+                sections(input: { sort: { field: fullName, order: asc }, pagination: { limit: 0 } }) {
+                  edges {
+                    node {
+                      id
+                      fullName
+                    }
+                  }
                 }
               }
             }
           }
         }
       `,
-      update({ websiteSections }) {
-        return mapNodes(websiteSections);
+      update({ websiteSites }) {
+        const websites = mapNodes(websiteSites);
+        return websites.reduce((arr, site) => {
+          const sections = mapNodes(site.sections)
+            .map(section => ({ ...section, site: { id: site.id, name: site.name }, term: `${site.name}: ${section.fullName}` }));
+          arr.push(...sections);
+          return arr;
+        }, []);
       },
     },
   },
