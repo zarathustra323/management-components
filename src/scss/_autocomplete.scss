@@ -41,7 +41,7 @@
     background-color: $input-bg;
     border: $input-border-width solid $input-border-color;
 
-    &--website-sections {
+    &--scheduling {
       max-height:
         calc(
           (
@@ -65,13 +65,13 @@
     color: $white;
     background-color: $primary;
     #{ $self } {
-      &__site-name {
+      &__product-name {
         color: $gray-200;
       }
     }
   }
 
-  &__site-name {
+  &__product-name {
     display: block;
     font-size: .8rem;
     font-weight: $font-weight-normal;

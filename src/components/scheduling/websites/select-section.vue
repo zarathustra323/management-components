@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <ul v-show="isOpen" class="autocomplete__results autocomplete__results--website-sections">
+    <ul v-show="isOpen" class="autocomplete__results autocomplete__results--scheduling">
       <li
         v-if="!isLoading && !sections.length"
         class="autocomplete-result autocomplete-result--empty"
@@ -39,7 +39,7 @@
         class="autocomplete-result"
         @click="setResult(section.fullName)"
       >
-        <span class="autocomplete-result__site-name">{{section.site.name}}</span>
+        <span class="autocomplete-result__product-name">{{ section.site.name }}</span>
         <span class="autocomplete-result__section-name">{{ section.fullName }}</span>
       </li>
     </ul>
