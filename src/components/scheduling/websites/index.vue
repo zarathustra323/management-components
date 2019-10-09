@@ -1,7 +1,7 @@
 <template>
   <div>
     <label>Add Schedule:</label>
-    <website-select />
+    <select-section />
     <hr />
     <schedule-list :content-id="contentId" />
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 import ScheduleList from './list.vue';
-import WebsiteSelect from './website-select.vue';
+import SelectSection from './select-section.vue';
 
 export default {
   /**
@@ -25,6 +25,6 @@ export default {
   /**
    *
    */
-  components: { ScheduleList, WebsiteSelect },
+  components: { ScheduleList, SelectSection },
 };
 </script>
