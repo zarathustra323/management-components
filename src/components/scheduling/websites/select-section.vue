@@ -1,5 +1,4 @@
 <template>
-  <!-- @todo Handle errors -->
   <!-- @todo Verify tab order -->
   <tree-select
     v-model="selected"
