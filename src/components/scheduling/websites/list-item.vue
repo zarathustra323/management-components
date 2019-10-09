@@ -7,8 +7,8 @@
 
     <div class="ml-2">
       <div class="btn-group" role="group">
-        <edit-button @click="editSchedule" />
-        <delete-button @click="deleteSchedule" />
+        <edit-button title="Edit Schedule" @click="editSchedule" />
+        <delete-button title="Delete Schedule" @click="deleteSchedule" />
       </div>
     </div>
   </div>
