@@ -1,11 +1,12 @@
 <template>
-  <form>
-    <label>Add Schedules</label>
-
-    <div class="form-group">
-      <select-sections />
+  <form class="card mb-4">
+    <div class="card-header">Add Schedules</div>
+    <div class="card-body">
+      <div class="form-group">
+        <select-sections />
+      </div>
+      <button type="submit" class="btn btn-success">Create</button>
     </div>
-    <button type="submit" class="btn btn-success">Create</button>
   </form>
 </template>
 

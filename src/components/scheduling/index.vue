@@ -13,7 +13,7 @@
         </nav-item>
       </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body py-4">
       <keep-alive>
         <component :is="schedulingComponent" :contentId="contentId"></component>
       </keep-alive>

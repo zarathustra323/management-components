@@ -7,6 +7,7 @@ $gray-900: #212529 !default;
 $font-family-sans-serif: "Roboto", sans-serif !default;
 $enable-shadows: true !default;
 $list-group-item-padding-x: .75rem !default;
+$card-spacer-x: .75rem !default;
 $font-size-base: .875rem !default;
 $paragraph-margin-bottom: .875rem !default;
 $spacer: .875rem !default;
@@ -56,6 +57,11 @@ $input-color: $gray-900 !default;
 @import "./icon";
 @import "./list-group";
 @import "./spinner";
+
+.card-header-pills {
+  margin-right: 0;
+  margin-left: 0;
+}
 
 .vue-treeselect {
   $self: &;

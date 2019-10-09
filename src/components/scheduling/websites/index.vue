@@ -1,7 +1,6 @@
 <template>
   <div>
     <create-schedules :content-id="contentId" />
-    <hr />
     <list-schedules :content-id="contentId" />
   </div>
 </template>
