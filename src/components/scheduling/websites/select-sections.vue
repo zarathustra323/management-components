@@ -6,11 +6,13 @@
     :flat="true"
     :load-options="loadOptions"
     :options="options"
+    :disabled="disabled"
     :show-count="true"
     :backspace-removes="false"
     :default-expand-level="defaultExpandLevel"
     :auto-load-root-options="false"
     :required="true"
+    @input="emitChange"
     search-nested
     placeholder="Select section(s); type to filter..."
   >
@@ -36,12 +38,23 @@ export default {
   /**
    *
    */
-  data() {
-    return {
-      selected: null,
-      options: null,
-    };
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    sectionIds: {
+      type: Array,
+      default: () => [],
+    },
   },
+
+  /**
+   *
+   */
+  data: () => ({
+    options: null,
+  }),
 
   components: { TreeSelect },
 
@@ -49,6 +62,18 @@ export default {
    *
    */
   computed: {
+    selected: {
+      get() {
+        return this.sectionIds;
+      },
+      set() {
+        return null;
+      },
+    },
+
+    /**
+     *
+     */
     defaultExpandLevel() {
       return this.options && this.options.length === 1 ? 1 : 0;
     },
@@ -65,6 +90,13 @@ export default {
       const { isSite } = node.raw;
       // eslint-disable-next-line no-param-reassign
       if (isSite) node.isExpanded = !node.isExpanded;
+    },
+
+    /**
+     *
+     */
+    emitChange(ids) {
+      this.$emit('change', ids);
     },
 
     /**
