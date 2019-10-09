@@ -19,7 +19,7 @@
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
-      @click="toggleSiteExapand(node)"
+      @click="toggleSiteExpanded(node)"
     >
       {{ node.label }}
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
@@ -61,7 +61,7 @@ export default {
     /**
      *
      */
-    toggleSiteExapand(node) {
+    toggleSiteExpanded(node) {
       const { isSite } = node.raw;
       // eslint-disable-next-line no-param-reassign
       if (isSite) node.isExpanded = !node.isExpanded;
