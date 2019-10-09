@@ -1,15 +1,14 @@
 <template>
   <div>
-    <label>Add Schedules</label>
-    <select-section />
+    <create-schedules :content-id="contentId" />
     <hr />
-    <schedule-list :content-id="contentId" />
+    <list-schedules :content-id="contentId" />
   </div>
 </template>
 
 <script>
-import ScheduleList from './list.vue';
-import SelectSection from './select-section.vue';
+import ListSchedules from './list.vue';
+import CreateSchedules from './create.vue';
 
 export default {
   /**
@@ -25,6 +24,6 @@ export default {
   /**
    *
    */
-  components: { ScheduleList, SelectSection },
+  components: { CreateSchedules, ListSchedules },
 };
 </script>

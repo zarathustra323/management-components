@@ -10,6 +10,7 @@
     :backspace-removes="false"
     :default-expand-level="defaultExpandLevel"
     :auto-load-root-options="false"
+    :required="true"
     search-nested
     placeholder="Select section(s); type to filter..."
   >
