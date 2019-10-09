@@ -8,7 +8,7 @@
         autocomplete="off"
         v-model="phrase"
         @focus="open"
-        :readonly="isLoadingWebsites"
+        :readonly="websitesAreLoading"
         :placeholder="placeholder"
       />
       <div class="input-group-append">
@@ -55,11 +55,11 @@ export default {
    *
    */
   computed: {
-    isLoadingWebsites() {
+    websitesAreLoading() {
       return this.$apollo.queries.websites.loading;
     },
     placeholder() {
-      if (this.isLoadingWebsites) return 'Loading websites...';
+      if (this.websitesAreLoading) return 'Loading websites...';
       return 'Select a website...';
     },
   },
