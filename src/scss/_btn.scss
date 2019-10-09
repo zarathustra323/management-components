@@ -1,0 +1,34 @@
+.btn {
+  // @extend .btn;
+  &--icon {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    line-height: 1;
+  }
+
+  &--secondary-outline {
+    @extend .btn-outline-secondary;
+    svg {
+      fill: $gray-600;
+    }
+
+    &:hover svg {
+      fill: $white;
+    }
+
+    &:disabled svg {
+      fill: $gray-600;
+    }
+  }
+
+  &--danger-outline {
+    @extend .btn-outline-danger;
+    svg {
+      fill: $danger;
+    }
+
+    &:hover svg {
+      fill: $white;
+    }
+  }
+}
