@@ -1,4 +1,7 @@
 @import "../../node_modules/bootstrap/scss/functions";
+
+$enable-shadows: true !default;
+
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
 
@@ -38,6 +41,9 @@
 // @import "../../node_modules/bootstrap/scss/print";
 
 
+@import "./autocomplete";
+
+
 .icon {
   width: 1rem;
   height: 1rem;
@@ -48,9 +54,9 @@
 }
 
 .btn-scheduling {
-  line-height: 1;
   padding-top: .5rem;
   padding-bottom: .5rem;
+  line-height: 1;
 
   &--edit {
     @extend .btn-outline-secondary;
