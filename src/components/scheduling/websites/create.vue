@@ -1,12 +1,16 @@
 <template>
   <form>
     <label>Add Schedules</label>
-    <select-section />
+
+    <div class="form-group">
+      <select-sections />
+    </div>
+    <button type="submit" class="btn btn-success">Create</button>
   </form>
 </template>
 
 <script>
-import SelectSection from './select-section.vue';
+import SelectSections from './select-sections.vue';
 
 export default {
   /**
@@ -22,6 +26,6 @@ export default {
   /**
    *
    */
-  components: { SelectSection },
+  components: { SelectSections },
 };
 </script>
