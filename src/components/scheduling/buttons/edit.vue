@@ -1,5 +1,10 @@
 <template>
-  <button type="button" class="btn btn-scheduling btn-scheduling--edit" @click="onClick">
+  <button
+    type="button"
+    class="btn btn-scheduling btn-scheduling--edit"
+    :title="title"
+    @click="emitClick"
+  >
     <icon-pencil />
   </button>
 </template>
@@ -8,10 +13,17 @@
 import IconPencil from '../../icons/pencil.vue';
 
 export default {
+  props: {
+    title: {
+      type: String,
+      default: 'Edit',
+    },
+  },
+
   components: { IconPencil },
 
   methods: {
-    onClick() {
+    emitClick() {
       this.$emit('click');
     },
   },
