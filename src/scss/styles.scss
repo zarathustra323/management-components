@@ -52,8 +52,19 @@ $input-color: $gray-900 !default;
 @import "../../node_modules/bootstrap/scss/utilities";
 // @import "../../node_modules/bootstrap/scss/print";
 
-@import "./autocomplete";
 @import "./btn";
 @import "./icon";
 @import "./list-group";
 @import "./spinner";
+
+.vue-treeselect {
+  $self: &;
+  &__option--disabled {
+    #{ $self } {
+      &__label-container {
+        color: $gray-600;
+        cursor: pointer;
+      }
+    }
+  }
+}

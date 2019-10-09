@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>Add Schedule:</label>
+    <label>Add Schedules</label>
     <select-section />
     <hr />
     <schedule-list :content-id="contentId" />

@@ -3,7 +3,7 @@
     <div>
       <div class="list-group-item__product-name">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
-      <time :datetime="start.toISOString()">{{ start.format('MM/DD/YYYY h:mma') }}</time>
+      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY @ h:mm a') }}</time>
     </div>
 
     <div class="ml-2">

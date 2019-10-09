@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import '@riophae/vue-treeselect/dist/vue-treeselect.css';
 import './scss/styles.scss';
 import Scheduling from './components/scheduling/index.vue';
 
