@@ -12,7 +12,12 @@
         :placeholder="placeholder"
       />
       <div class="autocomplete__input-group-append">
-        <button class="btn btn--icon btn--secondary-outline" type="button">
+        <button
+          :disabled="!canClear"
+          class="btn btn--icon btn--secondary-outline"
+          type="button"
+          @click="clear"
+        >
           <icon-x />
         </button>
       </div>
@@ -62,6 +67,9 @@ export default {
       if (this.websitesAreLoading) return 'Loading websites...';
       return 'Select a website...';
     },
+    canClear() {
+      return Boolean(this.phrase);
+    },
   },
 
   /**
@@ -73,6 +81,9 @@ export default {
     },
     close() {
       this.isOpen = false;
+    },
+    clear() {
+      this.phrase = '';
     },
     handleBlur(event) {
       if (!this.$el.contains(event.target)) this.close();
