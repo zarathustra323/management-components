@@ -58,7 +58,7 @@ export default {
 
   computed: {
     wrapperClasses() {
-      return ['text-danger', this.wrapperClass];
+      return ['operation-error', this.wrapperClass];
     },
   },
 

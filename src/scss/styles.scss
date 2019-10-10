@@ -59,6 +59,11 @@ $spinner-width-sm: $font-size-base !default;
 @import "./list-group";
 @import "./spinner";
 
+.operation-error {
+  color: $danger;
+  word-break: break-word;
+}
+
 .card-header-pills {
   margin-right: 0;
   margin-left: 0;
