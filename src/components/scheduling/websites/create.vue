@@ -29,26 +29,12 @@
       />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sectionIds.length" tabindex="0" />
-      <div
-        v-if="error"
-        class="text-danger mt-3"
-      >
-        {{ error.message }}
-        <a
-          href="#retry-query"
-          class="text-dark font-weight-bold text-decoration-none"
-          @click.prevent="save"
-        >
-          Retry?
-        </a>
-        <a
-          href="#cancel-query"
-          class="text-dark font-weight-bold text-decoration-none"
-          @click.prevent="cancel"
-        >
-          Cancel?
-        </a>
-      </div>
+      <operation-error
+        :error="error"
+        wrapper-class="mt-3"
+        @retry="save"
+        @cancel="cancel"
+      />
     </div>
   </form>
 </template>
@@ -56,6 +42,7 @@
 <script>
 import gql from 'graphql-tag';
 import SelectSections from './select-sections.vue';
+import OperationError from '../../operation-error.vue';
 
 export default {
   /**
@@ -73,6 +60,11 @@ export default {
     sectionIds: [],
     error: null,
   }),
+
+  /**
+   *
+   */
+  components: { SelectSections, OperationError },
 
   computed: {
     canSave() {
@@ -110,7 +102,7 @@ export default {
       const { contentId, sectionIds } = this;
 
       const mutation = gql`
-        mutation BMCCreateWebsiteSchedules($input: QuickCreateWebsiteSchedulesMutationInput!) {
+        mutation CreateWebsiteSchedules($input: QuickCreateWebsiteSchedulesMutationInput!) {
           quickCreateWebsiteSchedules(input: $input) {
             id
           }
@@ -129,10 +121,5 @@ export default {
       }
     },
   },
-
-  /**
-   *
-   */
-  components: { SelectSections },
 };
 </script>

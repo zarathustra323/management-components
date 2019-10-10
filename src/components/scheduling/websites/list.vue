@@ -17,19 +17,12 @@
       >
         None found
       </div>
-      <div
-        v-if="error"
-        class="list-group-item text-danger"
-      >
-        {{ error.message }}
-        <a
-          href="#retry-query"
-          class="text-dark font-weight-bold text-decoration-none"
-          @click.prevent="refresh"
-        >
-          Retry?
-        </a>
-      </div>
+      <operation-error
+        :error="error"
+        :can-cancel="false"
+        wrapper-class="list-group-item"
+        @retry="refresh"
+      />
       <list-item
         v-for="(schedule) in schedules"
         :key="schedule.id"
@@ -46,6 +39,7 @@
 <script>
 import gql from 'graphql-tag';
 import ListItem from './list-item.vue';
+import OperationError from '../../operation-error.vue';
 import mapNodes from '../../../utils/map-nodes';
 
 export default {
@@ -71,7 +65,7 @@ export default {
   /**
    *
    */
-  components: { ListItem },
+  components: { ListItem, OperationError },
 
   /**
    *
@@ -98,7 +92,7 @@ export default {
   apollo: {
     schedules: {
       query: gql`
-        query WebsiteSchedulingListSchedules($input: ContentWebsiteSchedulesQueryInput!) {
+        query ListWebsiteSchedules($input: ContentWebsiteSchedulesQueryInput!) {
           contentWebsiteSchedules(input: $input) {
             totalCount
             edges {
