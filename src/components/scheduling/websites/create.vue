@@ -2,21 +2,23 @@
   <form class="card mb-4" @submit.prevent="save">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>Add Schedules</span>
-      <button
-        id="add-schedules-button"
-        :disabled="saveDisabled"
-        type="submit"
-        class="btn btn-sm btn-success"
-        tabindex="-1"
-      >
+      <div>
         <span
           v-if="isSaving"
-          class="spinner-grow spinner-grow-sm"
+          class="spinner-grow spinner-grow-sm text-success mr-2"
           role="status"
           aria-hidden="true"
         />
-        Add
-      </button>
+        <button
+          id="add-schedules-button"
+          :disabled="saveDisabled"
+          :class="buttonClass"
+          type="submit"
+          tabindex="-1"
+        >
+          Add
+        </button>
+      </div>
     </div>
     <div class="card-body">
       <div class="form-group">
@@ -62,6 +64,11 @@ export default {
     saveDisabled() {
       if (!this.canSave) return true;
       return this.isSaving;
+    },
+    buttonClass() {
+      const classes = ['btn', 'btn-sm', 'btn-success'];
+      if (this.isSaving) classes.push('btn-loading');
+      return classes;
     },
   },
 

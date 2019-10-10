@@ -1,6 +1,10 @@
 .btn {
   // @extend .btn;
 
+  &-loading {
+    cursor: wait;
+  }
+
   &--secondary-outline {
     @extend .btn-outline-secondary;
     svg {
