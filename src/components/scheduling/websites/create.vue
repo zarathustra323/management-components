@@ -21,14 +21,12 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="form-group">
-        <select-sections
-          :disabled="isSaving"
-          :section-ids="sectionIds"
-          @change="setSelected"
-          @close="setButtonFocus"
-        />
-      </div>
+      <select-sections
+        :disabled="isSaving"
+        :section-ids="sectionIds"
+        @change="setSelected"
+        @close="setButtonFocus"
+      />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sectionIds.length" tabindex="0" />
     </div>
