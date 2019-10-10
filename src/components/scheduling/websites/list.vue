@@ -10,7 +10,7 @@
         <span class="spinner__loading-message">Loading...</span>
       </div>
     </div>
-    <div class="list-group list-group-flush">
+    <div class="list-group list-group-flush list-group--schedules">
       <div
         v-if="!isLoading && !schedules.length && !error"
         class="list-group-item list-group-item--muted"

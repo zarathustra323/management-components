@@ -1,3 +1,10 @@
+.list-group {
+  &--schedules {
+    max-height: 400px;
+    overflow: scroll;
+  }
+}
+
 .list-group-item {
   $self: &;
 
