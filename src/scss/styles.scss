@@ -9,10 +9,11 @@ $enable-shadows: true !default;
 $list-group-item-padding-x: .75rem !default;
 $card-spacer-x: .75rem !default;
 $font-size-base: .875rem !default;
-$paragraph-margin-bottom: .875rem !default;
-$spacer: .875rem !default;
+$paragraph-margin-bottom: $font-size-base !default;
+$spacer: $font-size-base !default;
 $font-weight-bold: 500 !default;
 $input-color: $gray-900 !default;
+$spinner-width-sm: $font-size-base !default;
 
 
 @import "../../node_modules/bootstrap/scss/variables";
