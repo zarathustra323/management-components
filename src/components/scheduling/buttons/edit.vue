@@ -1,12 +1,13 @@
 <template>
   <button
     type="button"
-    class="btn btn--secondary-outline"
+    :class="buttonClasses"
     :title="title"
     :disabled="disabled"
     @click="emitClick"
   >
-    <icon-pencil />
+    <span v-if="isLoading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+    <icon-pencil v-else />
   </button>
 </template>
 
@@ -23,9 +24,24 @@ export default {
       type: Boolean,
       default: false,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   components: { IconPencil },
+
+  computed: {
+    /**
+     *
+     */
+    buttonClasses() {
+      const classes = ['btn', 'btn--secondary-outline'];
+      if (this.isLoading) classes.push('btn-loading');
+      return classes;
+    },
+  },
 
   methods: {
     emitClick() {

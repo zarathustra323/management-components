@@ -1,14 +1,15 @@
 <template>
   <button
     type="button"
-    class="btn btn--danger-outline"
+    :class="buttonClasses"
     :title="buttonTitle"
     :disabled="disabled"
     @click="confirmAndEmit"
     @keydown="blurOnEscape"
     @blur="clearOnBlur"
   >
-    <alert-icon v-if="promptConfirm" />
+    <span v-if="isLoading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
+    <alert-icon v-else-if="promptConfirm" />
     <trashcan-icon v-else />
   </button>
 </template>
@@ -31,6 +32,10 @@ export default {
       default: 'Are you sure you want to delete this item?',
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    isLoading: {
       type: Boolean,
       default: false,
     },
@@ -58,6 +63,15 @@ export default {
     buttonTitle() {
       if (this.promptConfirm) return this.confirmTitle;
       return this.title;
+    },
+
+    /**
+     *
+     */
+    buttonClasses() {
+      const classes = ['btn', 'btn--danger-outline'];
+      if (this.isLoading) classes.push('btn-loading');
+      return classes;
     },
   },
 
