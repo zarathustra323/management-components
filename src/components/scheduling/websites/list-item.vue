@@ -124,10 +124,8 @@ export default {
       `;
       const input = { id: this.id };
       try {
-        const res = await this.$apollo.mutate({ mutation, variables: { input } });
-        console.log(res);
+        await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });
       } catch (e) {
-        console.error(e);
         this.error = e;
       } finally {
         this.isDeleting = false;
