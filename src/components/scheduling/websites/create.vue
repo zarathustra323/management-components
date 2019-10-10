@@ -29,6 +29,26 @@
       />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sectionIds.length" tabindex="0" />
+      <div
+        v-if="error"
+        class="text-danger mt-3"
+      >
+        {{ error.message }}
+        <a
+          href="#retry-query"
+          class="text-dark font-weight-bold text-decoration-none"
+          @click.prevent="save"
+        >
+          Retry?
+        </a>
+        <a
+          href="#cancel-query"
+          class="text-dark font-weight-bold text-decoration-none"
+          @click.prevent="cancel"
+        >
+          Cancel?
+        </a>
+      </div>
     </div>
   </form>
 </template>
@@ -78,6 +98,11 @@ export default {
       setTimeout(() => document.getElementById('add-schedules-button').focus(), 1);
     },
 
+    cancel() {
+      this.error = null;
+      this.sectionIds = [];
+    },
+
     async save() {
       this.error = null;
       this.isSaving = true;
@@ -85,8 +110,8 @@ export default {
       const { contentId, sectionIds } = this;
 
       const mutation = gql`
-        mutation BMCCreateWebsiteSchedules($input: CreateContentWebsiteSchedulesMutationInput!) {
-          createContentWebsiteSchedules(input: $input) {
+        mutation BMCCreateWebsiteSchedules($input: QuickCreateWebsiteSchedulesMutationInput!) {
+          quickCreateWebsiteSchedules(input: $input) {
             id
           }
         }
@@ -98,7 +123,6 @@ export default {
         console.log(res);
         this.sectionIds = [];
       } catch (e) {
-        console.log('error!!', e.message);
         this.error = e;
       } finally {
         this.isSaving = false;
