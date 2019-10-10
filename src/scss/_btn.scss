@@ -29,5 +29,9 @@
     &:hover svg {
       fill: $white;
     }
+
+    &:disabled svg {
+      fill: $danger;
+    }
   }
 }
