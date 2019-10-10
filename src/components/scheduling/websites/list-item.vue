@@ -4,6 +4,12 @@
       <div class="list-group-item__product-name">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
       <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY @ h:mm a') }}</time>
+      <operation-error
+        :error="error"
+        wrapper-class="mt-1"
+        @retry="retry"
+        @cancel="cancel"
+      />
     </div>
 
     <div class="ml-2">
@@ -28,8 +34,10 @@
 
 <script>
 import moment from 'moment';
+import gql from 'graphql-tag';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
+import OperationError from '../../operation-error.vue';
 
 export default {
   /**
@@ -65,10 +73,12 @@ export default {
   data: () => ({
     isDeleting: false,
     isUpdating: false,
+    isEditing: false,
+    currentOp: null,
     error: null,
   }),
 
-  components: { EditButton, DeleteButton },
+  components: { EditButton, DeleteButton, OperationError },
 
   /**
    *
@@ -90,15 +100,52 @@ export default {
    *
    */
   methods: {
+    /**
+     *
+     */
     async editSchedule() {
       this.error = null;
-      this.isUpdating = true;
+      this.isEditing = true;
       console.log('edit schedule', this.id);
     },
+
+    /**
+     *
+     */
     async deleteSchedule() {
+      this.currentOp = 'delete';
       this.error = null;
       this.isDeleting = true;
-      console.log('delete schedule', this.id);
+
+      const mutation = gql`
+        mutation DeleteWebsiteSchedule($input: DeleteWebsiteScheduleMutationInput!) {
+          deleteWebsiteSchedule(input: $input)
+        }
+      `;
+      const input = { id: this.id };
+      try {
+        const res = await this.$apollo.mutate({ mutation, variables: { input } });
+        console.log(res);
+      } catch (e) {
+        console.error(e);
+        this.error = e;
+      } finally {
+        this.isDeleting = false;
+      }
+    },
+
+    /**
+     *
+     */
+    cancel() {
+      this.error = null;
+      this.currentOp = null;
+    },
+
+    retry() {
+      if (this.currentOp === 'delete') {
+        this.deleteSchedule();
+      }
     },
   },
 };
