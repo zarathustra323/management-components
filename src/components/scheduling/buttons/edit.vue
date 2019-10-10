@@ -3,6 +3,7 @@
     type="button"
     class="btn btn--secondary-outline"
     :title="title"
+    :disabled="disabled"
     @click="emitClick"
   >
     <icon-pencil />
@@ -17,6 +18,10 @@ export default {
     title: {
       type: String,
       default: 'Edit',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 
