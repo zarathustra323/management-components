@@ -8,8 +8,19 @@
 
     <div class="ml-2">
       <div class="btn-group" role="group">
-        <edit-button title="Edit Schedule" @click="editSchedule" />
-        <delete-button title="Delete Schedule" @click="deleteSchedule" />
+        <edit-button
+          title="Edit Schedule"
+          :disabled="isMutating"
+          :isLoading="isUpdating"
+          @click="editSchedule"
+        />
+        <delete-button
+          title="Delete Schedule"
+          confirm-title="Are you sure you want to delete this schedule?"
+          :disabled="isMutating"
+          :isLoading="isDeleting"
+          @click="deleteSchedule"
+        />
       </div>
     </div>
   </div>
@@ -51,6 +62,12 @@ export default {
     },
   },
 
+  data: () => ({
+    isDeleting: false,
+    isUpdating: false,
+    error: null,
+  }),
+
   components: { EditButton, DeleteButton },
 
   /**
@@ -64,16 +81,23 @@ export default {
       if (this.endDate) return moment(this.endDate);
       return null;
     },
+    isMutating() {
+      return this.isDeleting || this.isUpdating;
+    },
   },
 
   /**
    *
    */
   methods: {
-    editSchedule() {
+    async editSchedule() {
+      this.error = null;
+      this.isUpdating = true;
       console.log('edit schedule', this.id);
     },
-    deleteSchedule() {
+    async deleteSchedule() {
+      this.error = null;
+      this.isDeleting = true;
       console.log('delete schedule', this.id);
     },
   },
