@@ -12,10 +12,23 @@
     </div>
     <div class="list-group list-group-flush">
       <div
-        v-if="!isLoading && !schedules.length"
+        v-if="!isLoading && !schedules.length && !error"
         class="list-group-item list-group-item--muted"
       >
         None found
+      </div>
+      <div
+        v-if="error"
+        class="list-group-item text-danger"
+      >
+        {{ error.message }}
+        <a
+          href="#retry-query"
+          class="text-dark font-weight-bold text-decoration-none"
+          @click.prevent="refresh"
+        >
+          Retry?
+        </a>
       </div>
       <list-item
         v-for="(schedule) in schedules"
@@ -52,6 +65,7 @@ export default {
   data: () => ({
     schedules: [],
     totalCount: 0,
+    error: null,
   }),
 
   /**
@@ -65,6 +79,16 @@ export default {
   computed: {
     isLoading() {
       return this.$apollo.loading;
+    },
+  },
+
+  /**
+   *
+   */
+  methods: {
+    refresh() {
+      this.error = null;
+      this.$apollo.queries.schedules.refresh();
     },
   },
 
@@ -107,8 +131,11 @@ export default {
         return { input };
       },
       update({ contentWebsiteSchedules }) {
-        this.totalCount = contentWebsiteSchedules.totalCount;
+        if (contentWebsiteSchedules) this.totalCount = contentWebsiteSchedules.totalCount;
         return mapNodes(contentWebsiteSchedules);
+      },
+      error(e) {
+        this.error = e;
       },
     },
   },
