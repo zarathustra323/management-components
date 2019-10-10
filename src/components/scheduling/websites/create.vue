@@ -34,9 +34,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import SelectSections from './select-sections.vue';
-
-const sleep = ms => new Promise(resolve => setTimeout(() => resolve(ms), ms));
 
 export default {
   /**
@@ -82,10 +81,24 @@ export default {
     async save() {
       this.error = null;
       this.isSaving = true;
+
+      const { contentId, sectionIds } = this;
+
+      const mutation = gql`
+        mutation BMCCreateWebsiteSchedules($input: CreateContentWebsiteSchedulesMutationInput!) {
+          createContentWebsiteSchedules(input: $input) {
+            id
+          }
+        }
+      `;
+      const input = { contentId, sectionIds };
+
       try {
-        await sleep(2000);
+        const res = await this.$apollo.mutate({ mutation, variables: { input } });
+        console.log(res);
         this.sectionIds = [];
       } catch (e) {
+        console.log('error!!', e.message);
         this.error = e;
       } finally {
         this.isSaving = false;
