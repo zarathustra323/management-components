@@ -111,8 +111,7 @@ export default {
       const input = { contentId, sectionIds };
 
       try {
-        const res = await this.$apollo.mutate({ mutation, variables: { input } });
-        console.log(res);
+        await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });
         this.sectionIds = [];
       } catch (e) {
         this.error = e;
