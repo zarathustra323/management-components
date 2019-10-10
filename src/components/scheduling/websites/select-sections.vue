@@ -1,5 +1,4 @@
 <template>
-  <!-- @todo Verify tab order -->
   <tree-select
     v-model="selected"
     :multiple="true"
@@ -13,6 +12,7 @@
     :auto-load-root-options="false"
     :required="true"
     @input="emitChange"
+    @close="emitClose"
     search-nested
     placeholder="Select section(s); type to filter..."
   >
@@ -97,6 +97,13 @@ export default {
      */
     emitChange(ids) {
       this.$emit('change', ids);
+    },
+
+    /**
+     *
+     */
+    emitClose() {
+      this.$emit('close');
     },
 
     /**

@@ -2,7 +2,13 @@
   <form class="card mb-4" @submit.prevent="save">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>Add Schedules</span>
-      <button :disabled="saveDisabled" type="submit" tabindex="1" class="btn btn-sm btn-success">
+      <button
+        id="add-schedules-button"
+        :disabled="saveDisabled"
+        type="submit"
+        class="btn btn-sm btn-success"
+        tabindex="-1"
+      >
         <span
           v-if="isSaving"
           class="spinner-grow spinner-grow-sm"
@@ -18,8 +24,11 @@
           :disabled="isSaving"
           :section-ids="sectionIds"
           @change="setSelected"
+          @close="setFocus"
         />
       </div>
+      <!-- Hidden tab stop for proper button focus -->
+      <span v-if="sectionIds.length" tabindex="0" />
     </div>
   </form>
 </template>
@@ -59,6 +68,10 @@ export default {
   methods: {
     setSelected(ids) {
       this.sectionIds = ids;
+    },
+
+    setFocus() {
+      setTimeout(() => document.getElementById('add-schedules-button').focus(), 1);
     },
 
     async save() {
