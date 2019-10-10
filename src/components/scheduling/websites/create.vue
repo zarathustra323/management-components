@@ -26,7 +26,7 @@
           :disabled="isSaving"
           :section-ids="sectionIds"
           @change="setSelected"
-          @close="setFocus"
+          @close="setButtonFocus"
         />
       </div>
       <!-- Hidden tab stop for proper button focus -->
@@ -77,7 +77,7 @@ export default {
       this.sectionIds = ids;
     },
 
-    setFocus() {
+    setButtonFocus() {
       setTimeout(() => document.getElementById('add-schedules-button').focus(), 1);
     },
 
