@@ -59,7 +59,7 @@ export default {
         return {
           id: section.id,
           label: section.name,
-          title: sectionTitle({ site, section }),
+          title: sectionTitle({ site, section, useSiteInTitle: false }),
         };
       },
       set() {
@@ -94,6 +94,7 @@ export default {
         action,
         expandedIds,
         disableSites: false,
+        useSiteInTitle: false,
       });
     },
   },
