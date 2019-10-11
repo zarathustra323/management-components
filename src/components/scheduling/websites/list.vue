@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="website-schedules__list">
     <!-- @todo handle errors -->
     <div class="card-header">
       Current Schedules

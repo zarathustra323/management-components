@@ -17,6 +17,7 @@
       }
       &__schedule-name {
         font-weight: $font-weight-bold;
+        word-break: break-word;
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <form class="card mb-4" @submit.prevent="save">
+  <form class="website-schedules__add" @submit.prevent="save">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>Add Schedules</span>
       <div>

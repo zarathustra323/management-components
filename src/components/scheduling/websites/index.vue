@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="website-schedules">
     <create-schedules :content-id="contentId" />
     <list-schedules :content-id="contentId" />
   </div>

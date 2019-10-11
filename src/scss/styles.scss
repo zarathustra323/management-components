@@ -10,6 +10,7 @@ $warning: #fb8c00 !default;
 $gray-900: #212529 !default;
 $font-family-sans-serif: "Roboto", sans-serif !default;
 $enable-shadows: true !default;
+$enable-rounded: false !default;
 $list-group-item-padding-x: .75rem !default;
 $card-spacer-x: .75rem !default;
 $font-size-base: .875rem !default;
@@ -18,7 +19,7 @@ $spacer: $font-size-base !default;
 $font-weight-bold: 500 !default;
 $input-color: $gray-900 !default;
 $spinner-width-sm: $font-size-base !default;
-$card-cap-bg: #f8f9fa !default;
+// $card-cap-bg: #f8f9fa !default;
 
 
 @import "../../node_modules/bootstrap/scss/variables";
@@ -64,12 +65,34 @@ $card-cap-bg: #f8f9fa !default;
 @import "./list-group";
 @import "./spinner";
 
+body {
+  letter-spacing: .1px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .24);
+}
+
+.website-schedules {
+  &__add {
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+    .card-header {
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
 .operation-error {
   color: $danger;
   word-break: break-word;
 }
 
 .card-header {
+  padding: 7px .75rem;
   font-weight: 300;
   border-bottom: none;
 }
@@ -81,6 +104,11 @@ $card-cap-bg: #f8f9fa !default;
 
 .vue-treeselect {
   $self: &;
+
+  &__control {
+    border-radius: 0;
+  }
+
   &__option--disabled {
     #{ $self } {
       &__checkbox-container {
@@ -89,6 +117,24 @@ $card-cap-bg: #f8f9fa !default;
       &__label-container {
         color: $gray-600;
         cursor: pointer;
+      }
+    }
+  }
+
+  &--open-below {
+    #{ $self } {
+      &__menu {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  &--open-above {
+    #{ $self } {
+      &__menu {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
       }
     }
   }
