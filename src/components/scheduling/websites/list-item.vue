@@ -4,13 +4,14 @@
     :site="site"
     :section="section"
     :option="option"
+    :start-date="start.toDate()"
     @cancel="exitEditMode"
   />
   <div v-else class="list-group-item list-group-item--schedules">
     <div>
-      <div class="list-group-item__product-name">{{ site.title }}</div>
+      <div class="site-label">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
-      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY @ h:mm a') }}</time>
+      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY, h:mm a') }}</time>
       <operation-error
         :error="error"
         wrapper-class="mt-1"

@@ -1,12 +1,18 @@
 <template>
   <div class="list-group-item">
+    <!-- @todo this will need to change if section/site changes -->
+    <div class="site-label">{{ site.title }}</div>
     <!-- @todo on change, determine if the option needs to change based on site -->
     <div class="form-group">
-      <section-select :site="site" :section="section" />
-      <option-select :site-id="site.id" :option="option" />
-    </div>
-    <div class="form-group">
-
+      <div class="mt-1">
+        <section-select :site="site" :section="section" />
+      </div>
+      <div class="mt-1">
+        <option-select :site-id="site.id" :option="option" />
+      </div>
+      <div class="mt-1">
+        <edit-start-date :date="startDate" />
+      </div>
     </div>
     <div class="d-flex justify-content-between">
       <save-button @click="update" />
@@ -16,6 +22,7 @@
 </template>
 
 <script>
+import EditStartDate from './edit-start-date.vue';
 import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
 import CancelButton from '../buttons/cancel.vue';
@@ -35,13 +42,14 @@ export default {
       type: Object,
       required: true,
     },
+    startDate: {
+      type: Date,
+      required: true,
+    },
   },
 
-  data: () => ({
-    options: null,
-  }),
-
   components: {
+    EditStartDate,
     SectionSelect,
     OptionSelect,
     CancelButton,
