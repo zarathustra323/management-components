@@ -1,5 +1,6 @@
 .btn {
   // @extend .btn;
+  box-shadow: none;
 
   &-loading {
     cursor: wait;
