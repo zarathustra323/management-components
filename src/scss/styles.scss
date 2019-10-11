@@ -115,6 +115,34 @@ $spinner-width-sm: $font-size-base !default;
   margin-left: 0;
 }
 
+.vdatetime-popup {
+  font-family: $font-family-sans-serif;
+  &__header {
+    background-color: $primary;
+  }
+}
+
+.vdatetime-calendar {
+  &__month__day {
+    &--selected > span > span {
+      background-color: $primary;
+    }
+    &--selected:hover > span span {
+      background-color: darken($primary, 7.5%);
+    }
+  }
+}
+
+.vdatetime-month-picker,
+.vdatetime-year-picker,
+.vdatetime-time-picker {
+  &__item {
+    &--selected {
+      color: $primary;
+    }
+  }
+}
+
 .vue-treeselect {
   $self: &;
 
