@@ -37,6 +37,7 @@
 
 <script>
 import '@riophae/vue-treeselect/dist/vue-treeselect.css';
+import 'vue-datetime/dist/vue-datetime.css';
 import './scss/styles.scss';
 import Scheduling from './components/scheduling/index.vue';
 
