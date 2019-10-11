@@ -1,8 +1,9 @@
 <template>
   <edit-schedule
     v-if="isEditing"
-    :section="section"
     :site="site"
+    :section="section"
+    :option="option"
     @cancel="exitEditMode"
   />
   <div v-else class="list-group-item list-group-item--schedules">

@@ -14,7 +14,7 @@ const mapChildren = (sections, site, expandedIds = []) => mapNodes(sections).map
   };
 });
 
-export default async (apollo, { action, expandedIds = [] }) => {
+export default async (apollo, { action, expandedIds = [], disableSites = true }) => {
   const variables = {
     siteInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
     rootSectionInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
@@ -30,7 +30,7 @@ export default async (apollo, { action, expandedIds = [] }) => {
         id: site.id,
         label: site.title,
         title: site.title,
-        isDisabled: true,
+        isDisabled: disableSites,
         isSite: true,
         ...(expandedIds.includes(site.id) && { isDefaultExpanded: true }),
         ...(children.length && { children }),
