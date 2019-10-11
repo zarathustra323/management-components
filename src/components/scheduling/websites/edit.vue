@@ -1,7 +1,5 @@
 <template>
   <div class="list-group-item">
-    <!-- @todo load selected section title -->
-    <!-- @todo expand selected tree -->
     <!-- @todo on change, determine if the option needs to change based on site -->
     <div class="form-group">
       <tree-select
@@ -16,7 +14,17 @@
         :auto-load-root-options="true"
         search-nested
       >
+        <!-- @todo make this a common component -->
         <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+        <label
+          slot="option-label"
+          slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
+          :class="labelClassName"
+          @click="toggleSiteExpanded(node)"
+        >
+          {{ node.label }}
+          <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
+        </label>
       </tree-select>
     </div>
     <div class="d-flex justify-content-between">
@@ -74,8 +82,19 @@ export default {
     /**
      *
      */
+    toggleSiteExpanded(node) {
+      const { isSite } = node.raw;
+      // eslint-disable-next-line no-param-reassign
+      if (isSite) node.isExpanded = !node.isExpanded;
+    },
+
+    /**
+     *
+     */
     async loadOptions({ action }) {
-      this.options = await sectionOptions(this.$apollo, { action });
+      const expandedIds = this.section.hierarchy.map(s => s.id);
+      expandedIds.push(this.site.id);
+      this.options = await sectionOptions(this.$apollo, { action, expandedIds });
     },
   },
 };

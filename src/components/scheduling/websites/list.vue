@@ -108,6 +108,11 @@ export default {
                   id
                   name
                   fullName
+                  # @todo Load the section section on edit.
+                  # Don't load the entire hierarchy on the list.
+                  hierarchy {
+                    id
+                  }
                 }
                 option {
                   id
