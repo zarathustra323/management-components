@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
 
-query BMCSchedulingSelectWebsiteSections(
+query LoadWebsiteSectionOptions(
   $siteInput: WebsiteSitesQueryInput!,
   $rootSectionInput: WebsiteSiteRootSectionsInput!,
   $childSectionInput: WebsiteSectionChildrenInput!,
