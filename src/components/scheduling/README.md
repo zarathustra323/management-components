@@ -2,6 +2,10 @@
 
 ## Website
 
+- [ ] Consolidate CSS into scopes
+- [ ] Set proper BEM classing throughout
+- [ ] Check all GraphQL queries and make common fragments
+
 - Create New Schedule
 - View Current Schedules
   - List each schedule
