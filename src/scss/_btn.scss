@@ -63,10 +63,20 @@
       fill: $warning;
     }
     &:hover svg {
-      fill: $gray-900;
+      fill: $white;
     }
     &:disabled svg {
       fill: $warning;
+    }
+  }
+
+  &-warning {
+    color: $white;
+    svg {
+      fill: $white;
+    }
+    &:disabled svg {
+      fill: $white;
     }
   }
 

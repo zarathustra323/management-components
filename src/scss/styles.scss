@@ -2,7 +2,11 @@
 
 @import "../../node_modules/bootstrap/scss/functions";
 
-
+$success: #43b25c !default;
+$primary: rgb(3, 155, 229) !default;
+$secondary: #8a9197 !default;
+$danger: #e53935 !default;
+$warning: #fb8c00 !default;
 $gray-900: #212529 !default;
 $font-family-sans-serif: "Roboto", sans-serif !default;
 $enable-shadows: true !default;
