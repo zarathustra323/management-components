@@ -3,7 +3,7 @@
 @import "../../node_modules/bootstrap/scss/functions";
 
 $success: #43b25c !default;
-$primary: rgb(3, 155, 229) !default;
+$primary: #039be5 !default;
 $secondary: #8a9197 !default;
 $danger: #e53935 !default;
 $warning: #fb8c00 !default;
@@ -72,6 +72,20 @@ $spinner-width-sm: $font-size-base !default;
 
 .schedules {
   letter-spacing: .1px;
+}
+
+.form-control {
+  border: 1px solid #ddd;
+  box-shadow: none;
+  &:hover {
+    border-color: #cfcfcf;
+  }
+}
+
+.site-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  color: $gray-600;
 }
 
 .website-schedules {
