@@ -1,4 +1,5 @@
 import { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
+import sectionTitle from './section-title';
 import query from '../../../../graphql/queries/scheduling/select-website-sections';
 import mapNodes from '../../../../utils/map-nodes';
 
@@ -7,7 +8,7 @@ const mapChildren = (sections, site) => mapNodes(sections).map((section) => {
   return {
     id: section.id,
     label: section.name,
-    title: `${site.shortName || site.name}: ${section.fullName}`,
+    title: sectionTitle({ site, section }),
     ...(children.length && { children }),
   };
 });
