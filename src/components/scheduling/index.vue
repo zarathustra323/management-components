@@ -41,9 +41,9 @@ export default {
    */
   data: () => ({
     items: [
-      { id: 'websites', label: 'Websites', component: WebsiteSchedules },
-      { id: 'magazines', label: 'Magazines', component: MagazineSchedules },
-      { id: 'newsletters', label: 'Newsletters', component: NewsletterSchedules },
+      { id: 'websites', label: 'Website', component: WebsiteSchedules },
+      { id: 'magazines', label: 'Magazine', component: MagazineSchedules },
+      { id: 'newsletters', label: 'Newsletter', component: NewsletterSchedules },
     ],
     selected: 'websites',
   }),
