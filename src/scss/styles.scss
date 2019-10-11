@@ -18,6 +18,7 @@ $spacer: $font-size-base !default;
 $font-weight-bold: 500 !default;
 $input-color: $gray-900 !default;
 $spinner-width-sm: $font-size-base !default;
+$card-cap-bg: #f8f9fa !default;
 
 
 @import "../../node_modules/bootstrap/scss/variables";
@@ -66,6 +67,11 @@ $spinner-width-sm: $font-size-base !default;
 .operation-error {
   color: $danger;
   word-break: break-word;
+}
+
+.card-header {
+  font-weight: 300;
+  border-bottom: none;
 }
 
 .card-header-pills {
