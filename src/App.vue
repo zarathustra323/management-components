@@ -27,8 +27,8 @@
     </div>
   </div>
   <div v-else class="container-fluid">
-    <div class="row mt-3">
-      <div class="col-12 col-md-6 col-xl-4">
+    <div class="row">
+      <div style="width: 350px; padding: 8px;">
         <component :is="currentComponent" v-bind="currentProps"></component>
       </div>
     </div>
