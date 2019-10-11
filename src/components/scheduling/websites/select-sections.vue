@@ -30,9 +30,8 @@
 </template>
 
 <script>
-import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import query from '../../../graphql/queries/scheduling/select-website-sections';
-import mapNodes from '../../../utils/map-nodes';
+import TreeSelect from '@riophae/vue-treeselect';
+import sectionOptions from './treeselect/section-options';
 
 export default {
   /**
@@ -110,42 +109,7 @@ export default {
      *
      */
     async loadOptions({ action }) {
-      const variables = {
-        siteInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
-        rootSectionInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
-        childSectionInput: { sort: { field: 'name', order: 'asc' }, pagination: { limit: 0 } },
-      };
-
-      if (action === LOAD_ROOT_OPTIONS) {
-        const { data } = await this.$apollo.query({ query, variables });
-        const sites = mapNodes(data.websiteSites);
-        this.options = sites.map((site) => {
-          const children = this.mapChildren(site.rootSections, site);
-          return {
-            id: site.id,
-            label: site.title,
-            title: site.title,
-            isDisabled: true,
-            isSite: true,
-            ...(children.length && { children }),
-          };
-        });
-      }
-    },
-
-    /**
-     *
-     */
-    mapChildren(sections, site) {
-      return mapNodes(sections).map((section) => {
-        const children = this.mapChildren(section.children, site);
-        return {
-          id: section.id,
-          label: section.name,
-          title: `${site.shortName || site.name}: ${section.fullName}`,
-          ...(children.length && { children }),
-        };
-      });
+      this.options = await sectionOptions(this.$apollo, { action });
     },
   },
 };
