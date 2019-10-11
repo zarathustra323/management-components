@@ -1,7 +1,7 @@
 # Scheduling Components
 
 ## Website
-
+- [ ] Add stronger lint rules
 - [ ] Consolidate CSS into scopes
 - [ ] Set proper BEM classing throughout
 - [ ] Check all GraphQL queries and make common fragments
