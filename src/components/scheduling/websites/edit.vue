@@ -1,5 +1,8 @@
 <template>
   <div class="list-group-item">
+    <!-- @todo load selected section title -->
+    <!-- @todo expand selected tree -->
+    <!-- @todo on change, determine if the option needs to change based on site -->
     <div class="form-group">
       <tree-select
         v-model="selectedSection"
@@ -12,7 +15,9 @@
         :clearable="false"
         :auto-load-root-options="true"
         search-nested
-      />
+      >
+        <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+      </tree-select>
     </div>
     <div class="d-flex justify-content-between">
       <save-button
@@ -27,12 +32,17 @@
 
 <script>
 import TreeSelect from '@riophae/vue-treeselect';
+import sectionTitle from './treeselect/section-title';
 import sectionOptions from './treeselect/section-options';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
 
 export default {
   props: {
+    site: {
+      type: Object,
+      required: true,
+    },
     section: {
       type: Object,
       required: true,
@@ -45,10 +55,11 @@ export default {
 
   computed: {
     selectedSection() {
-      const { section } = this;
+      const { section, site } = this;
       return {
         id: section.id,
-        label: section.fullName,
+        label: section.name,
+        title: sectionTitle({ site, section }),
       };
     },
   },

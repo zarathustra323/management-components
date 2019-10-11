@@ -1,5 +1,10 @@
 <template>
-  <edit-schedule v-if="isEditing" :section="section" @cancel="exitEditMode" />
+  <edit-schedule
+    v-if="isEditing"
+    :section="section"
+    :site="site"
+    @cancel="exitEditMode"
+  />
   <div v-else class="list-group-item list-group-item--schedules">
     <div>
       <div class="list-group-item__product-name">{{ site.title }}</div>

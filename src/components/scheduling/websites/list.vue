@@ -101,9 +101,12 @@ export default {
                 site {
                   id
                   title
+                  name
+                  shortName
                 }
                 section {
                   id
+                  name
                   fullName
                 }
                 option {
