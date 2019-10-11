@@ -65,13 +65,13 @@ $spinner-width-sm: $font-size-base !default;
 @import "./list-group";
 @import "./spinner";
 
-body {
-  letter-spacing: .1px;
-}
-
 .card {
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .24);
+}
+
+.schedules {
+  letter-spacing: .1px;
 }
 
 .website-schedules {

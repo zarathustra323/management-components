@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card schedules">
     <div class="card-header">
       <ul class="nav nav-pills card-header-pills">
         <nav-item
