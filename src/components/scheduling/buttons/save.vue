@@ -1,8 +1,11 @@
 <template>
   <action-button
-    icon="pencil"
-    type="secondary"
+    icon="check"
+    type="success"
     :label="label"
+    :loading-label="loadingLabel"
+    :outline="false"
+    :show-label="true"
     :disabled="disabled"
     :is-loading="isLoading"
     @click="$emit('click')"
@@ -19,7 +22,11 @@ export default {
   props: {
     label: {
       type: String,
-      default: 'Edit',
+      default: 'Save',
+    },
+    loadingLabel: {
+      type: String,
+      default: 'Saving...',
     },
     disabled: {
       type: Boolean,

@@ -1,8 +1,10 @@
 <template>
   <action-button
-    icon="pencil"
-    type="secondary"
+    icon="x"
+    type="warning"
     :label="label"
+    :show-label="true"
+    :outline="false"
     :disabled="disabled"
     :is-loading="isLoading"
     @click="$emit('click')"
@@ -19,7 +21,7 @@ export default {
   props: {
     label: {
       type: String,
-      default: 'Edit',
+      default: 'Cancel',
     },
     disabled: {
       type: Boolean,

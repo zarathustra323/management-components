@@ -3,21 +3,15 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <span>Add Schedules</span>
       <div>
-        <span
-          v-if="isSaving"
-          class="spinner-grow spinner-grow-sm text-success mr-2"
-          role="status"
-          aria-hidden="true"
-        />
-        <button
-          id="add-schedules-button"
-          :disabled="saveDisabled"
-          :class="buttonClass"
-          type="submit"
+        <add-button
+          ref="button"
+          button-type="submit"
+          label="Add schedules"
+          loading-label="Adding schedules..."
           tabindex="-1"
-        >
-          Add
-        </button>
+          :disabled="saveDisabled"
+          :isLoading="isSaving"
+        />
       </div>
     </div>
     <div class="card-body">
@@ -42,6 +36,7 @@
 <script>
 import gql from 'graphql-tag';
 import SelectSections from './select-sections.vue';
+import AddButton from '../buttons/add.vue';
 import OperationError from '../../operation-error.vue';
 
 export default {
@@ -64,7 +59,7 @@ export default {
   /**
    *
    */
-  components: { SelectSections, OperationError },
+  components: { SelectSections, OperationError, AddButton },
 
   computed: {
     canSave() {
@@ -87,7 +82,7 @@ export default {
     },
 
     setButtonFocus() {
-      setTimeout(() => document.getElementById('add-schedules-button').focus(), 1);
+      setTimeout(() => this.$refs.button.$el.focus(), 1);
     },
 
     cancel() {

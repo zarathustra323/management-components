@@ -1,5 +1,6 @@
 <template>
-  <div class="list-group-item list-group-item--schedules">
+  <edit-schedule v-if="isEditing" @cancel="exitEditMode" />
+  <div v-else class="list-group-item list-group-item--schedules">
     <div>
       <div class="list-group-item__product-name">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
@@ -7,22 +8,21 @@
       <operation-error
         :error="error"
         wrapper-class="mt-1"
-        @retry="retry"
-        @cancel="cancel"
+        @retry="deleteSchedule"
+        @cancel="cancelDelete"
       />
     </div>
 
     <div class="ml-2">
       <div class="btn-group" role="group">
         <edit-button
-          title="Edit Schedule"
+          label="Edit schedule"
           :disabled="isMutating"
-          :isLoading="isUpdating"
           @click="editSchedule"
         />
         <delete-button
-          title="Delete Schedule"
-          confirm-title="Are you sure you want to delete this schedule?"
+          label="Delete schedule"
+          loading-label="Deleting schedule..."
           :disabled="isMutating"
           :isLoading="isDeleting"
           @click="deleteSchedule"
@@ -35,6 +35,7 @@
 <script>
 import moment from 'moment';
 import gql from 'graphql-tag';
+import EditSchedule from './edit.vue';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
 import OperationError from '../../operation-error.vue';
@@ -72,13 +73,16 @@ export default {
 
   data: () => ({
     isDeleting: false,
-    isUpdating: false,
     isEditing: false,
-    currentOp: null,
     error: null,
   }),
 
-  components: { EditButton, DeleteButton, OperationError },
+  components: {
+    EditButton,
+    DeleteButton,
+    OperationError,
+    EditSchedule,
+  },
 
   /**
    *
@@ -92,7 +96,7 @@ export default {
       return null;
     },
     isMutating() {
-      return this.isDeleting || this.isUpdating;
+      return this.isDeleting;
     },
   },
 
@@ -104,16 +108,13 @@ export default {
      *
      */
     async editSchedule() {
-      this.error = null;
       this.isEditing = true;
-      console.log('edit schedule', this.id);
     },
 
     /**
      *
      */
     async deleteSchedule() {
-      this.currentOp = 'delete';
       this.error = null;
       this.isDeleting = true;
 
@@ -132,18 +133,15 @@ export default {
       }
     },
 
+    exitEditMode() {
+      this.isEditing = false;
+    },
+
     /**
      *
      */
-    cancel() {
+    cancelDelete() {
       this.error = null;
-      this.currentOp = null;
-    },
-
-    retry() {
-      if (this.currentOp === 'delete') {
-        this.deleteSchedule();
-      }
     },
   },
 };
