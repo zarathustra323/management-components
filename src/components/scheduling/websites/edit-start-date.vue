@@ -18,7 +18,7 @@
     <template slot="button-confirm" slot-scope="scope">
       <!-- <fa :icon="['fas', 'check-circle']"></fa> -->
       <span v-if='scope.step === "time"'>
-        <check-icon /> OK
+        <check-icon /> Done
       </span>
       <span v-else>
         Next <chevron-right-icon />
