@@ -108,10 +108,16 @@ export default {
                   id
                   name
                   fullName
-                  # @todo Load the section section on edit.
-                  # Don't load the entire hierarchy on the list.
+                  # @todo Load the section on edit to get this data.
                   hierarchy {
                     id
+                  }
+                  # @todo Load the section on edit to get this data.
+                  site {
+                    id
+                    title
+                    name
+                    shortName
                   }
                 }
                 option {

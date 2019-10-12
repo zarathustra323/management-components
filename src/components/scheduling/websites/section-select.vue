@@ -33,10 +33,6 @@ import sectionOptions from './treeselect/section-options';
 
 export default {
   props: {
-    site: {
-      type: Object,
-      required: true,
-    },
     section: {
       type: Object,
       required: true,
@@ -52,9 +48,12 @@ export default {
   },
 
   computed: {
+    site() {
+      return this.section.site;
+    },
+
     selected: {
       get() {
-        console.log('section selected.get', this.section.id);
         const { section, site } = this;
         return {
           id: section.id,
@@ -63,16 +62,15 @@ export default {
         };
       },
       set() {
-        console.log('section selected.set', this.section.id);
         return null;
       },
     },
   },
 
   methods: {
-    emitChange(section) {
-      console.log('emit section change', section.id);
-      this.$emit('change');
+    emitChange(option) {
+      const { model: section } = option;
+      this.$emit('change', section);
     },
 
     /**

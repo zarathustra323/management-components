@@ -19,6 +19,7 @@ const mapChildren = ({
     id: section.id,
     label: section.name,
     title: sectionTitle({ site, section, useSiteInTitle }),
+    model: { ...section, site },
     ...(expandedIds.includes(section.id) && { isDefaultExpanded: true }),
     ...(children.length && { children }),
   };
@@ -50,6 +51,7 @@ export default async (apollo, {
         id: site.id,
         label: site.title,
         title: site.title,
+        model: site,
         isDisabled: disableSites,
         isSite: true,
         ...(expandedIds.includes(site.id) && { isDefaultExpanded: true, useSiteInTitle }),

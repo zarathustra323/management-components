@@ -38,7 +38,6 @@ export default {
   computed: {
     selected: {
       get() {
-        console.log('option selected.get', this.option.id);
         const { option } = this;
         return {
           id: option.id,
@@ -46,16 +45,15 @@ export default {
         };
       },
       set() {
-        console.log('option selected.set', this.option.id);
         return null;
       },
     },
   },
 
   methods: {
-    emitChange(option) {
-      console.log('change option', option.id);
-      this.$emit('change');
+    emitChange(choice) {
+      const { model: option } = choice;
+      this.$emit('change', option);
     },
 
     async loadOptions({ action }) {
@@ -82,6 +80,7 @@ export default {
         this.options = options.map(option => ({
           id: option.id,
           label: `${option.name} (${option.id})`,
+          model: option,
         }));
       }
     },
