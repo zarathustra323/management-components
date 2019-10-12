@@ -77,8 +77,11 @@
     svg {
       fill: $white;
     }
-    &:disabled svg {
-      fill: $white;
+    &:disabled {
+      color: $white;
+      svg {
+        fill: $white;
+      }
     }
   }
 

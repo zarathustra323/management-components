@@ -20,6 +20,7 @@ $font-weight-bold: 500 !default;
 $input-color: $gray-900 !default;
 $spinner-width-sm: $font-size-base !default;
 $input-placeholder-color: #bdbdbd !default;
+$input-disabled-bg: #f9f9f9 !default;
 
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
@@ -80,7 +81,7 @@ $input-placeholder-color: #bdbdbd !default;
 .form-control {
   border: 1px solid #ddd;
   box-shadow: none;
-  &:hover {
+  &:not(:disabled):hover {
     border-color: #cfcfcf;
   }
 }
