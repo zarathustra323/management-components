@@ -2,7 +2,6 @@
   <div class="list-group-item">
     <div class="site-label">{{ currentSection.site.title }}</div>
     <!-- @todo allow end date to be cleared -->
-    <!-- @todo handle update and prevent save until valid -->
     <!-- @todo prevent selecting site when selecting section -->
     <div class="form-group">
       <div class="mt-1">
@@ -99,20 +98,46 @@ export default {
     currentSection() {
       return this.selectedSection || this.section;
     },
+    hasSectionChanged() {
+      return this.currentSection.id !== this.section.id;
+    },
     currentOption() {
       return this.selectedOption === undefined ? this.option : this.selectedOption;
+    },
+    hasOptionChanged() {
+      if (this.currentOption === null) return true;
+      return this.currentOption.id !== this.option.id;
     },
     currentStartDate() {
       return this.selectedStartDate || this.startDate;
     },
+    hasStartDateChanged() {
+      return this.currentStartDate.valueOf() !== this.startDate.valueOf();
+    },
     currentEndDate() {
       return this.selectedEndDate || this.endDate;
+    },
+    hasEndDateChanged() {
+      // Current end date is set but initial was empty.
+      if (this.currentEndDate && !this.endDate) return true;
+      // Current end date is empty but initial was set.
+      if (!this.currentEndDate && this.endDate) return true;
+      // Both current and initial are empty.
+      if (!this.currentEndDate && !this.endDate) return false;
+      // Compare date values.
+      return this.currentEndDate.valueOf() !== this.endDate.value();
+    },
+    hasChanged() {
+      return this.hasSectionChanged
+        || this.hasOptionChanged
+        || this.hasStartDateChanged
+        || this.hasEndDateChanged;
     },
     canSave() {
       return Boolean(this.currentSection && this.currentOption && this.currentStartDate);
     },
     isSaveDisabled() {
-      return !this.canSave || this.isSaving;
+      return !this.canSave || !this.hasChanged || this.isSaving;
     },
   },
 
