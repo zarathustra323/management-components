@@ -19,8 +19,7 @@ $spacer: $font-size-base !default;
 $font-weight-bold: 500 !default;
 $input-color: $gray-900 !default;
 $spinner-width-sm: $font-size-base !default;
-// $card-cap-bg: #f8f9fa !default;
-
+$input-placeholder-color: #bdbdbd !default;
 
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
