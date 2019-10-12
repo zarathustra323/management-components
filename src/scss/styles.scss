@@ -120,6 +120,20 @@ $spinner-width-sm: $font-size-base !default;
   &__header {
     background-color: $primary;
   }
+  &__actions__button {
+    &--confirm {
+      color: $success;
+      &:hover {
+        color: darken($success, 7.5%);
+      }
+    }
+    &--cancel {
+      color: $warning;
+      &:hover {
+        color: darken($warning, 7.5%);
+      }
+    }
+  }
 }
 
 .vdatetime-calendar {

@@ -7,6 +7,7 @@
     :hour-step="1"
     :minute-step="5"
     :week-start="7"
+    :phrases="{ ok: 'OK', cancel: 'Cancel' }"
     use12-hour
     auto
   />
