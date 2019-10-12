@@ -1,7 +1,8 @@
 <template>
   <tree-select
-    v-model="selected"
+    v-model="currentOption"
     value-format="object"
+    placeholder="Select an option..."
     :load-options="loadOptions"
     :options="options"
     :multiple="false"
@@ -25,34 +26,48 @@ export default {
     },
     option: {
       type: Object,
-      required: true,
+      default: null,
     },
   },
 
   data: () => ({
     options: null,
+    originalSiteId: null,
+    selectedOption: undefined,
   }),
+
+  created() {
+    this.originalSiteId = this.siteId;
+  },
 
   components: { TreeSelect },
 
+  watch: {
+    siteId() {
+      this.selectedOption = null;
+      this.options = null;
+    },
+  },
+
   computed: {
-    selected: {
+    currentOption: {
       get() {
-        const { option } = this;
+        const option = this.selectedOption === undefined ? this.option : this.selectedOption;
+        if (!option) return null;
         return {
           id: option.id,
           label: `${option.name} (${option.id})`,
         };
       },
-      set() {
-        return null;
+      set(v) {
+        this.selectedOption = v || null;
       },
     },
   },
 
   methods: {
     emitChange(choice) {
-      const { model: option } = choice;
+      const option = choice ? choice.model : null;
       this.$emit('change', option);
     },
 

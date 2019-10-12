@@ -76,7 +76,7 @@ export default {
 
   data: () => ({
     selectedSection: null,
-    selectedOption: null,
+    selectedOption: undefined,
     selectedStartDate: null,
     selectedEndDate: null,
   }),
@@ -94,7 +94,7 @@ export default {
       return this.selectedSection || this.section;
     },
     currentOption() {
-      return this.selectedOption || this.option;
+      return this.selectedOption === undefined ? this.option : this.selectedOption;
     },
     currentStartDate() {
       return this.selectedStartDate || this.startDate;
