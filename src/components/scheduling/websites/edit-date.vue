@@ -7,7 +7,6 @@
     :title="title"
     input-class="form-control"
     :hour-step="1"
-    :minute-step="5"
     :week-start="7"
     :min-datetime="minISO"
     :max-datetime="maxISO"
