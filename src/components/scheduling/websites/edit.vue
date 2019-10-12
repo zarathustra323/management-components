@@ -11,7 +11,10 @@
         <option-select :site-id="site.id" :option="option" />
       </div>
       <div class="mt-1">
-        <edit-start-date :date="startDate" />
+        <edit-date :date="startDate" title="Start Date" />
+      </div>
+      <div class="mt-1">
+        <edit-date :date="endDate" placeholder="Pick end date..." title="End Date" />
       </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-import EditStartDate from './edit-start-date.vue';
+import EditDate from './edit-date.vue';
 import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
 import CancelButton from '../buttons/cancel.vue';
@@ -46,10 +49,14 @@ export default {
       type: Date,
       required: true,
     },
+    endDate: {
+      type: Date,
+      default: null,
+    },
   },
 
   components: {
-    EditStartDate,
+    EditDate,
     SectionSelect,
     OptionSelect,
     CancelButton,

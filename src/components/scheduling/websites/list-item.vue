@@ -5,6 +5,7 @@
     :section="section"
     :option="option"
     :start-date="start.toDate()"
+    :end-date="end ? end.toDate() : end"
     @cancel="exitEditMode"
   />
   <div v-else class="list-group-item list-group-item--schedules">
