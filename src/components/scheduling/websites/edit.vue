@@ -19,7 +19,8 @@
       </div>
       <div class="mt-1">
         <edit-date
-          :value="startDate"
+          :value="currentStartDate"
+          :max="currentEndDate"
           placeholder="Pick a start date..."
           title="Start Date"
           @change="setStartDate"
@@ -27,7 +28,8 @@
       </div>
       <div class="mt-1">
         <edit-date
-          :value="endDate"
+          :value="currentEndDate"
+          :min="currentStartDate"
           placeholder="Pick an end date..."
           title="End Date"
           @change="setEndDate"

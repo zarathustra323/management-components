@@ -8,6 +8,8 @@
     :hour-step="1"
     :minute-step="5"
     :week-start="7"
+    :min-datetime="minISO"
+    :max-datetime="maxISO"
     use12-hour
     auto
     @input="emitChange"
@@ -32,9 +34,22 @@ import CheckIcon from '../../icons/check.vue';
 import XIcon from '../../icons/x.vue';
 import ChevronRightIcon from '../../icons/chevron-right.vue';
 
+const convertToISO = (value) => {
+  if (!value) return '';
+  return value.toISOString();
+};
+
 export default {
   props: {
     value: {
+      type: Date,
+      default: null,
+    },
+    min: {
+      type: Date,
+      default: null,
+    },
+    max: {
       type: Date,
       default: null,
     },
@@ -62,15 +77,20 @@ export default {
   computed: {
     currentValue: {
       get() {
-        return this.selectedValue || this.isoValue;
+        return this.selectedValue || this.valueISO;
       },
       set(v) {
         this.selectedValue = v;
       },
     },
-    isoValue() {
-      if (!this.value) return '';
-      return this.value.toISOString();
+    valueISO() {
+      return convertToISO(this.value);
+    },
+    minISO() {
+      return convertToISO(this.min);
+    },
+    maxISO() {
+      return convertToISO(this.max);
     },
   },
 
