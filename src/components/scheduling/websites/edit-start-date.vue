@@ -12,11 +12,9 @@
     auto
   >
     <template slot="button-cancel" class="foo">
-    <!-- <fa :icon="['far', 'times']"></fa> -->
       <x-icon /> Cancel
     </template>
     <template slot="button-confirm" slot-scope="scope">
-      <!-- <fa :icon="['fas', 'check-circle']"></fa> -->
       <span v-if='scope.step === "time"'>
         <check-icon /> Done
       </span>
