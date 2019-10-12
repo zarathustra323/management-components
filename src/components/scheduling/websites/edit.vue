@@ -1,12 +1,14 @@
 <template>
   <div class="list-group-item">
     <div class="site-label">{{ currentSection.site.title }}</div>
-    <!-- @todo on change, determine if the option needs to change based on site -->
+    <!-- @todo allow end date to be cleared -->
+    <!-- @todo handle update and prevent save until valid -->
+    <!-- @todo prevent selecting site when selecting section -->
     <div class="form-group">
       <div class="mt-1">
         <section-select
-          :site="site"
           :section="currentSection"
+          :disabled="isSaving"
           @change="setSection"
         />
       </div>
@@ -14,6 +16,7 @@
         <option-select
           :site-id="currentSection.site.id"
           :option="currentOption"
+          :disabled="isSaving"
           @change="setOption"
         />
       </div>
@@ -21,6 +24,7 @@
         <edit-date
           :value="currentStartDate"
           :max="currentEndDate"
+          :disabled="isSaving"
           placeholder="Pick a start date..."
           title="Start Date"
           @change="setStartDate"
@@ -30,6 +34,7 @@
         <edit-date
           :value="currentEndDate"
           :min="currentStartDate"
+          :disabled="isSaving"
           placeholder="Pick an end date..."
           title="End Date"
           @change="setEndDate"
@@ -37,8 +42,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <save-button @click="update" />
-      <cancel-button @click="$emit('cancel')" />
+      <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
+      <cancel-button :disabled="isSaving" @click="$emit('cancel')" />
     </div>
   </div>
 </template>
@@ -79,6 +84,7 @@ export default {
     selectedOption: undefined,
     selectedStartDate: null,
     selectedEndDate: null,
+    isSaving: false,
   }),
 
   components: {
@@ -102,6 +108,12 @@ export default {
     currentEndDate() {
       return this.selectedEndDate || this.endDate;
     },
+    canSave() {
+      return Boolean(this.currentSection && this.currentOption && this.currentStartDate);
+    },
+    isSaveDisabled() {
+      return !this.canSave || this.isSaving;
+    },
   },
 
   methods: {
@@ -117,7 +129,8 @@ export default {
     setEndDate(date) {
       this.selectedEndDate = date;
     },
-    update() {
+    async update() {
+      this.isSaving = true;
       console.log('update schedule', {
         section: this.currentSection,
         option: this.currentOption,

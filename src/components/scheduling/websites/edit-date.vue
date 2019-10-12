@@ -3,6 +3,7 @@
     v-model="currentValue"
     type="datetime"
     :placeholder="placeholder"
+    :disabled="disabled"
     :title="title"
     input-class="form-control"
     :hour-step="1"
@@ -60,6 +61,10 @@ export default {
     placeholder: {
       type: String,
       default: null,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 

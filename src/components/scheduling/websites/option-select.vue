@@ -6,7 +6,7 @@
     :load-options="loadOptions"
     :options="options"
     :multiple="false"
-    :loading="true"
+    :disabled="disabled"
     :clearable="false"
     :auto-load-root-options="true"
     search-nested
@@ -27,6 +27,10 @@ export default {
     option: {
       type: Object,
       default: null,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 

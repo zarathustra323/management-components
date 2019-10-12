@@ -5,7 +5,7 @@
     :load-options="loadOptions"
     :options="options"
     :multiple="false"
-    :loading="true"
+    :disabled="disabled"
     :show-count="true"
     :clearable="false"
     :auto-load-root-options="true"
@@ -36,6 +36,10 @@ export default {
     section: {
       type: Object,
       required: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 
