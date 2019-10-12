@@ -1,6 +1,6 @@
 <template>
   <datetime
-    v-model="isoDate"
+    v-model="currentValue"
     type="datetime"
     :placeholder="placeholder"
     :title="title"
@@ -10,6 +10,7 @@
     :week-start="7"
     use12-hour
     auto
+    @input="emitChange"
   >
     <template slot="button-cancel" class="foo">
       <x-icon /> Cancel
@@ -33,7 +34,7 @@ import ChevronRightIcon from '../../icons/chevron-right.vue';
 
 export default {
   props: {
-    date: {
+    value: {
       type: Date,
       default: null,
     },
@@ -47,6 +48,10 @@ export default {
     },
   },
 
+  data: () => ({
+    selectedValue: '',
+  }),
+
   components: {
     CheckIcon,
     ChevronRightIcon,
@@ -55,14 +60,23 @@ export default {
   },
 
   computed: {
-    isoDate: {
+    currentValue: {
       get() {
-        if (!this.date) return '';
-        return this.date.toISOString();
+        return this.selectedValue || this.isoValue;
       },
-      set() {
-        return null;
+      set(v) {
+        this.selectedValue = v;
       },
+    },
+    isoValue() {
+      if (!this.value) return '';
+      return this.value.toISOString();
+    },
+  },
+
+  methods: {
+    emitChange(value) {
+      this.$emit('change', value ? new Date(value) : null);
     },
   },
 };

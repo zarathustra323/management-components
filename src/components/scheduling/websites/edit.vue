@@ -4,7 +4,11 @@
     <!-- @todo on change, determine if the option needs to change based on site -->
     <div class="form-group">
       <div class="mt-1">
-        <section-select :site="site" :section="currentSection" @change="setSection" />
+        <section-select
+          :site="site"
+          :section="currentSection"
+          @change="setSection"
+        />
       </div>
       <div class="mt-1">
         <option-select
@@ -14,10 +18,20 @@
         />
       </div>
       <div class="mt-1">
-        <edit-date :date="startDate" title="Start Date" />
+        <edit-date
+          :value="startDate"
+          placeholder="Pick a start date..."
+          title="Start Date"
+          @change="setStartDate"
+        />
       </div>
       <div class="mt-1">
-        <edit-date :date="endDate" placeholder="Pick end date..." title="End Date" />
+        <edit-date
+          :value="endDate"
+          placeholder="Pick an end date..."
+          title="End Date"
+          @change="setEndDate"
+        />
       </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -61,6 +75,8 @@ export default {
   data: () => ({
     selectedSection: null,
     selectedOption: null,
+    selectedStartDate: null,
+    selectedEndDate: null,
   }),
 
   components: {
@@ -78,6 +94,12 @@ export default {
     currentOption() {
       return this.selectedOption || this.option;
     },
+    currentStartDate() {
+      return this.selectedStartDate || this.startDate;
+    },
+    currentEndDate() {
+      return this.selectedEndDate || this.endDate;
+    },
   },
 
   methods: {
@@ -87,10 +109,18 @@ export default {
     setOption(option) {
       this.selectedOption = option;
     },
+    setStartDate(date) {
+      this.selectedStartDate = date;
+    },
+    setEndDate(date) {
+      this.selectedEndDate = date;
+    },
     update() {
       console.log('update schedule', {
         section: this.currentSection,
         option: this.currentOption,
+        startDate: this.currentStartDate,
+        endDate: this.currentEndDate,
       });
     },
   },
