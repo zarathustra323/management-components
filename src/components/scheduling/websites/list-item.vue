@@ -11,7 +11,7 @@
     <div>
       <div class="site-label">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
-      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY, h:mm a') }}</time>
+      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY, h:mm A') }}</time>
       <operation-error
         :error="error"
         wrapper-class="mt-1"
