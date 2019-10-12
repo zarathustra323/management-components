@@ -6,6 +6,9 @@
     input-class="form-control"
     :hour-step="1"
     :minute-step="5"
+    :week-start="7"
+    use12-hour
+    auto
   />
 </template>
 
