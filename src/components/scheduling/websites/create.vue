@@ -1,6 +1,10 @@
 <template>
-  <form class="website-schedules__add" @submit.prevent="save">
-    <div class="card-header d-flex justify-content-between align-items-center">
+  <!-- @todo remove website-schedules__add -->
+  <form class="bmc-website-scheduling__create website-schedules__add" @submit.prevent="save">
+    <!-- @todo remove bootstrap classes -->
+    <div
+      class="bmc-website-scheduling__header card-header d-flex justify-content-between align-items-center"
+    >
       <span>Add Schedules</span>
       <div>
         <add-button
@@ -14,7 +18,8 @@
         />
       </div>
     </div>
-    <div class="card-body">
+    <!-- @todo remove card-body -->
+    <div class="bmc-website-scheduling__body card-body">
       <select-sections
         :disabled="isSaving"
         :section-ids="sectionIds"

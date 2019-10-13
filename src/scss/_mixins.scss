@@ -76,6 +76,11 @@
   background-color: $bmc-card-header-bg-color;
 }
 
+@mixin bmc-card-body() {
+  flex: 1 1 auto;
+  padding: $bmc-card-spacer-x;
+}
+
 @mixin bmc-nav() {
   display: flex;
   flex-wrap: wrap;
