@@ -40,9 +40,15 @@
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <cancel-button :disabled="isSaving" @click="$emit('cancel')" />
+      <cancel-button :disabled="isSaving" @click="cancel" />
       <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
     </div>
+    <operation-error
+      :error="error"
+      wrapper-class="mt-3"
+      @retry="update"
+      @cancel="cancel"
+    />
   </div>
 </template>
 
@@ -53,6 +59,7 @@ import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
+import OperationError from '../../operation-error.vue';
 
 const clearSeconds = (date) => {
   if (date) {
@@ -104,6 +111,7 @@ export default {
     OptionSelect,
     CancelButton,
     SaveButton,
+    OperationError,
   },
 
   computed: {
@@ -165,6 +173,9 @@ export default {
     },
     setEndDate(date) {
       this.selectedEndDate = date;
+    },
+    cancel() {
+      return this.$emit('cancel');
     },
     async update() {
       this.error = null;
