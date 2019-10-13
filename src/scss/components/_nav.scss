@@ -1,3 +1,7 @@
 .bmc-nav {
   @include bmc-nav();
+
+  &__link {
+    @include bmc-nav-link();
+  }
 }

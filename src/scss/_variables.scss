@@ -51,3 +51,10 @@ $bmc-card-spacer-x: .75rem !default;
 
 $bmc-card-header-bg-color: rgba($bmc-black, .03) !default;
 $bmc-card-header-font-weight: 300 !default;
+
+// Nav
+$bmc-nav-link-padding-y: .5rem !default;
+$bmc-nav-link-padding-x: 1rem !default;
+
+$bmc-nav-active-link-color: $bmc-white !default;
+$bmc-nav-active-link-bg-color: $bmc-primary !default;

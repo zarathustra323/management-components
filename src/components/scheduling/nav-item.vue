@@ -24,9 +24,9 @@ export default {
       return `#manage-scheduling-${this.id}`;
     },
     linkClasses() {
-      // @todo remove nav-link
+      // @todo remove nav-link active
       const classes = ['nav-link', 'bmc-nav__link'];
-      if (this.active) classes.push('active');
+      if (this.active) classes.push('active', 'bmc-nav__link--active');
       return classes;
     },
   },
