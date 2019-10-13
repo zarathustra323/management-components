@@ -92,6 +92,15 @@ $input-disabled-bg: #f9f9f9 !default;
   color: $gray-600;
 }
 
+.schedule-date {
+  display: block;
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    color: $gray-600;
+  }
+}
+
 .website-schedules {
   &__add {
     margin-top: .75rem;
