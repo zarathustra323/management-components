@@ -1,0 +1,11 @@
+.bmc-button {
+  @include bmc-button();
+
+  &__icon + &__label {
+    margin-left: map-get($bmc-spacers, 1);
+  }
+
+  &--loading {
+    cursor: wait;
+  }
+}

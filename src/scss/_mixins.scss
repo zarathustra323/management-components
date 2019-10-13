@@ -46,6 +46,11 @@
       outline: 0;
     }
   }
+
+  svg {
+    overflow: hidden;
+    vertical-align: middle;
+  }
 }
 
 @mixin bmc-base-link() {
@@ -107,4 +112,60 @@
       color: $bmc-nav-active-link-color;
     }
   }
+}
+
+@mixin bmc-button() {
+  $self: &;
+  display: inline-block;
+  margin: 0;
+  font-family: $bmc-button-font-family;
+  font-weight: $bmc-button-font-weight;
+  color: $bmc-button-color;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: $bmc-button-border-width solid transparent;
+  border-radius: 0;
+  @include bmc-button-size(
+    $bmc-button-padding-y,
+    $bmc-button-padding-x,
+    $bmc-button-font-size,
+    $bmc-button-line-height
+  );
+  // @include transition($btn-transition);
+
+  @include bmc-hover() {
+    color: $bmc-button-color;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &--focus {
+    outline: 0;
+    box-shadow: $bmc-button-focus-box-shadow;
+  }
+
+  &--disabled,
+  &:disabled {
+    box-shadow: none;
+    opacity: $bmc-button-disabled-opacity;
+  }
+
+  &:not(:disabled):not(&--disabled):active,
+  &:not(:disabled):not(&--disabled)#{$self}--active {
+    box-shadow: $bmc-button-active-box-shadow;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+}
+
+
+@mixin bmc-button-size($padding-y, $padding-x, $font-size, $line-height) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
 }

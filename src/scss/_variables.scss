@@ -31,6 +31,22 @@ $bmc-danger:        $bmc-red !default;
 $bmc-light:         $bmc-gray-100 !default;
 $bmc-dark:          $bmc-gray-800 !default;
 
+// Spacers
+$bmc-spacer: .875rem !default;
+$bmc-spacers: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$bmc-spacers: map-merge(
+  (
+    0: 0,
+    1: ($bmc-spacer * .25),
+    2: ($bmc-spacer * .5),
+    3: $bmc-spacer,
+    4: ($bmc-spacer * 1.5),
+    5: ($bmc-spacer * 3)
+  ),
+  $bmc-spacers
+);
+
 // Baseline values
 $bmc-base-font-family: "Roboto", sans-serif !default;
 $bmc-base-font-size: .875rem !default;
@@ -58,3 +74,21 @@ $bmc-nav-link-padding-x: 1rem !default;
 
 $bmc-nav-active-link-color: $bmc-white !default;
 $bmc-nav-active-link-bg-color: $bmc-primary !default;
+
+// Buttons
+$bmc-button-font-family: $bmc-base-font-family !default;
+$bmc-button-font-size: $bmc-base-font-size !default;
+$bmc-button-font-weight: 300 !default;
+$bmc-button-line-height: $bmc-base-line-height !default;
+$bmc-button-color: $bmc-base-color !default;
+$bmc-button-border-width: 1px !default;
+
+$bmc-button-padding-y: .375rem !default;
+$bmc-button-padding-x: .75rem !default;
+
+$bmc-button-focus-width: .2rem !default;
+$bmc-button-focus-color: rgba($bmc-primary, .25) !default;
+$bmc-button-focus-box-shadow: 0 0 0 $bmc-button-focus-width $bmc-button-focus-color !default;
+
+$bmc-button-disabled-opacity: .65 !default;
+$bmc-button-active-box-shadow: inset 0 3px 5px rgba($bmc-black, .125) !default;

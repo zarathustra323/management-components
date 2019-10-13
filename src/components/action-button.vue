@@ -20,7 +20,7 @@
       <component v-else :is="iconComponent" />
     </span>
 
-    <span v-if="showLabel">{{ buttonLabel }}</span>
+    <span v-if="showLabel" class="bmc-button__label">{{ buttonLabel }}</span>
   </button>
 </template>
 
@@ -157,15 +157,21 @@ export default {
     buttonClasses() {
       const outline = this.outline ? 'outline-' : '';
       const type = `btn-${outline}${this.type}`;
-      const classes = ['btn', type, this.buttonClass];
+      // @todo remove btn class
+      const classes = ['btn', 'bmc-button', type, this.buttonClass];
       if (this.size) classes.push(`btn-${this.size}`);
       if (this.block) classes.push('btn-block');
-      if (this.isLoading) classes.push('btn-loading');
+      if (this.isLoading) {
+        // @todo remove btn-loading
+        classes.push('btn-loading');
+        classes.push('bmc-button--loading');
+      }
       return classes;
     },
 
     iconContainerClasses() {
-      const classes = ['icon-container'];
+      // @todo icon-container and mr-1
+      const classes = ['icon-container', 'bmc-button__icon'];
       if (this.showLabel) classes.push('mr-1');
       return classes;
     },
