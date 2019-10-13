@@ -27,6 +27,11 @@
   word-wrap: break-word;
   background-color: $bmc-card-bg-color;
   background-clip: border-box;
-  // border: $card-border-width solid $card-border-color;
-  // @include border-radius($card-border-radius);
+}
+
+@mixin bmc-card-header() {
+  padding: $bmc-card-spacer-y $bmc-card-spacer-x;
+  margin-bottom: 0;
+  font-weight: $bmc-card-header-font-weight;
+  background-color: $bmc-card-header-bg-color;
 }

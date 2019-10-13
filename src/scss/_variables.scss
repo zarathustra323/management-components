@@ -41,3 +41,8 @@ $bmc-base-color: $bmc-gray-900 !default;
 
 // Cards
 $bmc-card-bg-color: $bmc-white !default;
+$bmc-card-spacer-y: 7px !default;
+$bmc-card-spacer-x: .75rem !default;
+
+$bmc-card-header-bg-color: rgba($bmc-black, .03) !default;
+$bmc-card-header-font-weight: 300 !default;
