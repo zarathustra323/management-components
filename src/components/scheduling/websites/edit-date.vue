@@ -14,7 +14,7 @@
     auto
     @input="emitChange"
   >
-    <template slot="button-cancel" class="foo">
+    <template slot="button-cancel">
       <x-icon /> Cancel
     </template>
     <template slot="button-confirm" slot-scope="scope">
@@ -25,11 +25,24 @@
         Next <chevron-right-icon />
       </span>
     </template>
+    <template slot="after">
+      <div v-if="canClear" class="input-group-append">
+        <action-button
+          type="secondary"
+          icon="x"
+          label="Clear date"
+          :outline="true"
+          :disabled="clearDisabled"
+          @click="clear"
+        />
+      </div>
+    </template>
   </datetime>
 </template>
 
 <script>
 import { Datetime } from 'vue-datetime';
+import ActionButton from '../../action-button.vue';
 import CheckIcon from '../../icons/check.vue';
 import XIcon from '../../icons/x.vue';
 import ChevronRightIcon from '../../icons/chevron-right.vue';
@@ -65,13 +78,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    canClear: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
-    selectedValue: '',
+    selectedValue: undefined,
   }),
 
+  mounted() {
+    this.$el.classList.add('input-group');
+  },
+
   components: {
+    ActionButton,
     CheckIcon,
     ChevronRightIcon,
     Datetime,
@@ -81,7 +103,7 @@ export default {
   computed: {
     currentValue: {
       get() {
-        return this.selectedValue || this.valueISO;
+        return this.selectedValue === undefined ? this.valueISO : this.selectedValue;
       },
       set(v) {
         this.selectedValue = v;
@@ -96,9 +118,16 @@ export default {
     maxISO() {
       return convertToISO(this.max);
     },
+    clearDisabled() {
+      return !this.currentValue;
+    },
   },
 
   methods: {
+    clear() {
+      this.selectedValue = '';
+      this.emitChange(this.selectedValue);
+    },
     emitChange(value) {
       this.$emit('change', value ? new Date(value) : null);
     },

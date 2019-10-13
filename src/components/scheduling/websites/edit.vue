@@ -1,7 +1,6 @@
 <template>
   <div class="list-group-item">
     <div class="site-label">{{ currentSection.site.title }}</div>
-    <!-- @todo allow end date to be cleared -->
     <div class="form-group">
       <div class="mt-1">
         <section-select
@@ -33,6 +32,7 @@
           :value="currentEndDate"
           :min="currentStartDate"
           :disabled="isSaving"
+          :can-clear="true"
           placeholder="Pick an end date..."
           title="End Date"
           @change="setEndDate"
