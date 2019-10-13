@@ -1,3 +1,14 @@
+@mixin bmc-hover {
+  &:hover { @content; }
+}
+
+@mixin bmc-hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
 @mixin bmc-base() {
   *,
   *::before,
@@ -17,6 +28,35 @@
 
   -webkit-text-size-adjust: 100%; // stylelint-disable-line property-no-vendor-prefix
   -webkit-tap-highlight-color: rgba($bmc-black, 0);
+
+  [tabindex="-1"]:focus {
+    outline: 0 !important; // stylelint-disable-line declaration-no-important
+  }
+
+  a {
+    color: $bmc-base-link-color;
+    text-decoration: $bmc-base-link-decoration;
+    background-color: transparent;
+
+    @include bmc-hover() {
+      color: $bmc-base-link-hover-color;
+      text-decoration: $bmc-base-link-hover-decoration;
+    }
+  }
+
+  a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+
+    @include bmc-hover-focus() {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
 }
 
 @mixin bmc-card() {
@@ -34,4 +74,28 @@
   margin-bottom: 0;
   font-weight: $bmc-card-header-font-weight;
   background-color: $bmc-card-header-bg-color;
+}
+
+@mixin bmc-nav() {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+@mixin bmc-nav-link() {
+  display: block;
+  // padding: $nav-link-padding-y $nav-link-padding-x;
+
+  // @include hover-focus {
+  //   text-decoration: none;
+  // }
+
+  // // Disabled state lightens text
+  // &.disabled {
+  //   color: $nav-link-disabled-color;
+  //   pointer-events: none;
+  //   cursor: default;
+  // }
 }

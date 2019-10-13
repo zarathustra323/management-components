@@ -39,6 +39,11 @@ $bmc-base-line-height: 1.5 !default;
 $bmc-base-bg-color: $bmc-white !default;
 $bmc-base-color: $bmc-gray-900 !default;
 
+$bmc-base-link-color: $bmc-primary !default;
+$bmc-base-link-hover-color: darken($bmc-base-link-color, 15%) !default;
+$bmc-base-link-decoration: none !default;
+$bmc-base-link-hover-decoration: underline !default;
+
 // Cards
 $bmc-card-bg-color: $bmc-white !default;
 $bmc-card-spacer-y: 7px !default;
