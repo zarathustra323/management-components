@@ -40,8 +40,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
       <cancel-button :disabled="isSaving" @click="$emit('cancel')" />
+      <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
     </div>
   </div>
 </template>
