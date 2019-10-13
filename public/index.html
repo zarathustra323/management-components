@@ -6,11 +6,49 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>BaseCMS Management Components</title>
+    <style>
+      /* example styles */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        font-family: sans-serif;
+        line-height: 1.15;
+      }
+      body {
+        margin: 0;
+        text-align: left;
+      }
+      .example-container {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .example-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+      .example-col {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but this page doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div class="example-container">
+      <div class="example-row">
+        <div id="app"></div>
+      </div>
+    </div>
   </body>
 </html>

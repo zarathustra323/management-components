@@ -1,0 +1,43 @@
+// Colors
+$bmc-white:    #fff !default;
+$bmc-gray-100: #f8f9fa !default;
+$bmc-gray-200: #e9ecef !default;
+$bmc-gray-300: #dee2e6 !default;
+$bmc-gray-400: #ced4da !default;
+$bmc-gray-500: #adb5bd !default;
+$bmc-gray-600: #6c757d !default;
+$bmc-gray-700: #495057 !default;
+$bmc-gray-800: #343a40 !default;
+$bmc-gray-900: #212529 !default;
+$bmc-black:    #000 !default;
+
+$bmc-blue:    #039be5 !default;
+$bmc-indigo:  #6610f2 !default;
+$bmc-purple:  #6f42c1 !default;
+$bmc-pink:    #e83e8c !default;
+$bmc-red:     #e53935 !default;
+$bmc-orange:  #fb8c00 !default;
+$bmc-yellow:  #ffc107 !default;
+$bmc-green:   #43b25c !default;
+$bmc-teal:    #20c997 !default;
+$bmc-cyan:    #17a2b8 !default;
+
+$bmc-primary:       $bmc-blue !default;
+$bmc-secondary:     #8a9197 !default;
+$bmc-success:       $bmc-green !default;
+$bmc-info:          $bmc-cyan !default;
+$bmc-warning:       $bmc-orange !default;
+$bmc-danger:        $bmc-red !default;
+$bmc-light:         $bmc-gray-100 !default;
+$bmc-dark:          $bmc-gray-800 !default;
+
+// Baseline values
+$bmc-base-font-family: "Roboto", sans-serif !default;
+$bmc-base-font-size: .875rem !default;
+$bmc-base-font-weight: 400 !default;
+$bmc-base-line-height: 1.5 !default;
+$bmc-base-bg-color: $bmc-white !default;
+$bmc-base-color: $bmc-gray-900 !default;
+
+// Cards
+$bmc-card-bg-color: $bmc-white !default;

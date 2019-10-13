@@ -1,44 +1,37 @@
 <template>
-  <div v-if="!hasExample" class="container">
-    <div class="row mt-3">
-      <div class="col">
-        <div class="list-group">
-          <div class="list-group-item">
-            <h5>Scheduling</h5>
-            <form action="/scheduling">
-              <div class="input-group w-25">
-                <input
-                  type="number"
-                  class="form-control"
-                  required="true"
-                  name="contentId"
-                  placeholder="ID"
-                  min="10000000"
-                  max="99999999"
-                />
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit">Go</button>
-                </div>
-              </div>
-            </form>
+  <div v-if="!hasExample" class="example-col">
+    <div class="list-group">
+      <div class="list-group-item">
+        <h5>Scheduling</h5>
+        <form action="/scheduling">
+          <div class="input-group w-25">
+            <input
+              type="number"
+              class="form-control"
+              required="true"
+              name="contentId"
+              placeholder="ID"
+              min="10000000"
+              max="99999999"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">Go</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-  <div v-else class="container-fluid">
-    <div class="row">
-      <div style="width: 350px; padding: 8px;">
-        <component :is="currentComponent" v-bind="currentProps"></component>
-      </div>
-    </div>
+  <div v-else style="width: 350px; padding: 8px;">
+    <component :is="currentComponent" v-bind="currentProps"></component>
   </div>
 </template>
 
 <script>
 import '@riophae/vue-treeselect/dist/vue-treeselect.css';
 import 'vue-datetime/dist/vue-datetime.css';
-import './scss/styles.scss';
+// import './scss/styles.scss';
+import './scss/components.scss';
 import Scheduling from './components/scheduling/index.vue';
 
 export default {

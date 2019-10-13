@@ -1,5 +1,6 @@
 <template>
-  <div class="card schedules">
+  <!-- @todo remove card schedules -->
+  <div class="card schedules bmc-scheduling">
     <div class="card-header">
       <ul class="nav nav-pills card-header-pills">
         <nav-item
