@@ -2,7 +2,6 @@
   <div class="list-group-item">
     <div class="site-label">{{ currentSection.site.title }}</div>
     <!-- @todo allow end date to be cleared -->
-    <!-- @todo prevent selecting site when selecting section -->
     <div class="form-group">
       <div class="mt-1">
         <section-select

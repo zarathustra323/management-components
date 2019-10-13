@@ -1,6 +1,7 @@
 <template>
   <tree-select
-    v-model="selected"
+    :value="selected"
+    :flat="true"
     value-format="object"
     :load-options="loadOptions"
     :options="options"
@@ -56,25 +57,22 @@ export default {
       return this.section.site;
     },
 
-    selected: {
-      get() {
-        const { section, site } = this;
-        return {
-          id: section.id,
-          label: section.name,
-          title: sectionTitle({ site, section, useSiteInTitle: false }),
-        };
-      },
-      set() {
-        return null;
-      },
+    selected() {
+      const { section } = this;
+      return {
+        id: section.id,
+        label: section.name,
+        title: sectionTitle({ site: section.site, section, useSiteInTitle: false }),
+      };
     },
   },
 
   methods: {
-    emitChange(option) {
-      const { model: section } = option;
-      this.$emit('change', section);
+    emitChange(section) {
+      const { isSite, model } = section;
+      if (!isSite) {
+        this.$emit('change', model);
+      }
     },
 
     /**
@@ -95,7 +93,6 @@ export default {
       this.options = await sectionOptions(this.$apollo, {
         action,
         expandedIds,
-        disableSites: false,
         useSiteInTitle: false,
       });
     },
