@@ -60,7 +60,7 @@ export default {
         if (!option) return null;
         return {
           id: option.id,
-          label: `${option.name} (${option.id})`,
+          label: option.name,
         };
       },
       set(v) {
@@ -86,7 +86,7 @@ export default {
         const options = mapNodes(data.websiteOptions);
         this.options = options.map(option => ({
           id: option.id,
-          label: `${option.name} (${option.id})`,
+          label: option.name,
           model: option,
         }));
       }
