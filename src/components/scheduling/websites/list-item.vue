@@ -8,6 +8,7 @@
     :start-date="start"
     :end-date="end"
     @cancel="exitEditMode"
+    @update="exitEditMode"
   />
   <div v-else class="list-group-item list-group-item--schedules">
     <div>

@@ -223,6 +223,7 @@ export default {
 
       try {
         await this.$apollo.mutate({ mutation, variables: { input } });
+        this.$emit('update');
       } catch (e) {
         this.error = e;
       } finally {
