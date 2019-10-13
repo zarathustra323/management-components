@@ -31,6 +31,7 @@
         :section="schedule.section"
         :option="schedule.option"
         :start-date="schedule.startDate"
+        :end-date="schedule.endDate"
       />
     </div>
   </div>
@@ -97,6 +98,7 @@ export default {
             totalCount
             edges {
               node {
+                # @todo make this a common fragment
                 id
                 site {
                   id

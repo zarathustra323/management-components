@@ -47,14 +47,26 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import EditDate from './edit-date.vue';
 import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
 
+const clearSeconds = (date) => {
+  if (date) {
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+  }
+};
+
 export default {
   props: {
+    scheduleId: {
+      type: String,
+      required: true,
+    },
     site: {
       type: Object,
       required: true,
@@ -83,6 +95,7 @@ export default {
     selectedStartDate: null,
     selectedEndDate: null,
     isSaving: false,
+    error: null,
   }),
 
   components: {
@@ -124,7 +137,7 @@ export default {
       // Both current and initial are empty.
       if (!this.currentEndDate && !this.endDate) return false;
       // Compare date values.
-      return this.currentEndDate.valueOf() !== this.endDate.value();
+      return this.currentEndDate.valueOf() !== this.endDate.valueOf();
     },
     hasChanged() {
       return this.hasSectionChanged
@@ -154,13 +167,67 @@ export default {
       this.selectedEndDate = date;
     },
     async update() {
+      this.error = null;
       this.isSaving = true;
-      console.log('update schedule', {
-        section: this.currentSection,
-        option: this.currentOption,
-        startDate: this.currentStartDate,
-        endDate: this.currentEndDate,
-      });
+
+      const mutation = gql`
+        mutation UpdateWebsiteSchedule($input: UpdateWebsiteScheduleMutationInput!) {
+          updateWebsiteSchedule(input: $input) {
+            # @todo make this a common fragment
+            id
+            site {
+              id
+              title
+              name
+              shortName
+            }
+            section {
+              id
+              name
+              fullName
+              # @todo Load the section on edit to get this data.
+              hierarchy {
+                id
+              }
+              # @todo Load the section on edit to get this data.
+              site {
+                id
+                title
+                name
+                shortName
+              }
+            }
+            option {
+              id
+              name
+            }
+            startDate
+            endDate
+          }
+        }
+      `;
+
+
+      // Set seconds and milliseconds to zero
+      const { currentStartDate, currentEndDate } = this;
+      clearSeconds(currentStartDate);
+      clearSeconds(currentEndDate);
+
+      const payload = {
+        sectionId: this.currentSection.id,
+        optionId: this.currentOption.id,
+        startDate: currentStartDate.valueOf(),
+        ...(currentEndDate && { endDate: currentEndDate.valueOf() }),
+      };
+      const input = { id: this.scheduleId, payload };
+
+      try {
+        await this.$apollo.mutate({ mutation, variables: { input } });
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isSaving = false;
+      }
     },
   },
 };

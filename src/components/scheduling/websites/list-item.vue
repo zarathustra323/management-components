@@ -1,18 +1,20 @@
 <template>
   <edit-schedule
     v-if="isEditing"
+    :schedule-id="id"
     :site="site"
     :section="section"
     :option="option"
-    :start-date="start.toDate()"
-    :end-date="end ? end.toDate() : end"
+    :start-date="start"
+    :end-date="end"
     @cancel="exitEditMode"
   />
   <div v-else class="list-group-item list-group-item--schedules">
     <div>
       <div class="site-label">{{ site.title }}</div>
       <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
-      <time :datetime="start.toISOString()">{{ start.format('MMM Do, YYYY, h:mm A') }}</time>
+      <display-date :value="start" label="Starts" />
+      <display-date :value="end" label="Ends" />
       <operation-error
         :error="error"
         wrapper-class="mt-1"
@@ -41,8 +43,8 @@
 </template>
 
 <script>
-import moment from 'moment';
 import gql from 'graphql-tag';
+import DisplayDate from '../display-date.vue';
 import EditSchedule from './edit.vue';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
@@ -86,6 +88,7 @@ export default {
   }),
 
   components: {
+    DisplayDate,
     EditButton,
     DeleteButton,
     OperationError,
@@ -97,10 +100,11 @@ export default {
    */
   computed: {
     start() {
-      return moment(this.startDate);
+      if (this.startDate) return new Date(this.startDate);
+      return null;
     },
     end() {
-      if (this.endDate) return moment(this.endDate);
+      if (this.endDate) return new Date(this.endDate);
       return null;
     },
     isMutating() {
