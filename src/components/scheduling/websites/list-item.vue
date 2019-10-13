@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import mutation from '../../../graphql/scheduling/mutations/delete-website-schedule';
 import DisplayDate from '../display-date.vue';
 import EditSchedule from './edit.vue';
 import EditButton from '../buttons/edit.vue';
@@ -130,12 +130,6 @@ export default {
     async deleteSchedule() {
       this.error = null;
       this.isDeleting = true;
-
-      const mutation = gql`
-        mutation DeleteWebsiteSchedule($input: DeleteWebsiteScheduleMutationInput!) {
-          deleteWebsiteSchedule(input: $input)
-        }
-      `;
       const input = { id: this.id };
       try {
         await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });

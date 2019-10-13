@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import mutation from '../../../graphql/scheduling/mutations/create-website-schedules';
 import SelectSections from './select-sections.vue';
 import AddButton from '../buttons/add.vue';
 import OperationError from '../../operation-error.vue';
@@ -93,18 +93,7 @@ export default {
     async save() {
       this.error = null;
       this.isSaving = true;
-
-      const { contentId, sectionIds } = this;
-
-      const mutation = gql`
-        mutation CreateWebsiteSchedules($input: QuickCreateWebsiteSchedulesMutationInput!) {
-          quickCreateWebsiteSchedules(input: $input) {
-            id
-          }
-        }
-      `;
-      const input = { contentId, sectionIds };
-
+      const input = { contentId: this.contentId, sectionIds: this.sectionIds };
       try {
         await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });
         this.sectionIds = [];

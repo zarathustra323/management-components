@@ -1,6 +1,6 @@
 import { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 import sectionTitle from './section-title';
-import query from '../../../../graphql/queries/scheduling/select-website-sections';
+import query from '../../../../graphql/scheduling/queries/load-website-sections';
 import mapNodes from '../../../../utils/map-nodes';
 
 const mapChildren = ({

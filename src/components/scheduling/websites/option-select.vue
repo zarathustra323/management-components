@@ -16,7 +16,7 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import gql from 'graphql-tag';
+import query from '../../../graphql/scheduling/queries/load-website-options';
 import mapNodes from '../../../utils/map-nodes';
 
 export default {
@@ -76,18 +76,6 @@ export default {
     },
 
     async loadOptions({ action }) {
-      const query = gql`
-        query LoadWebsiteOptions($input: WebsiteOptionsQueryInput!) {
-          websiteOptions(input: $input) {
-            edges {
-              node {
-                id
-                name
-              }
-            }
-          }
-        }
-      `;
       const input = {
         siteId: this.siteId,
         pagination: { limit: 0 },

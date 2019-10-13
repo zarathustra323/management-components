@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import mutation from '../../../graphql/scheduling/mutations/update-website-schedule';
 import EditDate from './edit-date.vue';
 import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
@@ -169,44 +169,6 @@ export default {
     async update() {
       this.error = null;
       this.isSaving = true;
-
-      const mutation = gql`
-        mutation UpdateWebsiteSchedule($input: UpdateWebsiteScheduleMutationInput!) {
-          updateWebsiteSchedule(input: $input) {
-            # @todo make this a common fragment
-            id
-            site {
-              id
-              title
-              name
-              shortName
-            }
-            section {
-              id
-              name
-              fullName
-              # @todo Load the section on edit to get this data.
-              hierarchy {
-                id
-              }
-              # @todo Load the section on edit to get this data.
-              site {
-                id
-                title
-                name
-                shortName
-              }
-            }
-            option {
-              id
-              name
-            }
-            startDate
-            endDate
-          }
-        }
-      `;
-
 
       // Set seconds and milliseconds to zero
       const { currentStartDate, currentEndDate } = this;

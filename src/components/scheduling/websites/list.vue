@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import query from '../../../graphql/scheduling/queries/list-website-schedules';
 import ListItem from './list-item.vue';
 import OperationError from '../../operation-error.vue';
 import mapNodes from '../../../utils/map-nodes';
@@ -92,47 +92,7 @@ export default {
    */
   apollo: {
     schedules: {
-      query: gql`
-        query ListWebsiteSchedules($input: ContentWebsiteSchedulesQueryInput!) {
-          contentWebsiteSchedules(input: $input) {
-            totalCount
-            edges {
-              node {
-                # @todo make this a common fragment
-                id
-                site {
-                  id
-                  title
-                  name
-                  shortName
-                }
-                section {
-                  id
-                  name
-                  fullName
-                  # @todo Load the section on edit to get this data.
-                  hierarchy {
-                    id
-                  }
-                  # @todo Load the section on edit to get this data.
-                  site {
-                    id
-                    title
-                    name
-                    shortName
-                  }
-                }
-                option {
-                  id
-                  name
-                }
-                startDate
-                endDate
-              }
-            }
-          }
-        }
-      `,
+      query,
       variables() {
         const input = {
           contentId: this.contentId,

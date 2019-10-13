@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
 
-query LoadWebsiteSectionOptions(
+query LoadWebsiteSections(
   $siteInput: WebsiteSitesQueryInput!,
   $rootSectionInput: WebsiteSiteRootSectionsInput!,
   $childSectionInput: WebsiteSectionChildrenInput!,
