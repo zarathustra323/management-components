@@ -93,7 +93,7 @@ export default {
     selectedSection: null,
     selectedOption: undefined,
     selectedStartDate: null,
-    selectedEndDate: null,
+    selectedEndDate: undefined,
     isSaving: false,
     error: null,
   }),
@@ -127,7 +127,7 @@ export default {
       return this.currentStartDate.valueOf() !== this.startDate.valueOf();
     },
     currentEndDate() {
-      return this.selectedEndDate || this.endDate;
+      return this.selectedEndDate === undefined ? this.endDate : this.selectedEndDate;
     },
     hasEndDateChanged() {
       // Current end date is set but initial was empty.
