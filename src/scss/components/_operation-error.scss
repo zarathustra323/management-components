@@ -1,4 +1,5 @@
 .bmc-operation-error {
+  font-size: $bmc-font-size-sm;
   color: $bmc-danger;
   word-break: break-word;
 
@@ -9,6 +10,6 @@
   }
 
   &--margin-top {
-    margin-top: map-get($bmc-spacers, 3);
+    margin-top: map-get($bmc-spacers, 2);
   }
 }
