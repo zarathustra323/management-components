@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import NavItem from './nav-item.vue';
+import NavItem from '../nav-item.vue';
 import WebsiteSchedules from './websites/index.vue';
 import MagazineSchedules from './magazines/index.vue';
 import NewsletterSchedules from './newsletters/index.vue';
