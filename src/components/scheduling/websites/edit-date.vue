@@ -1,11 +1,12 @@
 <template>
+  <!-- @todo remove form-control -->
   <datetime
     v-model="currentValue"
     type="datetime"
     :placeholder="placeholder"
     :disabled="disabled"
     :title="title"
-    input-class="form-control"
+    input-class="bmc-form-control form-control"
     :hour-step="1"
     :week-start="7"
     :min-datetime="minISO"
@@ -89,7 +90,9 @@ export default {
   }),
 
   mounted() {
+    // @todo remove input-group
     this.$el.classList.add('input-group');
+    this.$el.classList.add('bmc-input-group');
   },
 
   components: {

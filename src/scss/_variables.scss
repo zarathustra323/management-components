@@ -135,8 +135,27 @@ $bmc-button-active-box-shadow: inset 0 3px 5px rgba($bmc-black, .125) !default;
 
 $bmc-button-transition: color .15s ease-in-out, fill .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-// Forms
+// Form Group
 $bmc-form-group-margin-bottom: .75rem !default;
+
+// Form Controls
+$bmc-input-padding-y: .375rem !default;
+$bmc-input-padding-x: .75rem !default;
+$bmc-input-font-family: $bmc-base-font-family !default;
+$bmc-input-font-size: $bmc-base-font-size !default;
+$bmc-input-font-weight: $bmc-base-font-weight !default;
+$bmc-input-line-height: $bmc-base-line-height !default;
+
+$bmc-input-color: $bmc-gray-900 !default;
+$bmc-input-bg-color: $bmc-white !default;
+$bmc-input-border-color: #ddd !default;
+$bmc-input-hover-border-color: #cfcfcf !default;
+$bmc-input-border-width: 1px !default;
+
+$bmc-input-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+$bmc-input-placeholder-color: #bdbdbd !default;
+$bmc-input-disabled-bg-color: #f9f9f9 !default;
 
 // Spinners
 $bmc-spinner-width: 2rem !default;

@@ -148,6 +148,47 @@
   margin-bottom: $bmc-form-group-margin-bottom;
 }
 
+@mixin bmc-form-control {
+  display: block;
+  width: 100%;
+  // height: $input-height;
+  padding: $bmc-input-padding-y $bmc-input-padding-x;
+  font-family: $bmc-input-font-family;
+  font-size: $bmc-input-font-size;
+  font-weight: $bmc-input-font-weight;
+  line-height: $bmc-input-line-height;
+  color: $bmc-input-color;
+  background-color: $bmc-input-bg-color;
+  background-clip: padding-box;
+  border: $bmc-input-border-width solid $bmc-input-border-color;
+
+  transition: $bmc-input-transition;
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // // Customize the `:focus` state to imitate native WebKit styles.
+  // @include form-control-focus();
+
+  &::placeholder {
+    color: $bmc-input-placeholder-color;
+    opacity: 1;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: $bmc-input-disabled-bg-color;
+    opacity: 1;
+  }
+
+  &:not(:disabled):not([readonly]):hover {
+    border-color: $bmc-input-hover-border-color;
+  }
+}
+
 @mixin bmc-button() {
   $self: &;
   display: inline-block;
