@@ -5,9 +5,7 @@
       <span>({{ totalCount }})</span>
     </div>
     <div v-if="isLoading" class="bmc-website-scheduling__body">
-      <div class="bmc-spinner bmc-spinner--grow bmc-spinner--primary" role="status">
-        <span class="bmc-spinner__loading-message">Loading...</span>
-      </div>
+      <loading-spinner color="primary" />
     </div>
     <div class="bmc-website-schedule-list">
       <div
@@ -40,6 +38,7 @@
 import query from '../../../graphql/scheduling/queries/list-website-schedules';
 import ListItem from './list-item.vue';
 import OperationError from '../../operation-error.vue';
+import LoadingSpinner from '../../loading-spinner.vue';
 import mapNodes from '../../../utils/map-nodes';
 
 export default {
@@ -65,7 +64,7 @@ export default {
   /**
    *
    */
-  components: { ListItem, OperationError },
+  components: { ListItem, OperationError, LoadingSpinner },
 
   /**
    *

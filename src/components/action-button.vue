@@ -10,16 +10,11 @@
     @keydown="blurOnEscape"
     @blur="clearConfirmPrompt"
   >
-    <span v-if="showIcons" class="bmc-button__icon">
-      <span
-        v-if="isLoading"
-        class="bmc-spinner bmc-spinner--grow bmc-spinner--small"
-        role="status"
-        aria-hidden="true"
-      />
+    <div v-if="showIcons" class="bmc-button__icon">
+      <loading-spinner v-if="isLoading" size="small" />
       <alert-icon v-else-if="isConfirming" />
       <component v-else :is="iconComponent" />
-    </span>
+    </div>
 
     <span v-if="showLabel" class="bmc-button__label">{{ buttonLabel }}</span>
   </button>
@@ -32,6 +27,7 @@ import ChecklistIcon from './icons/checklist.vue';
 import PencilIcon from './icons/pencil.vue';
 import TrashcanIcon from './icons/trashcan.vue';
 import XIcon from './icons/x.vue';
+import LoadingSpinner from './loading-spinner.vue';
 
 export default {
   /**
@@ -127,6 +123,7 @@ export default {
     PencilIcon,
     TrashcanIcon,
     XIcon,
+    LoadingSpinner,
   },
 
   /**
