@@ -130,6 +130,14 @@
   border: $bmc-list-group-border-width solid $bmc-list-group-border-color;
   border-right: 0;
   border-left: 0;
+
+  &:first-child {
+    border-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
 @mixin bmc-button() {
@@ -153,7 +161,6 @@
     $bmc-button-font-size,
     $bmc-button-line-height
   );
-  // @include transition($btn-transition);
 
   @include bmc-hover() {
     color: $bmc-button-color;

@@ -20,6 +20,7 @@
       >
         None found
       </div>
+      <!-- @todo remove list-group-item -->
       <operation-error
         :error="error"
         :can-cancel="false"

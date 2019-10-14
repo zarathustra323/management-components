@@ -21,9 +21,10 @@
       </div>
       <display-date :value="start" label="Starts" />
       <display-date :value="end" label="Ends" />
+      <!-- @todo remove mt-1 -->
       <operation-error
         :error="error"
-        wrapper-class="mt-1"
+        wrapper-class="bmc-operation-error--margin-top mt-1"
         @retry="deleteSchedule"
         @cancel="cancelDelete"
       />
