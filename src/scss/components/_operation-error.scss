@@ -1,0 +1,14 @@
+.bmc-operation-error {
+  color: $bmc-danger;
+  word-break: break-word;
+
+  &__link {
+    font-weight: 500;
+    color: $bmc-dark;
+    text-decoration: none;
+  }
+
+  &--margin-top {
+    margin-top: map-get($bmc-spacers, 3);
+  }
+}

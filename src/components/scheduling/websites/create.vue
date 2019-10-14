@@ -27,10 +27,11 @@
         @close="setButtonFocus"
       />
       <!-- Hidden tab stop for proper button focus -->
+      <!-- @todo remove mt-3 -->
       <span v-if="sectionIds.length" tabindex="0" />
       <operation-error
         :error="error"
-        wrapper-class="mt-3"
+        wrapper-class="bmc-operation-error--margin-top mt-3"
         @retry="save"
         @cancel="cancel"
       />
