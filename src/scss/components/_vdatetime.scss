@@ -1,0 +1,81 @@
+.vdatetime-popup {
+  font-family: $bmc-base-font-family;
+  &__title {
+    font-size: 18px;
+  }
+  &__header {
+    padding: 1.25rem;
+    background-color: $bmc-primary;
+  }
+  &__actions {
+    padding: .75rem;
+  }
+  &__actions__button {
+    @include bmc-button();
+    &--confirm {
+      @include bmc-button-variant($bmc-success, $bmc-success);
+    }
+    &--cancel {
+      @include bmc-button-variant($bmc-warning, $bmc-warning);
+    }
+  }
+}
+
+.vdatetime-calendar {
+  &__month__day {
+    &--selected > span > span {
+      background-color: $bmc-primary;
+    }
+    &--selected:hover > span span {
+      background-color: darken($bmc-primary, 7.5%);
+    }
+  }
+}
+
+.vdatetime-month-picker,
+.vdatetime-year-picker,
+.vdatetime-time-picker {
+  &__item {
+    &--selected {
+      color: $bmc-primary;
+    }
+  }
+}
+
+.vue-treeselect {
+  $self: &;
+
+  &__control {
+    border-radius: 0;
+  }
+
+  &__option--disabled {
+    #{ $self } {
+      &__checkbox-container {
+        display: none;
+      }
+      &__label-container {
+        color: $bmc-gray-600;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &--open-below {
+    #{ $self } {
+      &__menu {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  &--open-above {
+    #{ $self } {
+      &__menu {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+}
