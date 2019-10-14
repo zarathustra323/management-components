@@ -44,6 +44,7 @@
   }
 
   &__product-name {
+    margin-bottom: map-get($bmc-spacers, 1) / 2;
     font-size: $bmc-font-size-sm;
     color: $bmc-gray-600;
   }
