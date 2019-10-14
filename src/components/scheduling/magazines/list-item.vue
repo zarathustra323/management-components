@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import mutation from '../../../graphql/scheduling/mutations/delete-magazine-schedule';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
 import OperationError from '../../operation-error.vue';
@@ -106,17 +107,16 @@ export default {
      *
      */
     async deleteSchedule() {
-      console.log('delete!');
-      // this.error = null;
-      // this.isDeleting = true;
-      // const input = { id: this.id };
-      // try {
-      //   await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });
-      // } catch (e) {
-      //   this.error = e;
-      // } finally {
-      //   this.isDeleting = false;
-      // }
+      this.error = null;
+      this.isDeleting = true;
+      const input = { id: this.id };
+      try {
+        await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListMagazineSchedules'] });
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isDeleting = false;
+      }
     },
 
     exitEditMode() {
