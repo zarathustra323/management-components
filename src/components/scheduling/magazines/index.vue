@@ -1,8 +1,14 @@
 <template>
-  <span>Magazine</span>
+  <div class="bmc-magazine-scheduling">
+    <create-schedule :content-id="contentId" />
+    <list-schedules :content-id="contentId" />
+  </div>
 </template>
 
 <script>
+import CreateSchedule from './create.vue';
+import ListSchedules from './list.vue';
+
 export default {
   /**
    *
@@ -17,22 +23,9 @@ export default {
   /**
    *
    */
-  mounted() {
-    console.log('mounted magazines');
-  },
-
-  /**
-   *
-   */
-  created() {
-    console.log('created magazines');
-  },
-
-  /**
-   *
-   */
-  destroyed() {
-    console.log('destroyed magazines');
+  components: {
+    CreateSchedule,
+    ListSchedules,
   },
 };
 </script>
