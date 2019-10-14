@@ -1,30 +1,25 @@
 <template>
   <div class="bmc-website-scheduling__list">
-    <!-- @todo remove card-header -->
-    <div class="bmc-website-scheduling__header card-header">
+    <div class="bmc-website-scheduling__header">
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <!-- @todo remove card-body -->
-    <div v-if="isLoading" class="bmc-website-scheduling__body card-body">
-      <!-- @todo remove spinner spinner__loading-message -->
-      <div class="bmc-spinner bmc-spinner--grow bmc-spinner--primary spinner" role="status">
-        <span class="bmc-spinner__loading-message spinner__loading-message">Loading...</span>
+    <div v-if="isLoading" class="bmc-website-scheduling__body">
+      <div class="bmc-spinner bmc-spinner--grow bmc-spinner--primary" role="status">
+        <span class="bmc-spinner__loading-message">Loading...</span>
       </div>
     </div>
-    <!-- @todo remove bootstrap styles -->
-    <div class="bmc-website-schedule-list list-group-flush">
+    <div class="bmc-website-schedule-list">
       <div
         v-if="!isLoading && !schedules.length && !error"
-        class="bmc-website-schedule-list__item list-group-item list-group-item--muted"
+        class="bmc-website-schedule-list__item bmc-website-schedule-list__item--muted"
       >
         None found
       </div>
-      <!-- @todo remove list-group-item -->
       <operation-error
         :error="error"
         :can-cancel="false"
-        wrapper-class="bmc-website-schedule-list__item list-group-item"
+        wrapper-class="bmc-website-schedule-list__item"
         @retry="refresh"
       />
       <list-item

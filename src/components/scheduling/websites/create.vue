@@ -1,10 +1,6 @@
 <template>
-  <!-- @todo remove website-schedules__add -->
-  <form class="bmc-website-scheduling__create website-schedules__add" @submit.prevent="save">
-    <!-- @todo remove bootstrap classes -->
-    <div
-      class="bmc-website-scheduling__header bmc-website-scheduling__header--create card-header d-flex justify-content-between align-items-center"
-    >
+  <form class="bmc-website-scheduling__create" @submit.prevent="save">
+    <div class="bmc-website-scheduling__header bmc-website-scheduling__header--create">
       <span>Add Schedules</span>
       <div>
         <add-button
@@ -18,8 +14,7 @@
         />
       </div>
     </div>
-    <!-- @todo remove card-body -->
-    <div class="bmc-website-scheduling__body card-body">
+    <div class="bmc-website-scheduling__body">
       <select-sections
         :disabled="isSaving"
         :section-ids="sectionIds"
@@ -27,11 +22,10 @@
         @close="setButtonFocus"
       />
       <!-- Hidden tab stop for proper button focus -->
-      <!-- @todo remove mt-3 -->
       <span v-if="sectionIds.length" tabindex="0" />
       <operation-error
         :error="error"
-        wrapper-class="bmc-operation-error--margin-top mt-3"
+        wrapper-class="bmc-operation-error--margin-top"
         @retry="save"
         @cancel="cancel"
       />

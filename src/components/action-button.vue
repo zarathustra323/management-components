@@ -10,11 +10,10 @@
     @keydown="blurOnEscape"
     @blur="clearConfirmPrompt"
   >
-    <span v-if="showIcons" :class="iconContainerClasses">
-      <!-- @todo remove spinner-grow spinner-grow-sm -->
+    <span v-if="showIcons" class="bmc-button__icon">
       <span
         v-if="isLoading"
-        class="bmc-spinner bmc-spinner--grow bmc-spinner--small spinner-grow spinner-grow-sm"
+        class="bmc-spinner bmc-spinner--grow bmc-spinner--small"
         role="status"
         aria-hidden="true"
       />
@@ -149,25 +148,13 @@ export default {
     },
 
     buttonClasses() {
-      // @todo remove these
       const outline = this.outline ? 'outline-' : '';
-      const legacyType = `btn-${outline}${this.type}`;
       const type = `bmc-button--${outline}${this.type}`;
-      // @todo remove btn class
-      const classes = ['btn', 'bmc-button', legacyType, type, this.buttonClass];
-      if (this.block) classes.push('btn-block');
+      const classes = ['bmc-button', type, this.buttonClass];
+      if (this.block) classes.push('bmc-button--block');
       if (this.isLoading) {
-        // @todo remove btn-loading
-        classes.push('btn-loading');
         classes.push('bmc-button--loading');
       }
-      return classes;
-    },
-
-    iconContainerClasses() {
-      // @todo icon-container and mr-1
-      const classes = ['icon-container', 'bmc-button__icon'];
-      if (this.showLabel) classes.push('mr-1');
       return classes;
     },
   },

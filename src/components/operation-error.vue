@@ -52,15 +52,13 @@ export default {
     },
   },
 
-  // @todo remove bootstrap classes
   data: () => ({
-    linkClasses: 'bmc-operation-error__link text-dark font-weight-bold text-decoration-none',
+    linkClasses: 'bmc-operation-error__link',
   }),
 
   computed: {
     wrapperClasses() {
-      // @todo remove operation-error
-      return ['operation-error', 'bmc-operation-error', this.wrapperClass];
+      return ['bmc-operation-error', this.wrapperClass];
     },
   },
 

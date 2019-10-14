@@ -10,29 +10,26 @@
     @cancel="exitEditMode"
     @update="exitEditMode"
   />
-  <!-- @todo remove list-group-item -->
-  <div v-else class="bmc-website-schedule-list__item bmc-website-schedule-list__item--view list-group-item list-group-item--schedules">
+  <div v-else class="bmc-website-schedule-list__item bmc-website-schedule-list__item--view">
     <div>
-      <!-- @todo remove site-label -->
-      <div class="bmc-website-schedule-list__site-title site-label">{{ site.title }}</div>
-      <!-- @todo remove list-group-item__schedule-name -->
-      <div class="bmc-website-schedule-list__schedule-name list-group-item__schedule-name">
+      <div class="bmc-website-schedule-list__site-title">
+        {{ site.title }}
+      </div>
+      <div class="bmc-website-schedule-list__schedule-name">
         {{ section.fullName }} ({{ option.name }})
       </div>
       <display-date :value="start" label="Starts" />
       <display-date :value="end" label="Ends" />
-      <!-- @todo remove mt-1 -->
       <operation-error
         :error="error"
-        wrapper-class="bmc-operation-error--margin-top mt-1"
+        wrapper-class="bmc-operation-error--margin-top"
         @retry="deleteSchedule"
         @cancel="cancelDelete"
       />
     </div>
 
     <div class="ml-2">
-      <!-- @todo remove btn-group -->
-      <div class="bmc-button-group btn-group" role="group">
+      <div class="bmc-button-group" role="group">
         <edit-button
           label="Edit schedule"
           :disabled="isMutating"

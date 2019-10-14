@@ -1,8 +1,0 @@
-.spinner {
-  @extend .spinner-grow;
-  @extend .text-primary;
-
-  &__loading-message {
-    @include sr-only();
-  }
-}

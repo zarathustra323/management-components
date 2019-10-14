@@ -1,6 +1,5 @@
 <template>
-  <!-- @todo remove website-schedules -->
-  <div class="website-schedules bmc-website-scheduling">
+  <div class="bmc-website-scheduling">
     <create-schedules :content-id="contentId" />
     <list-schedules :content-id="contentId" />
   </div>

@@ -1,20 +1,17 @@
 <template>
-  <!-- @todo remove list-group-item -->
-  <div class="bmc-website-schedule-list__item bmc-website-schedule-list__item--edit list-group-item">
-    <!-- @todo remove site-label -->
-    <div class="bmc-website-schedule-list__site-title site-label">{{ currentSection.site.title }}</div>
-    <!-- @todo remove form-group -->
-    <div class="bmc-website-schedule-edit form-group">
-      <!-- @todo remove mt-1 -->
-      <div class="bmc-website-schedule-edit__field mt-1">
+  <div class="bmc-website-schedule-list__item bmc-website-schedule-list__item--edit">
+    <div class="bmc-website-schedule-list__site-title">
+      {{ currentSection.site.title }}
+    </div>
+    <div class="bmc-website-schedule-edit">
+      <div class="bmc-website-schedule-edit__field">
         <section-select
           :section="currentSection"
           :disabled="isSaving"
           @change="setSection"
         />
       </div>
-      <!-- @todo remove mt-1 -->
-      <div class="bmc-website-schedule-edit__field mt-1">
+      <div class="bmc-website-schedule-edit__field">
         <option-select
           :site-id="currentSection.site.id"
           :option="currentOption"
@@ -22,8 +19,7 @@
           @change="setOption"
         />
       </div>
-      <!-- @todo remove mt-1 -->
-      <div class="bmc-website-schedule-edit__field mt-1">
+      <div class="bmc-website-schedule-edit__field">
         <edit-date
           :value="currentStartDate"
           :max="currentEndDate"
@@ -33,8 +29,7 @@
           @change="setStartDate"
         />
       </div>
-      <!-- @todo remove mt-1 -->
-      <div class="bmc-website-schedule-edit__field mt-1">
+      <div class="bmc-website-schedule-edit__field">
         <edit-date
           :value="currentEndDate"
           :min="currentStartDate"
@@ -46,15 +41,13 @@
         />
       </div>
     </div>
-    <!-- @todo remove d-flex justify-content-between -->
-    <div class="bmc-website-schedule-edit__buttons d-flex justify-content-between">
+    <div class="bmc-website-schedule-edit__buttons">
       <cancel-button :disabled="isSaving" @click="cancel" />
       <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
     </div>
-    <!-- @todo remove mt-3 -->
     <operation-error
       :error="error"
-      wrapper-class="bmc-operation-error--margin-top mt-3"
+      wrapper-class="bmc-operation-error--margin-top"
       @retry="update"
       @cancel="cancel"
     />

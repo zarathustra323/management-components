@@ -1,12 +1,11 @@
 <template>
-  <!-- @todo remove form-control -->
   <datetime
     v-model="currentValue"
     type="datetime"
     :placeholder="placeholder"
     :disabled="disabled"
     :title="title"
-    input-class="bmc-form-control form-control"
+    input-class="bmc-form-control"
     :hour-step="1"
     :week-start="7"
     :min-datetime="minISO"
@@ -27,8 +26,7 @@
       </span>
     </template>
     <template slot="after">
-      <!-- @todo remove input-group-append -->
-      <div v-if="canClear" class="bmc-input-group__append input-group-append">
+      <div v-if="canClear" class="bmc-input-group__append">
         <action-button
           type="secondary"
           icon="x"
@@ -91,8 +89,6 @@ export default {
   }),
 
   mounted() {
-    // @todo remove input-group
-    this.$el.classList.add('input-group');
     this.$el.classList.add('bmc-input-group');
   },
 

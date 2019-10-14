@@ -1,10 +1,7 @@
 <template>
-  <!-- @todo remove card schedules -->
-  <div class="bmc-scheduling card schedules">
-    <!-- @todo remove card-header -->
-    <div class="bmc-scheduling__header card-header">
-      <!-- @todo remove nav nav-pills card-header-pills -->
-      <ul class="bmc-nav nav nav-pills card-header-pills">
+  <div class="bmc-scheduling">
+    <div class="bmc-scheduling__header">
+      <ul class="bmc-nav">
         <nav-item
           v-for="(item) in items"
           :id="item.id"

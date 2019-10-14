@@ -1,6 +1,5 @@
 <template>
-  <!-- @todo remove nav-item -->
-  <li class="bmc-nav__item nav-item">
+  <li class="bmc-nav__item">
     <a :class="linkClasses" :href="anchor" @click.prevent="onClick"><slot /></a>
   </li>
 </template>
@@ -24,9 +23,8 @@ export default {
       return `#manage-scheduling-${this.id}`;
     },
     linkClasses() {
-      // @todo remove nav-link active
-      const classes = ['nav-link', 'bmc-nav__link'];
-      if (this.active) classes.push('active', 'bmc-nav__link--active');
+      const classes = ['bmc-nav__link'];
+      if (this.active) classes.push('bmc-nav__link--active');
       return classes;
     },
   },
