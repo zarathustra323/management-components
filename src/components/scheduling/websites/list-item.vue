@@ -49,7 +49,7 @@
 
 <script>
 import mutation from '../../../graphql/scheduling/mutations/delete-website-schedule';
-import DisplayDate from '../display-date.vue';
+import DisplayDate from '../../display-date.vue';
 import EditSchedule from './edit.vue';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
