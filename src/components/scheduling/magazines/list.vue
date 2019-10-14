@@ -14,11 +14,22 @@
       >
         None found
       </div>
+      <operation-error
+        :error="error"
+        :can-cancel="false"
+        wrapper-class="bmc-magazine-schedule-list__item"
+        @retry="refresh"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import query from '../../../graphql/scheduling/queries/list-magazine-schedules';
+import OperationError from '../../operation-error.vue';
+import LoadingSpinner from '../../loading-spinner.vue';
+import mapNodes from '../../../utils/map-nodes';
+
 export default {
   /**
    *
@@ -39,12 +50,47 @@ export default {
     error: null,
   }),
 
+  components: { OperationError, LoadingSpinner },
+
   /**
    *
    */
   computed: {
     isLoading() {
       return this.$apollo.loading;
+    },
+  },
+
+  /**
+   *
+   */
+  methods: {
+    refresh() {
+      this.error = null;
+      this.$apollo.queries.schedules.refresh();
+    },
+  },
+
+  /**
+   *
+   */
+  apollo: {
+    schedules: {
+      query,
+      variables() {
+        const input = {
+          contentId: this.contentId,
+          pagination: { limit: 0 },
+        };
+        return { input };
+      },
+      update({ contentMagazineSchedules }) {
+        if (contentMagazineSchedules) this.totalCount = contentMagazineSchedules.totalCount;
+        return mapNodes(contentMagazineSchedules);
+      },
+      error(e) {
+        this.error = e;
+      },
     },
   },
 };
