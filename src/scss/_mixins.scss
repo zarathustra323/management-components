@@ -107,7 +107,7 @@
 
   &--active {
     color: $bmc-nav-active-link-color;
-    background-color: $bmc-nav-active-link-bg-color;
+    @include bmc-gradient-bg($bmc-nav-active-link-bg-color);
     @include bmc-hover-focus() {
       color: $bmc-nav-active-link-color;
     }
@@ -123,6 +123,7 @@
   color: $bmc-button-color;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
   user-select: none;
   background-color: transparent;
   border: $bmc-button-border-width solid transparent;
@@ -148,6 +149,7 @@
 
   &--disabled,
   &:disabled {
+    cursor: default;
     box-shadow: none;
     opacity: $bmc-button-disabled-opacity;
   }
@@ -168,4 +170,49 @@
   padding: $padding-y $padding-x;
   font-size: $font-size;
   line-height: $line-height;
+}
+
+@mixin bmc-button-variant($background, $border, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $active-background: darken($background, 10%), $active-border: darken($border, 12.5%)) {
+  color: bmc-color-yiq($background);
+  @include bmc-gradient-bg($background);
+  border-color: $border;
+
+  @include bmc-hover() {
+    color: bmc-color-yiq($hover-background);
+    @include bmc-gradient-bg($hover-background);
+    border-color: $hover-border;
+    svg {
+      fill: bmc-color-yiq($hover-background);
+    }
+  }
+
+  svg {
+    fill: bmc-color-yiq($background);
+  }
+
+  &:focus,
+  &--focus {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    box-shadow: 0 0 0 $bmc-button-focus-width rgba(mix(bmc-color-yiq($background), $border, 15%), .5);
+  }
+
+  // Disabled comes first so active can properly restyle
+  &--disabled,
+  &:disabled {
+    color: bmc-color-yiq($background);
+    background-color: $background;
+    border-color: $border;
+    // Remove CSS gradients if they're enabled
+    @if $bmc-enable-gradients {
+      background-image: none;
+    }
+  }
+}
+
+@mixin bmc-gradient-bg($color) {
+  @if $bmc-enable-gradients {
+    background: $color linear-gradient(180deg, mix($bmc-base-bg-color, $color, 15%), $color) repeat-x;
+  } @else {
+    background-color: $color;
+  }
 }

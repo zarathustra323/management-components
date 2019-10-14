@@ -31,6 +31,22 @@ $bmc-danger:        $bmc-red !default;
 $bmc-light:         $bmc-gray-100 !default;
 $bmc-dark:          $bmc-gray-800 !default;
 
+$bmc-theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$bmc-theme-colors: map-merge(
+  (
+    "primary":    $bmc-primary,
+    "secondary":  $bmc-secondary,
+    "success":    $bmc-success,
+    "info":       $bmc-info,
+    "warning":    $bmc-warning,
+    "danger":     $bmc-danger,
+    "light":      $bmc-light,
+    "dark":       $bmc-dark
+  ),
+  $bmc-theme-colors
+);
+
 // Spacers
 $bmc-spacer: .875rem !default;
 $bmc-spacers: () !default;
@@ -47,6 +63,9 @@ $bmc-spacers: map-merge(
   $bmc-spacers
 );
 
+// Options
+$bmc-enable-gradients: true !default;
+
 // Baseline values
 $bmc-base-font-family: "Roboto", sans-serif !default;
 $bmc-base-font-size: .875rem !default;
@@ -59,6 +78,13 @@ $bmc-base-link-color: $bmc-primary !default;
 $bmc-base-link-hover-color: darken($bmc-base-link-color, 15%) !default;
 $bmc-base-link-decoration: none !default;
 $bmc-base-link-hover-decoration: underline !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$bmc-yiq-contrasted-threshold: 160 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$bmc-yiq-text-dark: $bmc-gray-900 !default;
+$bmc-yiq-text-light: $bmc-white !default;
 
 // Cards
 $bmc-card-bg-color: $bmc-white !default;

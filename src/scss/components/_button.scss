@@ -8,4 +8,10 @@
   &--loading {
     cursor: wait;
   }
+
+  @each $color, $value in $bmc-theme-colors {
+    &--#{$color} {
+      @include bmc-button-variant($value, $value);
+    }
+  }
 }

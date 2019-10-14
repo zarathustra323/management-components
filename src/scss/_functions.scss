@@ -1,0 +1,14 @@
+// Color contrast
+@function bmc-color-yiq($color, $bmc-dark: $bmc-yiq-text-dark, $light: $bmc-yiq-text-light) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+  @if ($yiq >= $bmc-yiq-contrasted-threshold) {
+    @return $bmc-dark;
+  } @else {
+    @return $bmc-light;
+  }
+}

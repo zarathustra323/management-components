@@ -95,14 +95,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    size: {
-      type: String,
-      default: null,
-      validator(value) {
-        if (value == null) return true;
-        return ['sm', 'lg'].includes(value);
-      },
-    },
     disabled: {
       type: Boolean,
       default: false,
@@ -155,11 +147,12 @@ export default {
     },
 
     buttonClasses() {
+      // @todo remove these
       const outline = this.outline ? 'outline-' : '';
-      const type = `btn-${outline}${this.type}`;
+      const legacyType = `btn-${outline}${this.type}`;
+      const type = `bmc-button--${outline}${this.type}`;
       // @todo remove btn class
-      const classes = ['btn', 'bmc-button', type, this.buttonClass];
-      if (this.size) classes.push(`btn-${this.size}`);
+      const classes = ['btn', 'bmc-button', legacyType, type, this.buttonClass];
       if (this.block) classes.push('btn-block');
       if (this.isLoading) {
         // @todo remove btn-loading
