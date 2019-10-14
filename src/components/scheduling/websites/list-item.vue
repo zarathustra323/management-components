@@ -31,7 +31,8 @@
     </div>
 
     <div class="ml-2">
-      <div class="btn-group" role="group">
+      <!-- @todo remove btn-group -->
+      <div class="bmc-button-group btn-group" role="group">
         <edit-button
           label="Edit schedule"
           :disabled="isMutating"

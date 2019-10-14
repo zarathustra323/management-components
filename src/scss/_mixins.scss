@@ -191,6 +191,22 @@
   }
 }
 
+@mixin bmc-button-group() {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+
+  > .bmc-button {
+    @include bmc-hover() {
+      z-index: 1;
+    }
+    &:focus,
+    &:active,
+    &--active {
+      z-index: 1;
+    }
+  }
+}
 
 @mixin bmc-button-size($padding-y, $padding-x, $font-size, $line-height) {
   padding: $padding-y $padding-x;

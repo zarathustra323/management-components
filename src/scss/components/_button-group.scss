@@ -1,0 +1,9 @@
+.bmc-button-group {
+  @include bmc-button-group();
+
+  // Prevent double borders when buttons are next to each other
+  > .bmc-button:not(:first-child),
+  > .bmc-button-group:not(:first-child) {
+    margin-left: -$bmc-button-border-width;
+  }
+}
