@@ -17,6 +17,7 @@
     <div class="bmc-schedule-tab__body">
       <div class="bmc-schedule-field">
         <select-issue
+          :issue-id="issueId"
           :disabled="isSaving"
           @change="setIssueId"
           @close="setSectionSelectFocus"
@@ -26,6 +27,7 @@
         <select-section
           ref="sectionSelect"
           :issue-id="issueId"
+          :section-id="sectionId"
           :disabled="isSectionDisabled"
           @change="setSectionId"
           @close="setButtonFocus"

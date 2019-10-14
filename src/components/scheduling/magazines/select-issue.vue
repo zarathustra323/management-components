@@ -1,6 +1,6 @@
 <template>
   <tree-select
-    v-model="issueId"
+    v-model="currentIssueId"
     :multiple="false"
     :flat="true"
     :load-options="loadChoices"
@@ -49,6 +49,10 @@ export default {
    *
    */
   props: {
+    issueId: {
+      type: Number,
+      default: null,
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -60,7 +64,7 @@ export default {
    */
   data: () => ({
     choices: null,
-    issueId: null,
+    selectedIssueId: null,
   }),
 
   components: { TreeSelect },
@@ -69,6 +73,14 @@ export default {
    *
    */
   computed: {
+    currentIssueId: {
+      get() {
+        return this.selectedIssueId || this.issueId;
+      },
+      set() {
+      },
+    },
+
     /**
      *
      */

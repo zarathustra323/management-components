@@ -1,6 +1,6 @@
 <template>
   <tree-select
-    v-model="sectionId"
+    v-model="currentSectionId"
     ref="select"
     :multiple="false"
     :load-options="loadChoices"
@@ -26,6 +26,10 @@ export default {
    *
    */
   props: {
+    sectionId: {
+      type: Number,
+      default: null,
+    },
     issueId: {
       type: Number,
       default: null,
@@ -41,14 +45,24 @@ export default {
    */
   data: () => ({
     choices: null,
-    sectionId: null,
+    selectedSectionId: null,
   }),
 
   components: { TreeSelect },
 
+  computed: {
+    currentSectionId: {
+      get() {
+        return this.selectedSectionId || this.sectionId;
+      },
+      set() {
+      },
+    },
+  },
+
   watch: {
     issueId() {
-      this.sectionId = null;
+      this.selectedSectionId = null;
       this.choices = null;
     },
   },
