@@ -1,6 +1,10 @@
 .bmc-button {
   @include bmc-button();
 
+  &__icon {
+    display: inline-block;
+  }
+
   &__icon + &__label {
     margin-left: map-get($bmc-spacers, 1);
   }
