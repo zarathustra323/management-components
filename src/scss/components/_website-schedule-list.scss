@@ -3,8 +3,11 @@
 
   &__item {
     @include bmc-list-group-item();
-    display: flex;
-    justify-content: space-between;
+
+    &--view {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &__site-title {

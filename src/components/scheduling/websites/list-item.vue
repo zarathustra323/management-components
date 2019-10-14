@@ -11,7 +11,7 @@
     @update="exitEditMode"
   />
   <!-- @todo remove list-group-item -->
-  <div v-else class="bmc-website-schedule-list__item list-group-item list-group-item--schedules">
+  <div v-else class="bmc-website-schedule-list__item bmc-website-schedule-list__item--view list-group-item list-group-item--schedules">
     <div>
       <!-- @todo remove site-label -->
       <div class="bmc-website-schedule-list__site-title site-label">{{ site.title }}</div>

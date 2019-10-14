@@ -1,15 +1,20 @@
 <template>
-  <div class="list-group-item">
-    <div class="site-label">{{ currentSection.site.title }}</div>
-    <div class="form-group">
-      <div class="mt-1">
+  <!-- @todo remove list-group-item -->
+  <div class="bmc-website-schedule-list__item bmc-website-schedule-list__item--edit list-group-item">
+    <!-- @todo remove site-label -->
+    <div class="bmc-website-schedule-list__site-title site-label">{{ currentSection.site.title }}</div>
+    <!-- @todo remove form-group -->
+    <div class="bmc-website-schedule-edit form-group">
+      <!-- @todo remove mt-1 -->
+      <div class="bmc-website-schedule-edit__field mt-1">
         <section-select
           :section="currentSection"
           :disabled="isSaving"
           @change="setSection"
         />
       </div>
-      <div class="mt-1">
+      <!-- @todo remove mt-1 -->
+      <div class="bmc-website-schedule-edit__field mt-1">
         <option-select
           :site-id="currentSection.site.id"
           :option="currentOption"
@@ -17,7 +22,8 @@
           @change="setOption"
         />
       </div>
-      <div class="mt-1">
+      <!-- @todo remove mt-1 -->
+      <div class="bmc-website-schedule-edit__field mt-1">
         <edit-date
           :value="currentStartDate"
           :max="currentEndDate"
@@ -27,7 +33,8 @@
           @change="setStartDate"
         />
       </div>
-      <div class="mt-1">
+      <!-- @todo remove mt-1 -->
+      <div class="bmc-website-schedule-edit__field mt-1">
         <edit-date
           :value="currentEndDate"
           :min="currentStartDate"

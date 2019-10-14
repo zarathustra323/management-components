@@ -1,0 +1,7 @@
+.bmc-website-schedule-edit {
+  @include bmc-form-group();
+
+  &__field {
+    margin-top: map-get($bmc-spacers, 1);
+  }
+}
