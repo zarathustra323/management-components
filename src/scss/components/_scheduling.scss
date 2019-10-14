@@ -9,8 +9,7 @@
   }
 }
 
-
-.bmc-scheduling-panel {
+.bmc-schedule-tab {
   &__header {
     @include bmc-card-header();
     &--create {
@@ -32,7 +31,7 @@
   }
 }
 
-.bmc-scheduling-list {
+.bmc-schedule-list {
   @include bmc-list-group();
 
   &__item {
@@ -55,7 +54,7 @@
   }
 }
 
-.bmc-scheduling-edit {
+.bmc-schedule-edit {
   @include bmc-form-group();
 
   &__buttons {

@@ -1,23 +1,23 @@
 <template>
-  <div class="bmc-scheduling-panel__list">
-    <div class="bmc-scheduling-panel__header">
+  <div class="bmc-schedule-tab__list">
+    <div class="bmc-schedule-tab__header">
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <div v-if="isLoading" class="bmc-scheduling-panel__body">
+    <div v-if="isLoading" class="bmc-schedule-tab__body">
       <loading-spinner color="primary" />
     </div>
-    <div class="bmc-scheduling-list">
+    <div class="bmc-schedule-list">
       <div
         v-if="!isLoading && !schedules.length && !error"
-        class="bmc-scheduling-list__item bmc-scheduling-list__item--muted"
+        class="bmc-schedule-list__item bmc-schedule-list__item--muted"
       >
         None found
       </div>
       <operation-error
         :error="error"
         :can-cancel="false"
-        wrapper-class="bmc-scheduling-list__item"
+        wrapper-class="bmc-schedule-list__item"
         @retry="refresh"
       />
       <list-item
