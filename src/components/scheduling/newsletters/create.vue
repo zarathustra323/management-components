@@ -1,7 +1,7 @@
 <template>
-  <form class="bmc-magazine-scheduling__create" @submit.prevent="save">
-    <div class="bmc-magazine-scheduling__header">
-      <span>Add Schedule</span>
+  <form class="bmc-website-scheduling__create" @submit.prevent="save">
+    <div class="bmc-website-scheduling__header">
+      <span>Add Schedules</span>
     </div>
   </form>
 </template>

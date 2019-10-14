@@ -1,8 +1,14 @@
 <template>
-  <span>Newsletter</span>
+  <div class="bmc-newsletter-scheduling">
+    <create-schedule :content-id="contentId" />
+    <list-schedules :content-id="contentId" />
+  </div>
 </template>
 
 <script>
+import CreateSchedule from './create.vue';
+import ListSchedules from './list.vue';
+
 export default {
   /**
    *
@@ -17,22 +23,9 @@ export default {
   /**
    *
    */
-  mounted() {
-    console.log('mounted newsletters');
-  },
-
-  /**
-   *
-   */
-  created() {
-    console.log('created newsletters');
-  },
-
-  /**
-   *
-   */
-  destroyed() {
-    console.log('destroyed newsletters');
+  components: {
+    CreateSchedule,
+    ListSchedules,
   },
 };
 </script>
