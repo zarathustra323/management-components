@@ -1,0 +1,8 @@
+.bmc-date-display {
+  display: block;
+
+  &__label {
+    font-size: $bmc-font-size-sm;
+    color: $bmc-gray-600;
+  }
+}

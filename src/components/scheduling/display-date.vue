@@ -1,6 +1,8 @@
 <template>
-  <time class="schedule-date" v-if="momentDate" :datetime="momentDate.toISOString()">
-    <span v-if="label" class="schedule-date__label">
+  <!-- @todo remove schedule-date -->
+  <time class="bmc-date-display schedule-date" v-if="momentDate" :datetime="momentDate.toISOString()">
+    <!-- @todo schedule-date__label -->
+    <span v-if="label" class="bmc-date-display__label schedule-date__label">
       {{ label }}
     </span>
     {{ formatted }}

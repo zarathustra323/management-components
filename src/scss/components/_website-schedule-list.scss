@@ -1,0 +1,19 @@
+.bmc-website-schedule-list {
+  @include bmc-list-group();
+
+  &__item {
+    @include bmc-list-group-item();
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__site-title {
+    font-size: $bmc-font-size-sm;
+    color: $bmc-gray-600;
+  }
+
+  &__schedule-name {
+    font-weight: $bmc-font-weight-bold;
+    word-break: break-word;
+  }
+}

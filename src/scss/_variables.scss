@@ -74,6 +74,12 @@ $bmc-base-line-height: 1.5 !default;
 $bmc-base-bg-color: $bmc-white !default;
 $bmc-base-color: $bmc-gray-900 !default;
 
+// Fonts
+$bmc-font-weight-light: 300 !default;
+$bmc-font-weight-bold: 500 !default;
+$bmc-font-size-lg: $bmc-base-font-size * 1.25 !default;
+$bmc-font-size-sm: $bmc-base-font-size * .875 !default;
+
 $bmc-base-link-color: $bmc-primary !default;
 $bmc-base-link-hover-color: darken($bmc-base-link-color, 15%) !default;
 $bmc-base-link-decoration: none !default;
@@ -93,6 +99,14 @@ $bmc-card-spacer-x: .75rem !default;
 
 $bmc-card-header-bg-color: rgba($bmc-black, .03) !default;
 $bmc-card-header-font-weight: 300 !default;
+
+// List Groups
+$bmc-list-group-bg-color: $bmc-white !default;
+$bmc-list-group-border-color: rgba($bmc-black, .125) !default;
+$bmc-list-group-border-width: 1px !default;
+
+$bmc-list-group-item-padding-y: .75rem !default;
+$bmc-list-group-item-padding-x: .75rem !default;
 
 // Nav
 $bmc-nav-link-padding-y: .5rem !default;
@@ -118,6 +132,8 @@ $bmc-button-focus-box-shadow: 0 0 0 $bmc-button-focus-width $bmc-button-focus-co
 
 $bmc-button-disabled-opacity: .65 !default;
 $bmc-button-active-box-shadow: inset 0 3px 5px rgba($bmc-black, .125) !default;
+
+$bmc-button-transition: color .15s ease-in-out, fill .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
 // Spinners
 $bmc-spinner-width: 2rem !default;

@@ -10,10 +10,15 @@
     @cancel="exitEditMode"
     @update="exitEditMode"
   />
-  <div v-else class="list-group-item list-group-item--schedules">
+  <!-- @todo remove list-group-item -->
+  <div v-else class="bmc-website-schedule-list__item list-group-item list-group-item--schedules">
     <div>
-      <div class="site-label">{{ site.title }}</div>
-      <div class="list-group-item__schedule-name">{{ section.fullName }} ({{ option.name }})</div>
+      <!-- @todo remove site-label -->
+      <div class="bmc-website-schedule-list__site-title site-label">{{ site.title }}</div>
+      <!-- @todo remove list-group-item__schedule-name -->
+      <div class="bmc-website-schedule-list__schedule-name list-group-item__schedule-name">
+        {{ section.fullName }} ({{ option.name }})
+      </div>
       <display-date :value="start" label="Starts" />
       <display-date :value="end" label="Ends" />
       <operation-error

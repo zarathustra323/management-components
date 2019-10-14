@@ -5,23 +5,25 @@
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <div v-if="isLoading" class="card-body">
+    <!-- @todo remove card-body -->
+    <div v-if="isLoading" class="bmc-website-scheduling__body card-body">
       <!-- @todo remove spinner spinner__loading-message -->
       <div class="bmc-spinner bmc-spinner--grow bmc-spinner--primary spinner" role="status">
         <span class="bmc-spinner__loading-message spinner__loading-message">Loading...</span>
       </div>
     </div>
-    <div class="list-group list-group-flush list-group--schedules">
+    <!-- @todo remove bootstrap styles -->
+    <div class="bmc-website-schedule-list list-group-flush">
       <div
         v-if="!isLoading && !schedules.length && !error"
-        class="list-group-item list-group-item--muted"
+        class="bmc-website-schedule-list__item list-group-item list-group-item--muted"
       >
         None found
       </div>
       <operation-error
         :error="error"
         :can-cancel="false"
-        wrapper-class="list-group-item"
+        wrapper-class="bmc-website-schedule-list__item list-group-item"
         @retry="refresh"
       />
       <list-item
@@ -74,7 +76,6 @@ export default {
    */
   computed: {
     isLoading() {
-      return true;
       return this.$apollo.loading;
     },
   },

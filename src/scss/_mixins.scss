@@ -114,6 +114,24 @@
   }
 }
 
+@mixin bmc-list-group() {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+@mixin bmc-list-group-item() {
+  position: relative;
+  display: block;
+  padding: $bmc-list-group-item-padding-y $bmc-list-group-item-padding-x;
+  margin-bottom: -$bmc-list-group-border-width;
+  background-color: $bmc-list-group-bg-color;
+  border: $bmc-list-group-border-width solid $bmc-list-group-border-color;
+  border-right: 0;
+  border-left: 0;
+}
+
 @mixin bmc-button() {
   $self: &;
   display: inline-block;
@@ -128,6 +146,7 @@
   background-color: transparent;
   border: $bmc-button-border-width solid transparent;
   border-radius: 0;
+  transition: $bmc-button-transition;
   @include bmc-button-size(
     $bmc-button-padding-y,
     $bmc-button-padding-x,
