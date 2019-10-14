@@ -1,12 +1,41 @@
 <template>
   <form class="bmc-magazine-scheduling__create" @submit.prevent="save">
-    <div class="bmc-magazine-scheduling__header">
+    <div class="bmc-magazine-scheduling__header bmc-magazine-scheduling__header--create">
       <span>Add Schedule</span>
+      <div>
+        <add-button
+          ref="button"
+          button-type="submit"
+          label="Add schedules"
+          loading-label="Adding schedules..."
+          tabindex="-1"
+          :disabled="saveDisabled"
+          :isLoading="isSaving"
+        />
+      </div>
+    </div>
+    <div class="bmc-magazine-scheduling__body">
+      <select-issue
+        :disabled="isSaving"
+        @change="setIssueId"
+      />
+      <!-- Hidden tab stop for proper button focus -->
+      <span v-if="canSave" tabindex="0" />
+      <operation-error
+        :error="error"
+        wrapper-class="bmc-operation-error--margin-top"
+        @retry="save"
+        @cancel="cancel"
+      />
     </div>
   </form>
 </template>
 
 <script>
+import SelectIssue from './select-issue.vue';
+import AddButton from '../buttons/add.vue';
+import OperationError from '../../operation-error.vue';
+
 export default {
   /**
    *
@@ -19,11 +48,42 @@ export default {
   },
 
   data: () => ({
+    issueId: null,
+    sectionId: null,
     isSaving: false,
     error: null,
   }),
 
+  components: { SelectIssue, OperationError, AddButton },
+
+  computed: {
+    canSave() {
+      return Boolean(this.issueId) && Boolean(this.sectionId);
+    },
+    saveDisabled() {
+      if (!this.canSave) return true;
+      return this.isSaving;
+    },
+  },
+
   methods: {
+    setIssueId(issueId) {
+      this.issueId = issueId;
+    },
+
+    setSectionId(sectionId) {
+      this.sectionId = sectionId;
+    },
+
+    setButtonFocus() {
+      setTimeout(() => this.$refs.button.$el.focus(), 1);
+    },
+
+    cancel() {
+      this.error = null;
+      this.issueId = null;
+      this.sectionId = null;
+    },
     async save() {
       console.log('save schedule');
     },
