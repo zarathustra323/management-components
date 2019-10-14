@@ -1,6 +1,6 @@
 <template>
   <tree-select
-    v-model="issueId"
+    v-model="sectionId"
     :multiple="false"
     :flat="true"
     :load-options="loadChoices"
@@ -14,7 +14,7 @@
     @input="emitChange"
     @close="emitClose"
     search-nested
-    placeholder="Select issue..."
+    placeholder="Select section..."
   >
     <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
     <label
@@ -60,7 +60,7 @@ export default {
    */
   data: () => ({
     choices: null,
-    issueId: null,
+    sectionId: null,
   }),
 
   components: { TreeSelect },
@@ -93,8 +93,8 @@ export default {
     /**
      *
      */
-    emitChange(issueId) {
-      this.$emit('change', issueId);
+    emitChange(sectionId) {
+      this.$emit('change', sectionId);
     },
 
     /**

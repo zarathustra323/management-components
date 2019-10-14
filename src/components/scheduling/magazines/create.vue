@@ -19,6 +19,10 @@
         :disabled="isSaving"
         @change="setIssueId"
       />
+      <select-section
+        :disabled="isSectionDisabled"
+        @change="setSectionId"
+      />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="canSave" tabindex="0" />
       <operation-error
@@ -33,6 +37,7 @@
 
 <script>
 import SelectIssue from './select-issue.vue';
+import SelectSection from './select-section.vue';
 import AddButton from '../buttons/add.vue';
 import OperationError from '../../operation-error.vue';
 
@@ -54,7 +59,12 @@ export default {
     error: null,
   }),
 
-  components: { SelectIssue, OperationError, AddButton },
+  components: {
+    SelectIssue,
+    SelectSection,
+    OperationError,
+    AddButton,
+  },
 
   computed: {
     canSave() {
@@ -63,6 +73,10 @@ export default {
     saveDisabled() {
       if (!this.canSave) return true;
       return this.isSaving;
+    },
+    isSectionDisabled() {
+      if (this.isSaving) return true;
+      return !this.issueId;
     },
   },
 
