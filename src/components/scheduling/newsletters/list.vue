@@ -1,16 +1,16 @@
 <template>
-  <div class="bmc-website-scheduling__list">
-    <div class="bmc-website-scheduling__header">
+  <div class="bmc-scheduling-panel__list">
+    <div class="bmc-scheduling-panel__header">
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <div v-if="isLoading" class="bmc-website-scheduling__body">
+    <div v-if="isLoading" class="bmc-scheduling-panel__body">
       <loading-spinner color="primary" />
     </div>
-    <div class="bmc-website-schedule-list">
+    <div class="bmc-scheduling-list">
       <div
         v-if="!isLoading && !schedules.length && !error"
-        class="bmc-website-schedule-list__item bmc-website-schedule-list__item--muted"
+        class="bmc-scheduling-list__item bmc-scheduling-list__item--muted"
       >
         None found
       </div>

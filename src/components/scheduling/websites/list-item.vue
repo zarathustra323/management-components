@@ -10,12 +10,12 @@
     @cancel="exitEditMode"
     @update="exitEditMode"
   />
-  <div v-else class="bmc-website-schedule-list__item bmc-website-schedule-list__item--view">
+  <div v-else class="bmc-scheduling-list__item bmc-scheduling-list__item--view">
     <div>
-      <div class="bmc-website-schedule-list__site-title">
+      <div class="bmc-scheduling-list__product-name">
         {{ site.title }}
       </div>
-      <div class="bmc-website-schedule-list__schedule-name">
+      <div class="bmc-scheduling-list__schedule-name">
         {{ section.fullName }} ({{ option.name }})
       </div>
       <display-date :value="start" label="Starts" />

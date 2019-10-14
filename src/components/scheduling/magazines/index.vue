@@ -1,5 +1,5 @@
 <template>
-  <div class="bmc-magazine-scheduling">
+  <div class="bmc-scheduling-panel">
     <create-schedule :content-id="contentId" />
     <list-schedules :content-id="contentId" />
   </div>

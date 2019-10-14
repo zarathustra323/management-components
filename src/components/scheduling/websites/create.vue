@@ -1,6 +1,6 @@
 <template>
-  <form class="bmc-website-scheduling__create" @submit.prevent="save">
-    <div class="bmc-website-scheduling__header bmc-website-scheduling__header--create">
+  <form class="bmc-scheduling-panel__create" @submit.prevent="save">
+    <div class="bmc-scheduling-panel__header bmc-scheduling-panel__header--create">
       <span>Add Schedules</span>
       <div>
         <add-button
@@ -14,7 +14,7 @@
         />
       </div>
     </div>
-    <div class="bmc-website-scheduling__body">
+    <div class="bmc-scheduling-panel__body">
       <select-sections
         :disabled="isSaving"
         :section-ids="sectionIds"

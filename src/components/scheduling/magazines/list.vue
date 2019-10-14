@@ -1,23 +1,23 @@
 <template>
-  <div class="bmc-magazine-scheduling__list">
-    <div class="bmc-magazine-scheduling__header">
+  <div class="bmc-scheduling-panel__list">
+    <div class="bmc-scheduling-panel__header">
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
-    <div v-if="isLoading" class="bmc-magazine-scheduling__body">
+    <div v-if="isLoading" class="bmc-scheduling-panel__body">
       <loading-spinner color="primary" />
     </div>
-    <div class="bmc-magazine-schedule-list">
+    <div class="bmc-scheduling-list">
       <div
         v-if="!isLoading && !schedules.length && !error"
-        class="bmc-magazine-schedule-list__item bmc-magazine-schedule-list__item--muted"
+        class="bmc-scheduling-list__item bmc-scheduling-list__item--muted"
       >
         None found
       </div>
       <operation-error
         :error="error"
         :can-cancel="false"
-        wrapper-class="bmc-magazine-schedule-list__item"
+        wrapper-class="bmc-scheduling-list__item"
         @retry="refresh"
       />
     </div>

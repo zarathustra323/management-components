@@ -1,6 +1,6 @@
 <template>
-  <div class="bmc-scheduling">
-    <div class="bmc-scheduling__header">
+  <div class="bmc-scheduling-component">
+    <div class="bmc-scheduling-component__header">
       <ul class="bmc-nav">
         <nav-item
           v-for="(item) in items"

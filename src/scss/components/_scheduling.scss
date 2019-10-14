@@ -1,4 +1,4 @@
-.bmc-scheduling {
+.bmc-scheduling-component {
   @include bmc-base();
   @include bmc-card();
   letter-spacing: .1px;
@@ -6,5 +6,68 @@
 
   &__header {
     @include bmc-card-header();
+  }
+}
+
+
+.bmc-scheduling-panel {
+  &__header {
+    @include bmc-card-header();
+    &--create {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &__body {
+    @include bmc-card-body();
+  }
+
+  &__create {
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+  }
+}
+
+.bmc-scheduling-list {
+  @include bmc-list-group();
+
+  &__item {
+    @include bmc-list-group-item();
+
+    &--view {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__product-name {
+    font-size: $bmc-font-size-sm;
+    color: $bmc-gray-600;
+  }
+
+  &__schedule-name {
+    font-weight: $bmc-font-weight-bold;
+    word-break: break-word;
+  }
+}
+
+.bmc-scheduling-edit {
+  @include bmc-form-group();
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.bmc-schedule-field {
+  margin-top: map-get($bmc-spacers, 1);
+
+  &:first-child {
+    margin-top: 0;
   }
 }

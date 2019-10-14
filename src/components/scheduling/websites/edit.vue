@@ -1,9 +1,9 @@
 <template>
-  <div class="bmc-website-schedule-list__item bmc-website-schedule-list__item--edit">
-    <div class="bmc-website-schedule-list__site-title">
+  <div class="bmc-scheduling-list__item bmc-scheduling-list__item--edit">
+    <div class="bmc-scheduling-list__product-name">
       {{ currentSection.site.title }}
     </div>
-    <div class="bmc-website-schedule-edit">
+    <div class="bmc-scheduling-edit">
       <div class="bmc-schedule-field">
         <section-select
           :section="currentSection"
@@ -41,7 +41,7 @@
         />
       </div>
     </div>
-    <div class="bmc-website-schedule-edit__buttons">
+    <div class="bmc-scheduling-edit__buttons">
       <cancel-button :disabled="isSaving" @click="cancel" />
       <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
     </div>
