@@ -1,11 +1,13 @@
 .bmc-website-scheduling {
   &__header {
     @include bmc-card-header();
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0;
-    padding-bottom: 0;
+    &--create {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   &__body {

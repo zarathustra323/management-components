@@ -1,13 +1,14 @@
 <template>
-  <div class="website-schedules__list">
-    <!-- @todo handle errors -->
-    <div class="card-header">
+  <div class="bmc-website-scheduling__list">
+    <!-- @todo remove card-header -->
+    <div class="bmc-website-scheduling__header card-header">
       Current Schedules
       <span>({{ totalCount }})</span>
     </div>
     <div v-if="isLoading" class="card-body">
-      <div class="spinner" role="status">
-        <span class="spinner__loading-message">Loading...</span>
+      <!-- @todo remove spinner spinner__loading-message -->
+      <div class="bmc-spinner bmc-spinner--grow bmc-spinner--primary spinner" role="status">
+        <span class="bmc-spinner__loading-message spinner__loading-message">Loading...</span>
       </div>
     </div>
     <div class="list-group list-group-flush list-group--schedules">
@@ -73,6 +74,7 @@ export default {
    */
   computed: {
     isLoading() {
+      return true;
       return this.$apollo.loading;
     },
   },

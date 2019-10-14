@@ -3,7 +3,7 @@
   <form class="bmc-website-scheduling__create website-schedules__add" @submit.prevent="save">
     <!-- @todo remove bootstrap classes -->
     <div
-      class="bmc-website-scheduling__header card-header d-flex justify-content-between align-items-center"
+      class="bmc-website-scheduling__header bmc-website-scheduling__header--create card-header d-flex justify-content-between align-items-center"
     >
       <span>Add Schedules</span>
       <div>

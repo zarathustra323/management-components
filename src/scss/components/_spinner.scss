@@ -14,6 +14,10 @@
   vertical-align: text-bottom;
   border-radius: 50%;
 
+  &__loading-message {
+    @include bmc-sr-only();
+  }
+
   &--grow {
     background-color: currentColor;
     opacity: 0;
@@ -23,5 +27,9 @@
   &--small {
     width: $bmc-spinner-width-sm;
     height: $bmc-spinner-height-sm;
+  }
+
+  &--primary {
+    color: $bmc-primary;
   }
 }
