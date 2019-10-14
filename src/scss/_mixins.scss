@@ -189,6 +189,57 @@
   }
 }
 
+@mixin bmc-input-group() {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap; // For form validation feedback
+  align-items: stretch;
+  width: 100%;
+
+  > .bmc-form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+
+    + .bmc-form-control {
+      margin-left: -$bmc-input-border-width;
+    }
+  }
+
+  // Bring the "active" form control to the top of surrounding elements
+  > .bmc-form-control:focus {
+    z-index: 3;
+  }
+}
+
+@mixin bmc-input-group-item() {
+  display: flex;
+
+  .bmc-button {
+    position: relative;
+    z-index: 2;
+
+    &:focus {
+      z-index: 3;
+    }
+  }
+
+  .bmc-button + .bmc-button {
+    margin-left: -$bmc-input-border-width;
+  }
+}
+
+@mixin bmc-input-group-append() {
+  @include bmc-input-group-item();
+  margin-left: -$bmc-input-border-width;
+}
+
+@mixin bmc-input-group-prepend() {
+  @include bmc-input-group-item();
+  margin-right: -$bmc-input-border-width;
+}
+
 @mixin bmc-button() {
   $self: &;
   display: inline-block;

@@ -27,7 +27,8 @@
       </span>
     </template>
     <template slot="after">
-      <div v-if="canClear" class="input-group-append">
+      <!-- @todo remove input-group-append -->
+      <div v-if="canClear" class="bmc-input-group__append input-group-append">
         <action-button
           type="secondary"
           icon="x"

@@ -4,4 +4,9 @@
   &__field {
     margin-top: map-get($bmc-spacers, 1);
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }

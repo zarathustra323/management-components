@@ -1,0 +1,11 @@
+.bmc-input-group {
+  @include bmc-input-group();
+
+  &__append {
+    @include bmc-input-group-append();
+  }
+
+  &__prepend {
+    @include bmc-input-group-prepend();
+  }
+}

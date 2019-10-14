@@ -46,13 +46,15 @@
         />
       </div>
     </div>
-    <div class="d-flex justify-content-between">
+    <!-- @todo remove d-flex justify-content-between -->
+    <div class="bmc-website-schedule-edit__buttons d-flex justify-content-between">
       <cancel-button :disabled="isSaving" @click="cancel" />
       <save-button :disabled="isSaveDisabled" :is-loading="isSaving" @click="update" />
     </div>
+    <!-- @todo remove mt-3 -->
     <operation-error
       :error="error"
-      wrapper-class="mt-3"
+      wrapper-class="bmc-operation-error--margin-top mt-3"
       @retry="update"
       @cancel="cancel"
     />
