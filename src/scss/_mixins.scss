@@ -273,6 +273,10 @@
     box-shadow: $bmc-button-focus-box-shadow;
   }
 
+  &--loading {
+    cursor: wait !important; // stylelint-disable-line declaration-no-important
+  }
+
   &--disabled,
   &:disabled {
     cursor: default;

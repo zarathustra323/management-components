@@ -9,10 +9,6 @@
     margin-left: map-get($bmc-spacers, 1);
   }
 
-  &--loading {
-    cursor: wait;
-  }
-
   @each $color, $value in $bmc-theme-colors {
     &--#{$color} {
       @include bmc-button-variant($value, $value);
