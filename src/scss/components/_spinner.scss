@@ -1,0 +1,27 @@
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.bmc-spinner {
+  display: inline-block;
+  width: $bmc-spinner-width;
+  height: $bmc-spinner-height;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+
+  &--grow {
+    background-color: currentColor;
+    opacity: 0;
+    animation: spinner-grow .75s linear infinite;
+  }
+
+  &--small {
+    width: $bmc-spinner-width-sm;
+    height: $bmc-spinner-height-sm;
+  }
+}

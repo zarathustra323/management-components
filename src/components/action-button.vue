@@ -11,8 +11,10 @@
     @blur="clearConfirmPrompt"
   >
     <span v-if="showIcons" :class="iconContainerClasses">
+      <!-- @todo remove spinner-grow spinner-grow-sm -->
       <span
-        v-if="isLoading" class="spinner-grow spinner-grow-sm"
+        v-if="isLoading"
+        class="bmc-spinner bmc-spinner--grow bmc-spinner--small spinner-grow spinner-grow-sm"
         role="status"
         aria-hidden="true"
       />
