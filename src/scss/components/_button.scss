@@ -13,5 +13,8 @@
     &--#{$color} {
       @include bmc-button-variant($value, $value);
     }
+    &--outline-#{$color} {
+      @include bmc-button-outline-variant($value);
+    }
   }
 }
