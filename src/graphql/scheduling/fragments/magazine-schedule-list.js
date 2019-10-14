@@ -1,21 +1,25 @@
 import gql from 'graphql-tag';
+import publicationFragment from './magazine-publication';
+import issueFragment from './magazine-issue';
+import sectionFragment from './magazine-section';
 
 export default gql`
 
 fragment MagazineScheduleList on MagazineSchedule {
   id
   publication {
-    id
-    name
+    ...MagazinePublicationScheduleList
   }
   issue {
-    id
-    name
+    ...MagazineIssueScheduleList
   }
   section {
-    id
-    name
+    ...MagazineSectionScheduleList
   }
 }
+
+${publicationFragment}
+${issueFragment}
+${sectionFragment}
 
 `;
