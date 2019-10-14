@@ -31,7 +31,7 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import publicationIssueQuery from '../../../graphql/scheduling/queries/load-magazine-publication-issues';
+import query from '../../../graphql/scheduling/queries/load-magazine-publication-issues';
 import mapNodes from '../../../utils/map-nodes';
 
 const mapIssues = ({
@@ -109,7 +109,7 @@ export default {
      */
     async loadChoices({ action }) {
       if (action === LOAD_ROOT_OPTIONS) {
-        const { data } = await this.$apollo.query({ query: publicationIssueQuery });
+        const { data } = await this.$apollo.query({ query });
         const publications = mapNodes(data.magazinePublications);
         this.choices = publications.map((pub) => {
           const children = mapIssues({

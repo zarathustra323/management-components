@@ -15,14 +15,22 @@
       </div>
     </div>
     <div class="bmc-magazine-scheduling__body">
-      <select-issue
-        :disabled="isSaving"
-        @change="setIssueId"
-      />
-      <select-section
-        :disabled="isSectionDisabled"
-        @change="setSectionId"
-      />
+      <div class="bmc-schedule-field">
+        <select-issue
+          :disabled="isSaving"
+          @change="setIssueId"
+          @close="setSectionSelectFocus"
+        />
+      </div>
+      <div class="bmc-schedule-field">
+        <select-section
+          ref="sectionSelect"
+          :issue-id="issueId"
+          :disabled="isSectionDisabled"
+          @change="setSectionId"
+          @close="setButtonFocus"
+        />
+      </div>
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="canSave" tabindex="0" />
       <operation-error
@@ -91,6 +99,10 @@ export default {
 
     setButtonFocus() {
       setTimeout(() => this.$refs.button.$el.focus(), 1);
+    },
+
+    setSectionSelectFocus() {
+      setTimeout(() => this.$refs.sectionSelect.focus(), 1);
     },
 
     cancel() {

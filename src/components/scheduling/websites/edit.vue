@@ -4,14 +4,14 @@
       {{ currentSection.site.title }}
     </div>
     <div class="bmc-website-schedule-edit">
-      <div class="bmc-website-schedule-edit__field">
+      <div class="bmc-schedule-field">
         <section-select
           :section="currentSection"
           :disabled="isSaving"
           @change="setSection"
         />
       </div>
-      <div class="bmc-website-schedule-edit__field">
+      <div class="bmc-schedule-field">
         <option-select
           :site-id="currentSection.site.id"
           :option="currentOption"
@@ -19,7 +19,7 @@
           @change="setOption"
         />
       </div>
-      <div class="bmc-website-schedule-edit__field">
+      <div class="bmc-schedule-field">
         <edit-date
           :value="currentStartDate"
           :max="currentEndDate"
@@ -29,7 +29,7 @@
           @change="setStartDate"
         />
       </div>
-      <div class="bmc-website-schedule-edit__field">
+      <div class="bmc-schedule-field">
         <edit-date
           :value="currentEndDate"
           :min="currentStartDate"
