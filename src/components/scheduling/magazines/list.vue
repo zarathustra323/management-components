@@ -1,7 +1,7 @@
 <template>
   <div class="bmc-schedule-tab__list">
     <div class="bmc-schedule-tab__header">
-      Current Schedules
+      Magazine Schedules
       <span>({{ totalCount }})</span>
     </div>
     <div v-if="isLoading" class="bmc-schedule-tab__body">
@@ -20,12 +20,21 @@
         wrapper-class="bmc-schedule-list__item"
         @retry="refresh"
       />
+      <list-item
+        v-for="(schedule) in schedules"
+        :key="schedule.id"
+        :id="schedule.id"
+        :publication="schedule.publication"
+        :issue="schedule.issue"
+        :section="schedule.section"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import query from '../../../graphql/scheduling/queries/list-magazine-schedules';
+import ListItem from './list-item.vue';
 import OperationError from '../../operation-error.vue';
 import LoadingSpinner from '../../loading-spinner.vue';
 import mapNodes from '../../../utils/map-nodes';
@@ -50,7 +59,7 @@ export default {
     error: null,
   }),
 
-  components: { OperationError, LoadingSpinner },
+  components: { OperationError, LoadingSpinner, ListItem },
 
   /**
    *

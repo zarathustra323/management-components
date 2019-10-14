@@ -1,7 +1,7 @@
 <template>
   <div class="bmc-schedule-tab__list">
     <div class="bmc-schedule-tab__header">
-      Current Schedules
+      Website Schedules
       <span>({{ totalCount }})</span>
     </div>
     <div v-if="isLoading" class="bmc-schedule-tab__body">
