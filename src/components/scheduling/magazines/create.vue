@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import mutation from '../../../graphql/scheduling/mutations/create-magazine-schedule';
 import SelectIssue from './select-issue.vue';
 import SelectSection from './select-section.vue';
 import AddButton from '../buttons/add.vue';
@@ -113,7 +114,18 @@ export default {
       this.sectionId = null;
     },
     async save() {
-      console.log('save schedule');
+      this.error = null;
+      this.isSaving = true;
+      const input = { contentId: this.contentId, issueId: this.issueId, sectionId: this.sectionId };
+      try {
+        await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListMagazineSchedules'] });
+        this.issueId = null;
+        this.sectionId = null;
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isSaving = false;
+      }
     },
   },
 };
