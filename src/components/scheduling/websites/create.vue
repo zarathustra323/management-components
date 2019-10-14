@@ -75,11 +75,6 @@ export default {
       if (!this.canSave) return true;
       return this.isSaving;
     },
-    buttonClass() {
-      const classes = ['btn', 'btn-sm', 'btn-success'];
-      if (this.isSaving) classes.push('btn-loading');
-      return classes;
-    },
   },
 
   methods: {
