@@ -440,3 +440,9 @@
   white-space: nowrap;
   border: 0;
 }
+
+@mixin bmc-animate($name, $duration: 1s) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-fill-mode: both;
+}
