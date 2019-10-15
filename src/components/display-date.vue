@@ -9,6 +9,7 @@
 
 <script>
 import moment from 'moment';
+import { DATE_FORMAT } from './constants';
 
 export default {
   props: {
@@ -22,7 +23,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'MMM Do, YYYY, h:mm A',
+      default: DATE_FORMAT,
     },
     inline: {
       type: Boolean,
