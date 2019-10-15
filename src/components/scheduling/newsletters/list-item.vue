@@ -3,6 +3,8 @@
     v-if="isEditing"
     :schedule-id="id"
     :section="section"
+    :deployment-date="start"
+    :sequence="sequence"
     @cancel="exitEditMode"
     @update="exitEditMode"
   />

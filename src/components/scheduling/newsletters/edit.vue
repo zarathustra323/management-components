@@ -12,6 +12,14 @@
         />
       </div>
       <div class="bmc-schedule-field">
+        <edit-date
+          :value="currentDeploymentDate"
+          :disabled="isSaving"
+          title="Deployment Date"
+          @change="setDeploymentDate"
+        />
+      </div>
+      <div class="bmc-schedule-field">
        <edit-sequence :value="currentSequence" :disabled="isSaving" @change="setSequence" />
       </div>
     </div>
@@ -31,6 +39,7 @@
 <script>
 import SelectSection from './select-section.vue';
 import EditSequence from './edit-sequence.vue';
+import EditDate from '../../edit-date.vue';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
 import OperationError from '../../operation-error.vue';
@@ -45,6 +54,10 @@ export default {
       type: Object,
       required: true,
     },
+    deploymentDate: {
+      type: Date,
+      required: true,
+    },
     sequence: {
       type: Number,
       default: 0,
@@ -54,6 +67,7 @@ export default {
   data: () => ({
     selectedSection: undefined,
     selectedSequence: undefined,
+    selectedDeploymentDate: undefined,
     isSaving: false,
     error: null,
   }),
@@ -63,12 +77,17 @@ export default {
     SelectSection,
     CancelButton,
     SaveButton,
+    EditDate,
     OperationError,
   },
 
   computed: {
     currentSection() {
       return this.selectedSection === undefined ? this.section : this.selectedSection;
+    },
+    currentDeploymentDate() {
+      const { selectedDeploymentDate } = this;
+      return selectedDeploymentDate === undefined ? this.deploymentDate : selectedDeploymentDate;
     },
     currentSequence() {
       return this.selectedSequence == null ? this.sequence : this.selectedSequence;
@@ -79,14 +98,17 @@ export default {
       if (!section) return false;
       return currentSection.id !== section.id;
     },
+    hasDeploymentDateChanged() {
+      return this.currentDeploymentDate.valueOf() !== this.deploymentDate.valueOf();
+    },
     hasSequenceChanged() {
       return `${this.currentSequence}` !== `${this.sequence}`;
     },
     hasChanged() {
-      return this.hasSectionChanged || this.hasSequenceChanged;
+      return this.hasSectionChanged || this.hasSequenceChanged || this.hasDeploymentDateChanged;
     },
     canSave() {
-      return Boolean(this.currentSection);
+      return Boolean(this.currentSection && this.currentDeploymentDate);
     },
     isSaveDisabled() {
       return !this.canSave || !this.hasChanged || this.isSaving;
@@ -96,6 +118,9 @@ export default {
   methods: {
     setSection(section) {
       this.selectedSection = section;
+    },
+    setDeploymentDate(date) {
+      this.selectedDeploymentDate = date;
     },
     setSequence(sequence) {
       this.selectedSequence = sequence;
