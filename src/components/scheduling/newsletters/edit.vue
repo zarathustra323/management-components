@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import mutation from '../../../graphql/scheduling/mutations/update-email-schedule';
 import SelectSection from './select-section.vue';
 import EditSequence from './edit-sequence.vue';
 import EditDate from '../../edit-date.vue';
@@ -131,22 +132,22 @@ export default {
     async update() {
       this.error = null;
       this.isSaving = true;
-      console.log('update');
 
-      // const payload = {
-      //   issueId: this.currentIssue.id,
-      //   sectionId: this.currentSection.id,
-      // };
-      // const input = { id: this.scheduleId, payload };
+      const payload = {
+        sectionId: this.currentSection.id,
+        deploymentDate: this.currentDeploymentDate.valueOf(),
+        sequence: this.currentSequence,
+      };
+      const input = { id: this.scheduleId, payload };
 
-      // try {
-      //   await this.$apollo.mutate({ mutation, variables: { input } });
-      //   this.$emit('update');
-      // } catch (e) {
-      //   this.error = e;
-      // } finally {
-      //   this.isSaving = false;
-      // }
+      try {
+        await this.$apollo.mutate({ mutation, variables: { input } });
+        this.$emit('update');
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isSaving = false;
+      }
     },
   },
 };
