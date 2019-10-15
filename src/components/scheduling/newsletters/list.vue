@@ -1,10 +1,7 @@
 <template>
   <div class="bmc-schedule-tab__list">
     <div class="bmc-schedule-tab__header bmc-schedule-tab__header--with-buttons">
-      <span>
-        Newsletter Schedules
-        <span>({{ totalCount }})</span>
-      </span>
+      <span>Newsletter Schedules ({{ totalCount }})</span>
       <refresh-button
         label="Refresh schedules"
         :isLoading="isLoading"
