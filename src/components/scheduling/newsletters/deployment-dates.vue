@@ -51,8 +51,17 @@ import XIcon from '../../icons/x.vue';
 import ChevronRightIcon from '../../icons/chevron-right.vue';
 import { DATE_FORMAT } from '../../constants';
 
+const createDateNode = (date, format) => {
+  const d = moment(date);
+  return { id: d.valueOf(), label: d.format(format) };
+};
+
 export default {
   props: {
+    values: {
+      type: Array,
+      default: () => [],
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -76,15 +85,12 @@ export default {
   computed: {
     selected: {
       get() {
-        const sorted = this.dates.slice().map(d => d.valueOf()).sort().reverse();
-        return sorted.map((date) => {
-          const d = moment(date);
-          return { id: d.valueOf(), label: d.format(this.format) };
-        });
+        const sorted = this.values.slice().map(d => d.valueOf()).sort().reverse();
+        return sorted.map(date => createDateNode(date, this.format));
       },
       set(dates) {
-        this.dates = dates.map(({ id }) => new Date(id));
-        this.$emit('change', this.dates);
+        const values = dates.map(({ id }) => new Date(id));
+        this.$emit('change', values);
       },
     },
     hideClass() {
@@ -102,7 +108,8 @@ export default {
     },
     addDate(value) {
       if (value) {
-        this.dates.push(new Date(value));
+        const node = createDateNode(new Date(value), this.format);
+        this.selected = [...this.selected, node];
         setTimeout(() => { this.date = ''; }, 2);
       }
     },

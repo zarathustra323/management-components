@@ -20,6 +20,7 @@
         />
       </div>
       <deployment-dates
+        :values="deploymentDates"
         :disabled="isSaving"
         @change="setDeploymentDates"
       />
@@ -101,12 +102,13 @@ export default {
       };
 
       console.log('save', input);
-      // try {
-      // } catch (e) {
-      //   this.error = e;
-      // } finally {
-      //   this.isSaving = false;
-      // }
+      try {
+        throw new Error('bad');
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isSaving = false;
+      }
     },
   },
 };
