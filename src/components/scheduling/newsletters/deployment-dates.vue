@@ -4,7 +4,7 @@
       v-model="date"
       type="datetime"
       :disabled="disabled"
-      placeholder="Add deployment date(s)..."
+      placeholder="Add deployment date..."
       title="Deployment Date"
       input-class="bmc-form-control"
       :week-start="7"
@@ -24,20 +24,21 @@
         </span>
       </template>
     </datetime>
-    <tree-select
-      v-if="selected.length"
-      ref="treeselect"
-      v-model="selected"
-      value-format="object"
-      placeholder=""
-      :disabled="disabled"
-      :searchable="false"
-      :options="null"
-      :multiple="true"
-      :backspace-removes="false"
-      :required="true"
-      @open="preventTreeOpen"
-    />
+    <div :class="hideClass">
+      <tree-select
+        ref="treeselect"
+        v-model="selected"
+        value-format="object"
+        placeholder=""
+        :disabled="disabled"
+        :searchable="false"
+        :options="null"
+        :multiple="true"
+        :backspace-removes="false"
+        :required="true"
+        @open="preventTreeOpen"
+      />
+    </div>
   </div>
 </template>
 
@@ -85,6 +86,10 @@ export default {
         this.dates = dates.map(({ id }) => new Date(id));
         this.$emit('change', this.dates);
       },
+    },
+    hideClass() {
+      if (!this.selected.length) return 'bmc-hide';
+      return null;
     },
   },
 
