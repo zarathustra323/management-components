@@ -11,6 +11,9 @@
           @change="setSection"
         />
       </div>
+      <div class="bmc-schedule-field">
+       <edit-sequence :value="currentSequence" :disabled="isSaving" @change="setSequence" />
+      </div>
     </div>
     <div class="bmc-schedule-edit__buttons">
       <cancel-button :disabled="isSaving" @click="cancel" />
@@ -27,6 +30,7 @@
 
 <script>
 import SelectSection from './select-section.vue';
+import EditSequence from './edit-sequence.vue';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
 import OperationError from '../../operation-error.vue';
@@ -41,15 +45,21 @@ export default {
       type: Object,
       required: true,
     },
+    sequence: {
+      type: Number,
+      default: 0,
+    },
   },
 
   data: () => ({
     selectedSection: undefined,
+    selectedSequence: undefined,
     isSaving: false,
     error: null,
   }),
 
   components: {
+    EditSequence,
     SelectSection,
     CancelButton,
     SaveButton,
@@ -60,14 +70,20 @@ export default {
     currentSection() {
       return this.selectedSection === undefined ? this.section : this.selectedSection;
     },
+    currentSequence() {
+      return this.selectedSequence == null ? this.sequence : this.selectedSequence;
+    },
     hasSectionChanged() {
       const { currentSection, section } = this;
       if (currentSection === null) return true;
       if (!section) return false;
       return currentSection.id !== section.id;
     },
+    hasSequenceChanged() {
+      return `${this.currentSequence}` !== `${this.sequence}`;
+    },
     hasChanged() {
-      return this.hasSectionChanged;
+      return this.hasSectionChanged || this.hasSequenceChanged;
     },
     canSave() {
       return Boolean(this.currentSection);
@@ -80,6 +96,9 @@ export default {
   methods: {
     setSection(section) {
       this.selectedSection = section;
+    },
+    setSequence(sequence) {
+      this.selectedSequence = sequence;
     },
     cancel() {
       return this.$emit('cancel');
