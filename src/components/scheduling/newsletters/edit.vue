@@ -1,13 +1,15 @@
 <template>
   <div class="bmc-schedule-list__item bmc-schedule-list__item--edit">
+    <div class="bmc-schedule-list__product-name">
+      {{ currentSection.newsletter.name }}
+    </div>
     <div class="bmc-schedule-edit">
       <div class="bmc-schedule-field">
-        <!-- <select-issue
-          :issue="currentIssue"
+        <select-section
+          :section="currentSection"
           :disabled="isSaving"
-          :clearable="false"
-          @change="setIssue"
-        /> -->
+          @change="setSection"
+        />
       </div>
     </div>
     <div class="bmc-schedule-edit__buttons">
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import SelectSection from './select-section.vue';
 import CancelButton from '../buttons/cancel.vue';
 import SaveButton from '../buttons/save.vue';
 import OperationError from '../../operation-error.vue';
@@ -47,6 +50,7 @@ export default {
   }),
 
   components: {
+    SelectSection,
     CancelButton,
     SaveButton,
     OperationError,
