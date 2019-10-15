@@ -76,4 +76,23 @@
   &:first-child {
     margin-top: 0;
   }
+
+  &--deployment-dates {
+    .vue-treeselect {
+      &__control {
+        border-top: none;
+      }
+      &__control-arrow-container {
+        display: none;
+      }
+
+      &--focused {
+        // stylelint-disable-next-line selector-class-pattern
+        .vue-treeselect__control {
+          border-color: $bmc-input-border-color;
+          box-shadow: none;
+        }
+      }
+    }
+  }
 }

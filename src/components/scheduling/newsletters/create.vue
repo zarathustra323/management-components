@@ -23,6 +23,7 @@
           @close="setButtonFocus"
         />
       </div>
+      <deployment-dates />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sections.length" tabindex="0" />
       <operation-error
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+import DeploymentDates from './deployment-dates.vue';
 import SelectSections from './select-sections.vue';
 import AddButton from '../buttons/add.vue';
 import OperationError from '../../operation-error.vue';
@@ -57,7 +59,12 @@ export default {
     error: null,
   }),
 
-  components: { AddButton, SelectSections, OperationError },
+  components: {
+    AddButton,
+    SelectSections,
+    OperationError,
+    DeploymentDates,
+  },
 
   computed: {
     canSave() {
