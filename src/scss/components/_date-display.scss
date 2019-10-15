@@ -5,4 +5,8 @@
     font-size: $bmc-font-size-sm;
     color: $bmc-gray-600;
   }
+
+  &--inline {
+    display: inline;
+  }
 }
