@@ -32,21 +32,8 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import query from '../../../graphql/scheduling/queries/load-email-newsletter-sections';
-import mapNodes from '../../../utils/map-nodes';
-
-const createSectionNode = (section) => {
-  if (!section) return null;
-  const { newsletter } = section;
-  return {
-    id: section.id,
-    label: section.name,
-    title: `${newsletter.name}: ${section.name}`,
-    model: section,
-  };
-};
-
-const mapSections = ({ sections } = {}) => mapNodes(sections).map(createSectionNode);
+import loadChoices from './utils/load-newsletter-section-choices';
+import createSectionNode from './utils/create-section-node';
 
 export default {
   /**
@@ -127,19 +114,7 @@ export default {
      */
     async loadOptions({ action }) {
       if (action === LOAD_ROOT_OPTIONS) {
-        const { data } = await this.$apollo.query({ query });
-        const newsletters = mapNodes(data.emailNewsletters);
-        this.choices = newsletters.map((newsletter) => {
-          const children = mapSections({ sections: newsletter.sections });
-          return {
-            id: newsletter.id,
-            label: newsletter.name,
-            model: newsletter,
-            isDisabled: true,
-            isNewsletter: true,
-            ...(children.length && { children }),
-          };
-        });
+        this.choices = await loadChoices(this.$apollo);
       }
     },
   },
