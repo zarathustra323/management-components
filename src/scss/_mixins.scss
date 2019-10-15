@@ -188,6 +188,15 @@
     opacity: 1;
   }
 
+  &:focus {
+    color: $bmc-input-focus-color;
+    background-color: $bmc-input-focus-bg-color;
+    // stylelint-disable-next-line declaration-no-important
+    border-color: $bmc-input-focus-border-color !important;
+    outline: 0;
+    box-shadow: $bmc-input-focus-box-shadow;
+  }
+
   &:not(:disabled):not([readonly]):hover {
     border-color: $bmc-input-hover-border-color;
   }
@@ -242,6 +251,21 @@
 @mixin bmc-input-group-prepend() {
   @include bmc-input-group-item();
   margin-right: -$bmc-input-border-width;
+}
+
+@mixin bmc-input-group-text() {
+  display: flex;
+  align-items: center;
+  padding: $bmc-input-padding-y $bmc-input-padding-x;
+  margin-bottom: 0;
+  font-size: $bmc-input-font-size;
+  font-weight: $bmc-base-font-weight;
+  line-height: $bmc-input-line-height;
+  color: $bmc-input-group-color;
+  text-align: center;
+  white-space: nowrap;
+  background-color: $bmc-input-group-bg-color;
+  border: $bmc-input-border-width solid $bmc-input-group-border-color;
 }
 
 @mixin bmc-button() {

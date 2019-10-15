@@ -8,4 +8,8 @@
   &__prepend {
     @include bmc-input-group-prepend();
   }
+
+  &__text {
+    @include bmc-input-group-text();
+  }
 }

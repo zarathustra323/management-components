@@ -152,10 +152,19 @@ $bmc-input-border-color: #ddd !default;
 $bmc-input-hover-border-color: #cfcfcf !default;
 $bmc-input-border-width: 1px !default;
 
+$bmc-input-focus-color: $bmc-input-color !default;
+$bmc-input-focus-bg-color: $bmc-input-bg-color !default;
+$bmc-input-focus-border-color: $bmc-primary !default;
+$bmc-input-focus-box-shadow: 0 0 0 3px rgba(3, 155, 229, .1) !default;
+
 $bmc-input-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
 $bmc-input-placeholder-color: #bdbdbd !default;
 $bmc-input-disabled-bg-color: #f9f9f9 !default;
+
+$bmc-input-group-color: $bmc-input-color !default;
+$bmc-input-group-bg-color: $bmc-gray-100 !default;
+$bmc-input-group-border-color: $bmc-input-border-color !default;
 
 // Spinners
 $bmc-spinner-width: 2rem !default;
