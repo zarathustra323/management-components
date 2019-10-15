@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import mutation from '../../../graphql/scheduling/mutations/update-website-schedule';
+import mutation from '../../../graphql/scheduling/mutations/update-magazine-schedule';
 import SelectIssue from './select-issue.vue';
 import SelectSection from './select-section.vue';
 import CancelButton from '../buttons/cancel.vue';
@@ -125,25 +125,20 @@ export default {
       this.error = null;
       this.isSaving = true;
 
-      // // Set seconds and milliseconds to zero
-      // const { currentStartDate, currentEndDate } = this;
+      const payload = {
+        issueId: this.currentIssue.id,
+        sectionId: this.currentSection.id,
+      };
+      const input = { id: this.scheduleId, payload };
 
-      // const payload = {
-      //   sectionId: this.currentSection.id,
-      //   optionId: this.currentOption.id,
-      //   startDate: currentStartDate.valueOf(),
-      //   ...(currentEndDate && { endDate: currentEndDate.valueOf() }),
-      // };
-      // const input = { id: this.scheduleId, payload };
-
-      // try {
-      //   await this.$apollo.mutate({ mutation, variables: { input } });
-      //   this.$emit('update');
-      // } catch (e) {
-      //   this.error = e;
-      // } finally {
-      //   this.isSaving = false;
-      // }
+      try {
+        await this.$apollo.mutate({ mutation, variables: { input } });
+        this.$emit('update');
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.isSaving = false;
+      }
     },
   },
 };
