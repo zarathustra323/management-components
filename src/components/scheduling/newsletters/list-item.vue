@@ -18,7 +18,10 @@
       <div class="bmc-schedule-list__schedule-name">
         {{ section.name }}
       </div>
-      <display-date :value="start" />
+      <div>
+        <display-date :value="start" :inline="true" />
+        <span class="bmc-schedule-list__sequence">Sequence: {{ sequence }}</span>
+      </div>
       <operation-error
         :error="error"
         wrapper-class="bmc-operation-error--margin-top"
@@ -74,6 +77,10 @@ export default {
     deploymentDate: {
       type: Number,
       required: true,
+    },
+    sequence: {
+      type: Number,
+      default: 0,
     },
   },
 

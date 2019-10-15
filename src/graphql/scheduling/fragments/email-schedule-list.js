@@ -13,6 +13,7 @@ fragment EmailScheduleList on EmailSchedule {
     ...EmailSectionScheduleList
   }
   deploymentDate
+  sequence
 }
 
 ${newsletterFragment}

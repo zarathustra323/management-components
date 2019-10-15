@@ -29,6 +29,7 @@
         :newsletter="schedule.newsletter"
         :section="schedule.section"
         :deployment-date="schedule.deploymentDate"
+        :sequence="schedule.sequence"
       />
     </div>
   </div>

@@ -54,6 +54,11 @@
     font-weight: $bmc-font-weight-bold;
     word-break: break-word;
   }
+
+  &__sequence {
+    font-size: $bmc-font-size-sm;
+    color: $bmc-gray-600;
+  }
 }
 
 .bmc-schedule-edit {
