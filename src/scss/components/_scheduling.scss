@@ -10,6 +10,7 @@
 }
 
 .bmc-schedule-tab {
+  @include bmc-animate($name: bmc-fade-in, $duration: 500ms);
   &__header {
     @include bmc-card-header();
     &--create {
