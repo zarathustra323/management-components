@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import mutation from '../../../graphql/scheduling/mutations/create-email-schedules';
 import DeploymentDates from './deployment-dates.vue';
 import SelectSections from './select-sections.vue';
 import AddButton from '../buttons/add.vue';
@@ -101,9 +102,10 @@ export default {
         deploymentDates: this.deploymentDates.map(date => date.valueOf()),
       };
 
-      console.log('save', input);
       try {
-        throw new Error('bad');
+        await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListEmailSchedules'] });
+        this.sections = [];
+        this.deploymentDates = [];
       } catch (e) {
         this.error = e;
       } finally {

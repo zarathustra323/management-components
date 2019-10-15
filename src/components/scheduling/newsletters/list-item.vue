@@ -18,10 +18,8 @@
       <div class="bmc-schedule-list__schedule-name">
         {{ section.name }}
       </div>
-      <div>
-        <display-date :value="start" :inline="true" />
-        <span class="bmc-schedule-list__sequence">Sequence: {{ sequence }}</span>
-      </div>
+      <display-date :value="start" />
+      <div class="bmc-schedule-list__sequence">Sequence: {{ sequence }}</div>
       <operation-error
         :error="error"
         wrapper-class="bmc-operation-error--margin-top"
