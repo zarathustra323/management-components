@@ -178,6 +178,10 @@
     opacity: 1;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &:disabled,
   &[readonly] {
     background-color: $bmc-input-disabled-bg-color;
