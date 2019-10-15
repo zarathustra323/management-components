@@ -89,7 +89,12 @@ export default {
         return sorted.map(date => createDateNode(date, this.format));
       },
       set(dates) {
-        const values = dates.map(({ id }) => new Date(id));
+        const values = [...new Set(dates.map(({ id }) => {
+          const date = new Date(id);
+          date.setSeconds(0);
+          date.setMilliseconds(0);
+          return date.valueOf();
+        }))].map(timestamp => new Date(timestamp));
         this.$emit('change', values);
       },
     },
