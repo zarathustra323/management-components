@@ -3,7 +3,6 @@
     <div class="bmc-schedule-tab__header bmc-schedule-tab__header--with-buttons">
       <span>Add Schedules</span>
       <add-button
-        ref="button"
         button-type="submit"
         label="Add schedules"
         loading-label="Adding schedules..."
@@ -18,10 +17,12 @@
           :sections="sections"
           :disabled="isSaving"
           @change="setSections"
-          @close="setButtonFocus"
         />
       </div>
-      <deployment-dates :disabled="isSaving" />
+      <deployment-dates
+        :disabled="isSaving"
+        @change="setDeploymentDates"
+      />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sections.length" tabindex="0" />
       <operation-error
@@ -54,6 +55,7 @@ export default {
   data: () => ({
     isSaving: false,
     sections: [],
+    deploymentDates: [],
     error: null,
   }),
 
@@ -66,7 +68,7 @@ export default {
 
   computed: {
     canSave() {
-      return this.sections.length;
+      return this.sections.length && this.deploymentDates.length;
     },
     saveDisabled() {
       if (!this.canSave) return true;
@@ -79,13 +81,14 @@ export default {
       this.sections = sections;
     },
 
-    setButtonFocus() {
-      setTimeout(() => this.$refs.button.$el.focus(), 1);
+    setDeploymentDates(dates) {
+      this.deploymentDates = dates;
     },
 
     cancel() {
       this.error = null;
       this.sections = [];
+      this.deploymentDates = [];
     },
 
     async save() {
