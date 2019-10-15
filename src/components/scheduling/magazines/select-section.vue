@@ -77,7 +77,6 @@ export default {
 
   watch: {
     issueId() {
-      this.section = null;
       this.choices = null;
     },
   },

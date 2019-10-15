@@ -98,7 +98,7 @@ export default {
   methods: {
     setIssue(issue) {
       this.issue = issue;
-      if (!issue) this.section = null;
+      this.section = null;
     },
 
     setSection(section) {

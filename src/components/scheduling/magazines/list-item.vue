@@ -1,18 +1,12 @@
 <template>
-  <!-- <edit-schedule
+  <edit-schedule
     v-if="isEditing"
     :schedule-id="id"
-    :site="site"
+    :issue="issue"
     :section="section"
-    :option="option"
-    :start-date="start"
-    :end-date="end"
     @cancel="exitEditMode"
     @update="exitEditMode"
-  /> -->
-  <div v-if="isEditing" class="bmc-schedule-list__item bmc-schedule-list__item--edit">
-    EDIT ME
-  </div>
+  />
   <div v-else class="bmc-schedule-list__item bmc-schedule-list__item--view">
     <div>
       <div class="bmc-schedule-list__product-name">
@@ -53,6 +47,7 @@
 
 <script>
 import mutation from '../../../graphql/scheduling/mutations/delete-magazine-schedule';
+import EditSchedule from './edit.vue';
 import EditButton from '../buttons/edit.vue';
 import DeleteButton from '../buttons/delete.vue';
 import OperationError from '../../operation-error.vue';
@@ -87,6 +82,7 @@ export default {
   }),
 
   components: {
+    EditSchedule,
     EditButton,
     DeleteButton,
     OperationError,
