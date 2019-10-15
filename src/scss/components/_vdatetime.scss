@@ -21,6 +21,10 @@
   }
 }
 
+.vdatetime-input {
+  cursor: pointer;
+}
+
 .vdatetime-calendar {
   &__month__day {
     &--selected > span > span {
