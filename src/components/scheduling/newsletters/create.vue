@@ -14,11 +14,31 @@
         />
       </div>
     </div>
+    <div class="bmc-schedule-tab__body">
+      <div class="bmc-schedule-field">
+        <select-sections
+          :sections="sections"
+          :disabled="isSaving"
+          @change="setSections"
+          @close="setButtonFocus"
+        />
+      </div>
+      <!-- Hidden tab stop for proper button focus -->
+      <span v-if="sections.length" tabindex="0" />
+      <operation-error
+        :error="error"
+        wrapper-class="bmc-operation-error--margin-top"
+        @retry="save"
+        @cancel="cancel"
+      />
+    </div>
   </form>
 </template>
 
 <script>
+import SelectSections from './select-sections.vue';
 import AddButton from '../buttons/add.vue';
+import OperationError from '../../operation-error.vue';
 
 export default {
   /**
@@ -33,14 +53,15 @@ export default {
 
   data: () => ({
     isSaving: false,
+    sections: [],
     error: null,
   }),
 
-  components: { AddButton },
+  components: { AddButton, SelectSections, OperationError },
 
   computed: {
     canSave() {
-      return false;
+      return this.sections.length;
     },
     saveDisabled() {
       if (!this.canSave) return true;
@@ -49,8 +70,29 @@ export default {
   },
 
   methods: {
+    setSections(sections) {
+      this.sections = sections;
+    },
+
+    setButtonFocus() {
+      setTimeout(() => this.$refs.button.$el.focus(), 1);
+    },
+
+    cancel() {
+      this.error = null;
+      this.sections = [];
+    },
+
     async save() {
-      console.log('save schedule');
+      this.error = null;
+      this.isSaving = true;
+      console.log('save');
+      // try {
+      // } catch (e) {
+      //   this.error = e;
+      // } finally {
+      //   this.isSaving = false;
+      // }
     },
   },
 };
