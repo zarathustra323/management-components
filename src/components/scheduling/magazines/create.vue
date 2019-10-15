@@ -1,6 +1,6 @@
 <template>
   <form class="bmc-schedule-tab__create" @submit.prevent="save">
-    <div class="bmc-schedule-tab__header bmc-schedule-tab__header--create">
+    <div class="bmc-schedule-tab__header bmc-schedule-tab__header--with-buttons">
       <span>Add Schedule</span>
       <div>
         <add-button
