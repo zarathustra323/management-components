@@ -134,10 +134,7 @@ export default {
         const { data } = await this.$apollo.query({ query });
         const publications = mapNodes(data.magazinePublications);
         this.choices = publications.map((pub) => {
-          const children = mapIssues({
-            issues: pub.issues,
-            pub,
-          });
+          const children = mapIssues({ issues: pub.issues });
           return {
             id: pub.id,
             label: pub.name,
