@@ -1,11 +1,13 @@
 <template>
   <tree-select
-    v-model="currentSectionId"
+    v-model="currentSection"
+    value-format="object"
     ref="select"
     :multiple="false"
     :load-options="loadChoices"
     :options="choices"
     :disabled="disabled"
+    :clearable="clearable"
     :backspace-removes="false"
     :auto-load-root-options="false"
     :required="true"
@@ -21,18 +23,31 @@ import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 import query from '../../../graphql/scheduling/queries/load-magazine-issue-sections';
 import mapNodes from '../../../utils/map-nodes';
 
+const createSectionNode = (section) => {
+  if (!section) return null;
+  return {
+    id: section.id,
+    label: `${section.name}${section.isGlobal ? ' (Global)' : ''}`,
+    model: section,
+  };
+};
+
 export default {
   /**
    *
    */
   props: {
-    sectionId: {
-      type: Number,
+    section: {
+      type: Object,
       default: null,
     },
     issueId: {
       type: Number,
       default: null,
+    },
+    clearable: {
+      type: Boolean,
+      default: true,
     },
     disabled: {
       type: Boolean,
@@ -45,15 +60,15 @@ export default {
    */
   data: () => ({
     choices: null,
-    selectedSectionId: null,
   }),
 
   components: { TreeSelect },
 
   computed: {
-    currentSectionId: {
+    currentSection: {
       get() {
-        return this.selectedSectionId || this.sectionId;
+        if (!this.section) return null;
+        return createSectionNode(this.section);
       },
       set() {
       },
@@ -62,7 +77,7 @@ export default {
 
   watch: {
     issueId() {
-      this.selectedSectionId = null;
+      this.section = null;
       this.choices = null;
     },
   },
@@ -74,8 +89,9 @@ export default {
     /**
      *
      */
-    emitChange(sectionId) {
-      this.$emit('change', sectionId);
+    emitChange(choice) {
+      const section = choice ? choice.model : null;
+      this.$emit('change', section);
     },
 
     /**
@@ -98,11 +114,7 @@ export default {
         const input = { id: this.issueId };
         const { data } = await this.$apollo.query({ query, variables: { input } });
         const sections = mapNodes(data.magazineIssue.sections);
-        this.choices = sections.filter(section => section.name).map(section => ({
-          id: section.id,
-          label: `${section.name}${section.isGlobal ? ' (Global)' : ''}`,
-          model: section,
-        }));
+        this.choices = sections.filter(section => section.name).map(createSectionNode);
       }
     },
   },

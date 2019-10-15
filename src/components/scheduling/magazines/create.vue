@@ -17,9 +17,9 @@
     <div class="bmc-schedule-tab__body">
       <div class="bmc-schedule-field">
         <select-issue
-          :issue-id="issueId"
+          :issue="issue"
           :disabled="isSaving"
-          @change="setIssueId"
+          @change="setIssue"
           @close="setSectionSelectFocus"
         />
       </div>
@@ -27,9 +27,9 @@
         <select-section
           ref="sectionSelect"
           :issue-id="issueId"
-          :section-id="sectionId"
+          :section="section"
           :disabled="isSectionDisabled"
-          @change="setSectionId"
+          @change="setSection"
           @close="setButtonFocus"
         />
       </div>
@@ -64,8 +64,8 @@ export default {
   },
 
   data: () => ({
-    issueId: null,
-    sectionId: null,
+    issue: null,
+    section: null,
     isSaving: false,
     error: null,
   }),
@@ -78,8 +78,12 @@ export default {
   },
 
   computed: {
+    issueId() {
+      if (!this.issue) return null;
+      return this.issue.id;
+    },
     canSave() {
-      return Boolean(this.issueId) && Boolean(this.sectionId);
+      return Boolean(this.issue) && Boolean(this.section);
     },
     saveDisabled() {
       if (!this.canSave) return true;
@@ -87,17 +91,18 @@ export default {
     },
     isSectionDisabled() {
       if (this.isSaving) return true;
-      return !this.issueId;
+      return !this.issue;
     },
   },
 
   methods: {
-    setIssueId(issueId) {
-      this.issueId = issueId;
+    setIssue(issue) {
+      this.issue = issue;
+      if (!issue) this.section = null;
     },
 
-    setSectionId(sectionId) {
-      this.sectionId = sectionId;
+    setSection(section) {
+      this.section = section;
     },
 
     setButtonFocus() {
@@ -110,17 +115,21 @@ export default {
 
     cancel() {
       this.error = null;
-      this.issueId = null;
-      this.sectionId = null;
+      this.issue = null;
+      this.section = null;
     },
     async save() {
       this.error = null;
       this.isSaving = true;
-      const input = { contentId: this.contentId, issueId: this.issueId, sectionId: this.sectionId };
+      const input = {
+        contentId: this.contentId,
+        issueId: this.issue.id,
+        sectionId: this.section.id,
+      };
       try {
         await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListMagazineSchedules'] });
-        this.issueId = null;
-        this.sectionId = null;
+        this.issue = null;
+        this.section = null;
       } catch (e) {
         this.error = e;
       } finally {

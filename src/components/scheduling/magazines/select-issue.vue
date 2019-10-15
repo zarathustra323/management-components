@@ -1,13 +1,15 @@
 <template>
   <tree-select
-    v-model="currentIssueId"
+    v-model="currentIssue"
+    value-format="object"
     :multiple="false"
     :flat="true"
     :load-options="loadChoices"
     :options="choices"
     :disabled="disabled"
-    :show-count="true"
+    :clearable="clearable"
     :backspace-removes="false"
+    :show-count="true"
     :default-expand-level="defaultExpandLevel"
     :auto-load-root-options="false"
     :required="true"
@@ -34,24 +36,31 @@ import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 import query from '../../../graphql/scheduling/queries/load-magazine-publication-issues';
 import mapNodes from '../../../utils/map-nodes';
 
-const mapIssues = ({
-  issues,
-  pub,
-} = {}) => mapNodes(issues).map(issue => ({
-  id: issue.id,
-  label: issue.name,
-  title: `${pub.name}: ${issue.name}`,
-  model: { ...issue, publication: pub },
-}));
+const createIssueNode = (issue) => {
+  if (!issue) return null;
+  const { publication } = issue;
+  return {
+    id: issue.id,
+    label: issue.name,
+    title: `${publication.name}: ${issue.name}`,
+    model: issue,
+  };
+};
+
+const mapIssues = ({ issues } = {}) => mapNodes(issues).map(createIssueNode);
 
 export default {
   /**
    *
    */
   props: {
-    issueId: {
-      type: Number,
+    issue: {
+      type: Object,
       default: null,
+    },
+    clearable: {
+      type: Boolean,
+      default: true,
     },
     disabled: {
       type: Boolean,
@@ -64,7 +73,6 @@ export default {
    */
   data: () => ({
     choices: null,
-    selectedIssueId: null,
   }),
 
   components: { TreeSelect },
@@ -73,9 +81,10 @@ export default {
    *
    */
   computed: {
-    currentIssueId: {
+    currentIssue: {
       get() {
-        return this.selectedIssueId || this.issueId;
+        if (!this.issue) return null;
+        return createIssueNode(this.issue);
       },
       set() {
       },
@@ -105,8 +114,9 @@ export default {
     /**
      *
      */
-    emitChange(issueId) {
-      this.$emit('change', issueId);
+    emitChange(choice) {
+      const issue = choice ? choice.model : null;
+      this.$emit('change', issue);
     },
 
     /**
