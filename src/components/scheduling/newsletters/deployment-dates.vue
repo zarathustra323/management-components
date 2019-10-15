@@ -3,6 +3,7 @@
     <datetime
       v-model="date"
       type="datetime"
+      :disabled="disabled"
       placeholder="Add deployment date(s)..."
       title="Deployment Date"
       input-class="bmc-form-control"
@@ -29,6 +30,7 @@
       v-model="selected"
       value-format="object"
       placeholder=""
+      :disabled="disabled"
       :searchable="false"
       :options="null"
       :multiple="true"
@@ -50,6 +52,10 @@ import { DATE_FORMAT } from '../../constants';
 
 export default {
   props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     format: {
       type: String,
       default: DATE_FORMAT,

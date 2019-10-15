@@ -23,7 +23,7 @@
           @close="setButtonFocus"
         />
       </div>
-      <deployment-dates />
+      <deployment-dates :disabled="isSaving" />
       <!-- Hidden tab stop for proper button focus -->
       <span v-if="sections.length" tabindex="0" />
       <operation-error
