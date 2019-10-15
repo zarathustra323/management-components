@@ -1,5 +1,5 @@
 <template>
-  <div class="bmc-scheduling-scheduling">
+  <div class="bmc-schedule-tab">
     <create-schedule :content-id="contentId" />
     <list-schedules :content-id="contentId" />
   </div>

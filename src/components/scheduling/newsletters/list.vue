@@ -1,11 +1,16 @@
 <template>
   <div class="bmc-schedule-tab__list">
-    <div class="bmc-schedule-tab__header">
-      Newsletter Schedules
-      <span>({{ totalCount }})</span>
-    </div>
-    <div v-if="isLoading" class="bmc-schedule-tab__body">
-      <loading-spinner color="primary" />
+    <div class="bmc-schedule-tab__header bmc-schedule-tab__header--with-buttons">
+      <span>
+        Newsletter Schedules
+        <span>({{ totalCount }})</span>
+      </span>
+      <refresh-button
+        label="Refresh schedules"
+        :isLoading="isLoading"
+        :disabled="isLoading"
+        @click="refresh"
+      />
     </div>
     <div class="bmc-schedule-list">
       <div
@@ -36,7 +41,7 @@
 import query from '../../../graphql/scheduling/queries/list-email-schedules';
 import ListItem from './list-item.vue';
 import OperationError from '../../operation-error.vue';
-import LoadingSpinner from '../../loading-spinner.vue';
+import RefreshButton from '../buttons/refresh.vue';
 import mapNodes from '../../../utils/map-nodes';
 
 export default {
@@ -59,7 +64,11 @@ export default {
     error: null,
   }),
 
-  components: { OperationError, LoadingSpinner, ListItem },
+  components: {
+    OperationError,
+    ListItem,
+    RefreshButton,
+  },
 
   /**
    *
@@ -86,6 +95,7 @@ export default {
   apollo: {
     schedules: {
       query,
+      fetchPolicy: 'cache-and-network',
       variables() {
         const input = {
           contentId: this.contentId,
