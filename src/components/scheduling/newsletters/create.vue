@@ -94,7 +94,13 @@ export default {
     async save() {
       this.error = null;
       this.isSaving = true;
-      console.log('save');
+      const input = {
+        contentId: this.contentId,
+        sectionIds: this.sections.map(section => section.id),
+        deploymentDates: this.deploymentDates.map(date => date.valueOf()),
+      };
+
+      console.log('save', input);
       // try {
       // } catch (e) {
       //   this.error = e;
