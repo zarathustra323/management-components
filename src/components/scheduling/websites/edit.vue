@@ -56,7 +56,7 @@
 
 <script>
 import mutation from '../../../graphql/scheduling/mutations/update-website-schedule';
-import EditDate from './edit-date.vue';
+import EditDate from '../../edit-date.vue';
 import SectionSelect from './section-select.vue';
 import OptionSelect from './option-select.vue';
 import CancelButton from '../buttons/cancel.vue';

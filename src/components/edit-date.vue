@@ -42,10 +42,10 @@
 
 <script>
 import { Datetime } from 'vue-datetime';
-import ActionButton from '../../action-button.vue';
-import CheckIcon from '../../icons/check.vue';
-import XIcon from '../../icons/x.vue';
-import ChevronRightIcon from '../../icons/chevron-right.vue';
+import ActionButton from './action-button.vue';
+import CheckIcon from './icons/check.vue';
+import XIcon from './icons/x.vue';
+import ChevronRightIcon from './icons/chevron-right.vue';
 
 const convertToISO = (value) => {
   if (!value) return '';
