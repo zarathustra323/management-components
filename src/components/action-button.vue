@@ -25,6 +25,7 @@ import AlertIcon from './icons/alert.vue';
 import CheckIcon from './icons/check.vue';
 import ChecklistIcon from './icons/checklist.vue';
 import PencilIcon from './icons/pencil.vue';
+import SyncIcon from './icons/sync.vue';
 import TrashcanIcon from './icons/trashcan.vue';
 import XIcon from './icons/x.vue';
 import LoadingSpinner from './loading-spinner.vue';
@@ -42,7 +43,7 @@ export default {
       type: String,
       required: true,
       validator(value) {
-        return ['check', 'checklist', 'pencil', 'trashcan', 'x'].includes(value);
+        return ['check', 'checklist', 'pencil', 'sync', 'trashcan', 'x'].includes(value);
       },
     },
     type: {
@@ -121,6 +122,7 @@ export default {
     CheckIcon,
     ChecklistIcon,
     PencilIcon,
+    SyncIcon,
     TrashcanIcon,
     XIcon,
     LoadingSpinner,
