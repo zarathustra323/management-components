@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import mutation from '../../../graphql/scheduling/mutations/create-magazine-schedule';
 import SelectIssue from './select-issue.vue';
 import SelectSection from './select-section.vue';
@@ -104,11 +105,11 @@ export default {
     },
 
     setButtonFocus() {
-      setTimeout(() => this.$refs.button.$el.focus(), 1);
+      Vue.nextTick(() => this.$refs.button.$el.focus());
     },
 
     setSectionSelectFocus() {
-      setTimeout(() => this.$refs.sectionSelect.focus(), 1);
+      Vue.nextTick(() => this.$refs.sectionSelect.focus());
     },
 
     cancel() {

@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import mutation from '../../../graphql/scheduling/mutations/update-magazine-schedule';
 import SelectIssue from './select-issue.vue';
 import SelectSection from './select-section.vue';
@@ -116,7 +117,7 @@ export default {
       this.selectedSection = section;
     },
     setSectionSelectFocus() {
-      setTimeout(() => this.$refs.selectSection.focus(), 1);
+      Vue.nextTick(() => this.$refs.selectSection.focus());
     },
     cancel() {
       return this.$emit('cancel');

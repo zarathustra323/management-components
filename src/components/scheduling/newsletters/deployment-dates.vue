@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import moment from 'moment';
 import { Datetime } from 'vue-datetime';
 import TreeSelect from '@riophae/vue-treeselect';
@@ -115,7 +116,7 @@ export default {
       if (value) {
         const node = createDateNode(new Date(value), this.format);
         this.selected = [...this.selected, node];
-        setTimeout(() => { this.date = ''; }, 2);
+        Vue.nextTick(() => { this.date = ''; });
       }
     },
   },
