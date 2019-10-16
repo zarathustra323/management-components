@@ -17,6 +17,13 @@
     <h1>Scheduling</h1>
     <div id="scheduling"></div>
 
-    <script>bmc.loadComponent('#scheduling', 'scheduling', { contentId: 21091788 });</script>
+    <script>
+      bmc.loadComponent({
+        name: 'scheduling',
+        el: '#scheduling',
+        props: { contentId: 21091788 },
+        on: { mount: () => console.log('received mount') }
+      });
+    </script>
   </body>
 </html>

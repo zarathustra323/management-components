@@ -21,14 +21,19 @@ const components = {
   scheduling: Scheduling,
 };
 
-const loadComponent = (el, name, props) => {
+const loadComponent = ({
+  el,
+  name,
+  props,
+  on,
+} = {}) => {
   if (!hasConfigured()) throw new Error('BaseCMS Management Components have not been configured. Run `bmc.configure()` before loading components.');
   const Component = components[name];
   if (!Component) throw new Error(`No BaseCMS Management Component found for '${name}'`);
   new Vue({
     el,
     apolloProvider: getApolloProvider(),
-    render: h => h(Component, { props }),
+    render: h => h(Component, { props, on }),
   });
 };
 
