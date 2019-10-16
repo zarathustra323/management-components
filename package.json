@@ -8,6 +8,7 @@
     "build": "yarn clean && yarn build:latest && yarn build:version",
     "build:latest": "scripts/build.sh latest",
     "build:version": "scripts/build.sh $npm_package_version",
+    "build:help": "vue-cli-service build --help",
     "inspect": "vue-cli-service inspect",
     "lint": "vue-cli-service lint"
   },
