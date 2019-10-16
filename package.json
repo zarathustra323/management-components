@@ -10,7 +10,8 @@
     "build:version": "scripts/build.sh $npm_package_version",
     "build:help": "vue-cli-service build --help",
     "inspect": "vue-cli-service inspect",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "yarn lint"
   },
   "dependencies": {
     "@base-cms/graphql-fragment-types": "^1.0.0-beta.1",
