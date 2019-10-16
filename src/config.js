@@ -15,11 +15,11 @@ const getApolloProvider = () => {
 };
 
 const configure = (options = {}) => {
-  const { graphqlUri, tenantKey, apiHost } = options;
+  const { graphqlUri, tenantKey, baseApiUri } = options;
   if (hasConfigured()) {
     warn('BaseCMS components have already been configured. The following config changes will NOT be applied.', options);
   } else {
-    apolloProvider = createProvider({ graphqlUri, tenantKey, apiHost });
+    apolloProvider = createProvider({ graphqlUri, tenantKey, baseApiUri });
     config = options;
   }
 };

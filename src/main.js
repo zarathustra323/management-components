@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 configure({
   graphqlUri: 'http://0.0.0.0:11001',
   tenantKey: 'acbm_fcp',
-  apiHost: 'manage.forconstructionpros.com',
+  baseApiUri: 'https://manage.forconstructionpros.com',
 });
 
 new Vue({
