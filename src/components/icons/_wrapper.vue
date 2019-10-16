@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     classNames() {
-      return ['icon', `icon--${this.name}`, this.className];
+      return ['bmc-icon', `bmc-icon--${this.name}`, this.className];
     },
   },
 };
