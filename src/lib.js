@@ -12,25 +12,24 @@ import {
   getConfig,
   hasConfigured,
 } from './config';
-import Scheduling from './components/scheduling/index.vue';
 import { version } from '../package.json';
 
 Vue.use(VueApollo);
 
 const components = {
-  scheduling: Scheduling,
+  scheduling: () => import(/* webpackChunkName: "scheduling" */ './components/scheduling/index.vue'),
 };
 
-const loadComponent = ({
+const loadComponent = async ({
   el,
   name,
   props,
   on,
 } = {}) => {
   if (!hasConfigured()) throw new Error('BaseCMS Management Components have not been configured. Run `bmc.configure()` before loading components.');
-  const Component = components[name];
-  if (!Component) throw new Error(`No BaseCMS Management Component found for '${name}'`);
-  new Vue({
+  if (!components[name]) throw new Error(`No BaseCMS Management Component found for '${name}'`);
+  const { default: Component } = await components[name]();
+  return new Vue({
     el,
     apolloProvider: getApolloProvider(),
     render: h => h(Component, { props, on }),
