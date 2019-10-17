@@ -258,6 +258,9 @@ export default {
 </script>
 
 <style lang="scss">
+.vdatetime-input {
+  cursor: pointer;
+}
 .vdatetime-fade-enter-active,
 .vdatetime-fade-leave-active {
   transition: opacity .4s;

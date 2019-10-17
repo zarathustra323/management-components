@@ -277,6 +277,9 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../scss/functions";
+  @import "../scss/variables";
+  @import "../scss/mixins";
   .vdatetime-popup {
     box-sizing: border-box;
     z-index: 1000;
@@ -288,7 +291,7 @@ export default {
     max-width: calc(100% - 30px);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
     color: #444;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: $bmc-base-font-family;
     line-height: 1.18;
     background: #fff;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -299,15 +302,15 @@ export default {
   }
 
 .vdatetime-popup__header {
-  padding: 18px 30px;
-  background: #3f51b5;
+  padding: 1.25rem;
+  background-color: $bmc-primary;
   color: #fff;
   font-size: 32px;
 }
 
 .vdatetime-popup__title {
   margin-bottom: 8px;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 300;
 }
 
@@ -329,22 +332,30 @@ export default {
 }
 
 .vdatetime-popup__actions {
-  padding: 0 20px 10px 30px;
+  padding: .75rem;
   text-align: right;
 }
 
 .vdatetime-popup__actions__button {
-  display: inline-block;
-  border: none;
-  padding: 10px 20px;
-  background: transparent;
-  font-size: 16px;
-  color: #3f51b5;
-  cursor: pointer;
-  transition: color .3s;
+  @include bmc-button();
+  // display: inline-block;
+  // border: none;
+  // padding: 10px 20px;
+  // background: transparent;
+  // font-size: 16px;
+  // color: #3f51b5;
+  // cursor: pointer;
+  // transition: color .3s;
 
-  &:hover {
-    color: #444;
+  // &:hover {
+  //   color: #444;
+  // }
+
+  &--confirm {
+    @include bmc-button-variant($bmc-success, $bmc-success);
+  }
+  &--cancel {
+    @include bmc-button-variant($bmc-warning, $bmc-warning);
   }
 }
 </style>

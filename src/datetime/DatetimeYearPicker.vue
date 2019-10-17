@@ -63,6 +63,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/variables";
+
 .vdatetime-year-picker {
   box-sizing: border-box;
 
@@ -109,7 +111,7 @@ export default {
 }
 
 .vdatetime-year-picker__item--selected {
-  color: #3f51b5;
+  color: $bmc-primary;
   font-size: 32px;
 }
 

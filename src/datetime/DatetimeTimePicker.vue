@@ -139,6 +139,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/variables";
+
 .vdatetime-time-picker {
   box-sizing: border-box;
 
@@ -189,7 +191,7 @@ export default {
 }
 
 .vdatetime-time-picker__item--selected {
-  color: #3f51b5;
+  color: $bmc-primary;
   font-size: 32px;
 }
 

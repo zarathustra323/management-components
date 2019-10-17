@@ -103,6 +103,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/variables";
+
 .vdatetime-calendar__navigation,
 .vdatetime-calendar__navigation * {
   box-sizing: border-box;
@@ -198,10 +200,14 @@ export default {
 }
 
 .vdatetime-calendar__month__day--selected {
-  & > span > span,
+  & > span > span {
+    color: #fff;
+    background-color: $bmc-primary;
+  }
+
   &:hover > span > span {
     color: #fff;
-    background: #3f51b5;
+    background-color: darken($bmc-primary, 7.5%);
   }
 }
 

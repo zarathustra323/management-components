@@ -68,6 +68,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/variables";
 .vdatetime-month-picker {
   box-sizing: border-box;
 
@@ -114,7 +115,7 @@ export default {
 }
 
 .vdatetime-month-picker__item--selected {
-  color: #3f51b5;
+  color: $bmc-primary;
   font-size: 32px;
 }
 
