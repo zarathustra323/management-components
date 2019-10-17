@@ -99,7 +99,13 @@ export default {
 
     async loadChoices({ action }) {
       if (action === LOAD_ROOT_OPTIONS) {
-        this.choices = await loadChoices(this.$apollo, this.nodeOptions);
+        const { section } = this;
+        const expandedIds = [];
+        if (section) {
+          if (section.site) expandedIds.push(section.site.id);
+          if (section.hierarchy) expandedIds.push(...section.hierarchy.map(s => s.id));
+        }
+        this.choices = await loadChoices(this.$apollo, { ...this.nodeOptions, expandedIds });
       }
     },
   },
