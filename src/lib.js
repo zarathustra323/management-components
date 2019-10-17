@@ -33,7 +33,7 @@ const loadComponent = async ({
     apolloProvider: getApolloProvider(),
     render: h => h(Component, { props, on }),
   });
-  if (debug()) console.info(`Component ${name} mounted.`, { el, props, on });
+  if (debug()) console.info(`BMC '${name}' mounted`, { el, props, on });
 };
 
 const info = () => {
