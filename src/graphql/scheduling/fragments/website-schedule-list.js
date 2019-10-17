@@ -1,37 +1,30 @@
 import gql from 'graphql-tag';
+import siteFragment from './website-site';
+import sectionFragment from './website-section';
+import optionFragment from './website-option';
 
 export default gql`
 
 fragment WebsiteScheduleList on WebsiteSchedule {
   id
   site {
-    id
-    title
-    name
-    shortName
+    ...WebsiteSiteScheduleList
   }
   section {
-    id
-    name
-    fullName
-    # @todo Load the section on edit to get this data.
+    ...WebsiteSectionScheduleList
     hierarchy {
       id
     }
-    # @todo Load the section on edit to get this data.
-    site {
-      id
-      title
-      name
-      shortName
-    }
   }
   option {
-    id
-    name
+    ...WebsiteOptionScheduleList
   }
   startDate
   endDate
 }
+
+${siteFragment}
+${sectionFragment}
+${optionFragment}
 
 `;
