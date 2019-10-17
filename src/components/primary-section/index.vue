@@ -2,11 +2,29 @@
   <div class="bmc-primary-section-component">
     <label>{{ label }}</label>
     <website-section-field :section="section" :disabled="isLoading" @change="setSection" />
+    <operation-error
+      :error="error"
+      :can-cancel="false"
+      @retry="loadSection"
+    />
   </div>
 </template>
 
 <script>
+import gql from 'graphql-tag';
+import sectionFragment from '../../graphql/common/fragments/website-section';
 import WebsiteSectionField from '../common/fields/website/section.vue';
+import OperationError from '../operation-error.vue';
+
+const query = gql`
+  query LoadPrimarySection($input: WebsiteSectionQueryInput!) {
+    websiteSection(input: $input) {
+      ...CommonWebsiteSection
+    }
+  }
+
+  ${sectionFragment}
+`;
 
 export default {
   props: {
@@ -27,12 +45,13 @@ export default {
   data: () => ({
     section: null,
     isLoading: false,
+    error: null,
   }),
 
-  components: { WebsiteSectionField },
+  components: { WebsiteSectionField, OperationError },
 
-  created() {
-    console.log('created', this.sectionId);
+  mounted() {
+    this.loadSection();
   },
 
   methods: {
@@ -40,6 +59,23 @@ export default {
       console.log('set section', section);
       this.section = section;
       this.$emit('change', section);
+    },
+
+    async loadSection() {
+      const { sectionId } = this;
+      if (sectionId && !this.isLoading) {
+        this.isLoading = true;
+        this.error = null;
+        const input = { id: sectionId };
+        try {
+          const { data } = await this.$apollo.query({ query, variables: { input } });
+          this.section = data.websiteSection;
+        } catch (e) {
+          this.error = e;
+        } finally {
+          this.isLoading = false;
+        }
+      }
     },
   },
 };
