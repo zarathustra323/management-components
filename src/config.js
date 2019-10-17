@@ -9,6 +9,8 @@ const getConfig = () => config;
 
 const hasConfigured = () => Boolean(getConfig());
 
+const debug = () => Boolean(config && config.debug);
+
 const getApolloProvider = () => {
   if (!apolloProvider) throw new Error('The BaseCMS apollo provider has not been created.');
   return apolloProvider;
@@ -21,11 +23,13 @@ const configure = (options = {}) => {
   } else {
     apolloProvider = createProvider({ graphqlUri, tenantKey, baseApiUri });
     config = options;
+    if (debug()) console.info('BMC configured with values', config);
   }
 };
 
 export {
   configure,
+  debug,
   getApolloProvider,
   getConfig,
   hasConfigured,

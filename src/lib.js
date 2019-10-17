@@ -6,6 +6,7 @@ import './styles';
 
 import {
   configure,
+  debug,
   getApolloProvider,
   getConfig,
   hasConfigured,
@@ -27,11 +28,13 @@ const loadComponent = async ({
   if (!hasConfigured()) throw new Error('BaseCMS Management Components have not been configured. Run `bmc.configure()` before loading components.');
   if (!components[name]) throw new Error(`No BaseCMS Management Component found for '${name}'`);
   const { default: Component } = await components[name]();
-  return new Vue({
+  const vm = new Vue({
     el,
     apolloProvider: getApolloProvider(),
     render: h => h(Component, { props, on }),
   });
+  if (debug()) console.info(`Component ${name} mounted.`, { el, props, on });
+  return vm;
 };
 
 const info = () => ({ version, config: getConfig(), components: Object.keys(components) });
