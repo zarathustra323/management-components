@@ -4,6 +4,7 @@
     <tree-select
       v-model="currentSection"
       value-format="object"
+      :flat="true"
       :multiple="false"
       :load-options="loadChoices"
       :options="choices"
@@ -17,12 +18,25 @@
       @input="emitChange"
       search-nested
       placeholder="Select section; type to filter..."
-    />
+    >
+      <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+      <label
+        slot="option-label"
+        slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
+        :class="labelClassName"
+        @click="toggleSiteExpanded(node)"
+      >
+        {{ node.label }}
+        <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
+      </label>
+    </tree-select>
   </div>
 </template>
 
 <script>
-import TreeSelect from '@riophae/vue-treeselect';
+import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
+import loadChoices from '../utils/website-section/load-site-choices';
+import createSectionNode from '../utils/website-section/create-node';
 
 export default {
   props: {
@@ -52,9 +66,7 @@ export default {
   computed: {
     currentSection: {
       get() {
-        if (!this.section) return null;
-        // convert this to a section node!
-        return {};
+        return createSectionNode(this.section);
       },
       set() {
       },
@@ -71,8 +83,10 @@ export default {
       this.$emit('change', section);
     },
 
-    async loadChoices() {
-      this.options = [];
+    async loadChoices({ action }) {
+      if (action === LOAD_ROOT_OPTIONS) {
+        this.choices = await loadChoices(this.$apollo);
+      }
     },
   },
 };
