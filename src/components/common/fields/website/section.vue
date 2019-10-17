@@ -24,7 +24,7 @@
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
-      @click="toggleSiteExpanded(node)"
+      @click="toggleExpanded(node)"
     >
       {{ node.label }}
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
@@ -95,6 +95,12 @@ export default {
     emitChange(choice) {
       const section = choice ? choice.model : null;
       this.$emit('change', section);
+    },
+
+    toggleExpanded(node) {
+      const { isSite } = (node || {}).raw;
+      // eslint-disable-next-line no-param-reassign
+      if (isSite) node.isExpanded = !node.isExpanded;
     },
 
     async loadChoices({ action }) {
