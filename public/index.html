@@ -11,19 +11,6 @@
         var l = f + 'Queue'; w[l] = w[l] || [];
         w[f] = w[f] || function() { w[l].push(arguments); };
       })(window, 'bmc');
-
-      bmc('configure', {
-        graphqlUri: 'https://caprica.graphql-staging.base-cms.io',
-        tenantKey: 'acbm_fcp',
-        baseApiUri: 'https://manage.forconstructionpros.com',
-        debug: true,
-      });
-
-      bmc('loadComponent', {
-        name: 'scheduling',
-        el: '#component-scheduling',
-        props: { contentId: 21091788 },
-      });
     </script>
 
     <style>
@@ -63,6 +50,20 @@
     </style>
   </head>
   <body>
+    <script>
+      bmc('configure', {
+        graphqlUri: 'https://caprica.graphql-staging.base-cms.io',
+        tenantKey: 'acbm_fcp',
+        baseApiUri: 'https://manage.forconstructionpros.com',
+        debug: true,
+      });
+
+      bmc('loadComponent', {
+        name: 'scheduling',
+        el: '#component-scheduling',
+        props: { contentId: 21091788 },
+      });
+    </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
     <noscript>
       <strong>We're sorry but this page doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
