@@ -13,49 +13,58 @@
            @focus="open">
     <input v-if="hiddenName" type="hidden" :name="hiddenName" :value="value" @input="setValue">
     <slot name="after"></slot>
-    <transition-group name="vdatetime-fade" tag="div">
-      <div key="overlay" v-if="isOpen" class="vdatetime-overlay" @click.self="cancel"></div>
-      <datetime-popup
-          key="popup"
-          v-if="isOpen"
-          :type="type"
-          :datetime="popupDate"
-          :phrases="phrases"
-          :use12-hour="use12Hour"
-          :hour-step="hourStep"
-          :minute-step="minuteStep"
-          :min-datetime="popupMinDatetime"
-          :max-datetime="popupMaxDatetime"
-          @confirm="confirm"
-          @cancel="cancel"
-          :auto="auto"
-          :week-start="weekStart"
-          :flow="flow"
-          :title="title">
-        <template slot="button-cancel__internal" slot-scope="scope">
-          <slot name="button-cancel" v-bind:step="scope.step">{{ phrases.cancel }}</slot>
-        </template>
-        <template slot="button-confirm__internal" slot-scope="scope">
-          <slot name="button-confirm" v-bind:step="scope.step">{{ phrases.ok }}</slot>
-        </template>
-      </datetime-popup>
-    </transition-group>
+
+    <MountingPortal :mountTo="mountTo" append>
+      <transition-group name="vdatetime-fade" tag="div">
+        <div key="overlay" v-if="isOpen" class="vdatetime-overlay" @click.self="cancel"></div>
+        <datetime-popup
+            key="popup"
+            v-if="isOpen"
+            :type="type"
+            :datetime="popupDate"
+            :phrases="phrases"
+            :use12-hour="use12Hour"
+            :hour-step="hourStep"
+            :minute-step="minuteStep"
+            :min-datetime="popupMinDatetime"
+            :max-datetime="popupMaxDatetime"
+            @confirm="confirm"
+            @cancel="cancel"
+            :auto="auto"
+            :week-start="weekStart"
+            :flow="flow"
+            :title="title">
+          <template slot="button-cancel__internal" slot-scope="scope">
+            <slot name="button-cancel" v-bind:step="scope.step">{{ phrases.cancel }}</slot>
+          </template>
+          <template slot="button-confirm__internal" slot-scope="scope">
+            <slot name="button-confirm" v-bind:step="scope.step">{{ phrases.ok }}</slot>
+          </template>
+        </datetime-popup>
+      </transition-group>
+    </MountingPortal>
   </div>
 </template>
 
 <script>
 import { DateTime } from 'luxon'
+import { MountingPortal } from 'portal-vue';
 import DatetimePopup from './DatetimePopup'
 import { datetimeFromISO, startOfDay, weekStart } from './util'
 
 export default {
   components: {
-    DatetimePopup
+    DatetimePopup,
+    MountingPortal,
   },
 
   inheritAttrs: false,
 
   props: {
+    mountTo: {
+      type: String,
+      default: '#bmc-datetime-portal',
+    },
     value: {
       type: String
     },
