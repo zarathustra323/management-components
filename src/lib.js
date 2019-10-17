@@ -2,9 +2,7 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
-import '@riophae/vue-treeselect/dist/vue-treeselect.css';
-import 'vue-datetime/dist/vue-datetime.css';
-import './scss/components.scss';
+import './styles';
 
 import {
   configure,
