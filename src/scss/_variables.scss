@@ -48,7 +48,7 @@ $bmc-theme-colors: map-merge(
 );
 
 // Spacers
-$bmc-spacer: .875rem !default;
+$bmc-spacer: 14px !default;
 $bmc-spacers: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $bmc-spacers: map-merge(
@@ -68,7 +68,7 @@ $bmc-enable-gradients: true !default;
 
 // Baseline values
 $bmc-base-font-family: "Roboto", sans-serif !default;
-$bmc-base-font-size: .875rem !default;
+$bmc-base-font-size: 14px !default;
 $bmc-base-font-weight: 400 !default;
 $bmc-base-line-height: 1.5 !default;
 $bmc-base-bg-color: $bmc-white !default;
@@ -95,7 +95,7 @@ $bmc-yiq-text-light: $bmc-white !default;
 // Cards
 $bmc-card-bg-color: $bmc-white !default;
 $bmc-card-spacer-y: 7px !default;
-$bmc-card-spacer-x: .75rem !default;
+$bmc-card-spacer-x: 12px !default;
 
 $bmc-card-header-bg-color: rgba($bmc-black, .03) !default;
 $bmc-card-header-font-weight: 300 !default;
@@ -105,12 +105,12 @@ $bmc-list-group-bg-color: transparent !default;
 $bmc-list-group-border-color: rgba($bmc-black, .125) !default;
 $bmc-list-group-border-width: 1px !default;
 
-$bmc-list-group-item-padding-y: .75rem !default;
-$bmc-list-group-item-padding-x: .75rem !default;
+$bmc-list-group-item-padding-y: 12px !default;
+$bmc-list-group-item-padding-x: 12px !default;
 
 // Nav
-$bmc-nav-link-padding-y: .5rem !default;
-$bmc-nav-link-padding-x: 1rem !default;
+$bmc-nav-link-padding-y: 8px !default;
+$bmc-nav-link-padding-x: 16px !default;
 
 $bmc-nav-active-link-color: $bmc-white !default;
 $bmc-nav-active-link-bg-color: $bmc-primary !default;
@@ -123,10 +123,10 @@ $bmc-button-line-height: $bmc-base-line-height !default;
 $bmc-button-color: $bmc-base-color !default;
 $bmc-button-border-width: 1px !default;
 
-$bmc-button-padding-y: .375rem !default;
-$bmc-button-padding-x: .75rem !default;
+$bmc-button-padding-y: 6px !default;
+$bmc-button-padding-x: 12px !default;
 
-$bmc-button-focus-width: .2rem !default;
+$bmc-button-focus-width: 3px !default;
 $bmc-button-focus-color: rgba($bmc-primary, .25) !default;
 $bmc-button-focus-box-shadow: 0 0 0 $bmc-button-focus-width $bmc-button-focus-color !default;
 
@@ -136,11 +136,11 @@ $bmc-button-active-box-shadow: inset 0 3px 5px rgba($bmc-black, .125) !default;
 $bmc-button-transition: color .15s ease-in-out, fill .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
 // Form Group
-$bmc-form-group-margin-bottom: .75rem !default;
+$bmc-form-group-margin-bottom: 12px !default;
 
 // Form Controls
-$bmc-input-padding-y: .375rem !default;
-$bmc-input-padding-x: .75rem !default;
+$bmc-input-padding-y: 6px !default;
+$bmc-input-padding-x: 12px !default;
 $bmc-input-font-family: $bmc-base-font-family !default;
 $bmc-input-font-size: $bmc-base-font-size !default;
 $bmc-input-font-weight: $bmc-base-font-weight !default;

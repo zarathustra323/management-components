@@ -2,17 +2,15 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
-import '@riophae/vue-treeselect/dist/vue-treeselect.css';
-import 'vue-datetime/dist/vue-datetime.css';
-import './scss/components.scss';
-
 import {
   configure,
+  debug,
   getApolloProvider,
   getConfig,
   hasConfigured,
 } from './config';
 import { version } from '../package.json';
+import './styles';
 
 Vue.use(VueApollo);
 
@@ -29,11 +27,13 @@ const loadComponent = async ({
   if (!hasConfigured()) throw new Error('BaseCMS Management Components have not been configured. Run `bmc.configure()` before loading components.');
   if (!components[name]) throw new Error(`No BaseCMS Management Component found for '${name}'`);
   const { default: Component } = await components[name]();
-  return new Vue({
+  const vm = new Vue({
     el,
     apolloProvider: getApolloProvider(),
     render: h => h(Component, { props, on }),
   });
+  if (debug()) console.info(`Component ${name} mounted.`, { el, props, on });
+  return vm;
 };
 
 const info = () => ({ version, config: getConfig(), components: Object.keys(components) });

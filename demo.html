@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>bmc demo</title>
-    <script src="./dist/latest/bmc.umd.min.js"></script>
+    <script src="./dist/0.3.0/bmc.umd.min.js"></script>
     <script>
       bmc.configure({
         graphqlUri: 'http://0.0.0.0:11001',
         tenantKey: 'acbm_fcp',
-        baseApiUri: 'https://manage.forconstructionpros.com'
+        baseApiUri: 'https://manage.forconstructionpros.com',
+        debug: true,
       });
     </script>
-    <link rel="stylesheet" href="./dist/latest/bmc.css">
+    <link rel="stylesheet" href="./dist/0.3.0/bmc.css">
   </head>
   <body>
+    <div id="bmc-datetime-portal" class="bmc-portal"></div>
     <h1>Scheduling</h1>
     <div id="scheduling"></div>
 

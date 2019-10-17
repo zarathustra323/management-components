@@ -28,10 +28,8 @@
 </template>
 
 <script>
-import '@riophae/vue-treeselect/dist/vue-treeselect.css';
-import 'vue-datetime/dist/vue-datetime.css';
-import './scss/components.scss';
 import Scheduling from './components/scheduling/index.vue';
+import './styles';
 
 export default {
   /**
