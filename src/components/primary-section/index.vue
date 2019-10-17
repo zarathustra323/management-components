@@ -1,42 +1,12 @@
 <template>
   <div class="bmc-primary-section-component">
     <label>{{ label }}</label>
-    <tree-select
-      v-model="currentSection"
-      value-format="object"
-      :flat="true"
-      :multiple="false"
-      :load-options="loadChoices"
-      :options="choices"
-      :disabled="disabled"
-      :clearable="false"
-      :backspace-removes="false"
-      :show-count="true"
-      :default-expand-level="defaultExpandLevel"
-      :auto-load-root-options="false"
-      :required="true"
-      @input="emitChange"
-      search-nested
-      placeholder="Select section; type to filter..."
-    >
-      <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
-      <label
-        slot="option-label"
-        slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
-        :class="labelClassName"
-        @click="toggleSiteExpanded(node)"
-      >
-        {{ node.label }}
-        <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
-      </label>
-    </tree-select>
+    <website-section-field :section="section" :disabled="isLoading" @change="setSection" />
   </div>
 </template>
 
 <script>
-import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import loadChoices from '../utils/website-section/load-site-choices';
-import createSectionNode from '../utils/website-section/create-node';
+import WebsiteSectionField from '../common/fields/website/section.vue';
 
 export default {
   props: {
@@ -55,38 +25,21 @@ export default {
   },
 
   data: () => ({
-    choices: null,
     section: null,
+    isLoading: false,
   }),
 
-  components: {
-    TreeSelect,
-  },
+  components: { WebsiteSectionField },
 
-  computed: {
-    currentSection: {
-      get() {
-        return createSectionNode(this.section);
-      },
-      set() {
-      },
-    },
-
-    defaultExpandLevel() {
-      return this.choices && this.choices.length === 1 ? 1 : 0;
-    },
+  created() {
+    console.log('created', this.sectionId);
   },
 
   methods: {
-    emitChange(choice) {
-      const section = choice ? choice.model : null;
+    setSection(section) {
+      console.log('set section', section);
+      this.section = section;
       this.$emit('change', section);
-    },
-
-    async loadChoices({ action }) {
-      if (action === LOAD_ROOT_OPTIONS) {
-        this.choices = await loadChoices(this.$apollo);
-      }
     },
   },
 };
