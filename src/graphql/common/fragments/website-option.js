@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
 
-fragment EmailNewsletterScheduleList on EmailNewsletter {
+fragment CommonWebsiteOption on WebsiteOption {
   id
   name
 }

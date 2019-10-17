@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import siteFragment from '../fragments/website-site';
-import sectionFragment from '../fragments/website-section';
+import siteFragment from '../../common/fragments/website-site';
+import sectionFragment from '../../common/fragments/website-section';
 
 export default gql`
 
@@ -12,27 +12,27 @@ query LoadWebsiteSections(
   websiteSites(input: $siteInput) {
     edges {
       node {
-        ...WebsiteSiteScheduleList
+        ...CommonWebsiteSite
         rootSections(input: $rootSectionInput) {
           edges {
             node {
-              ...WebsiteSectionScheduleList
+              ...CommonWebsiteSection
               children(input: $childSectionInput) {
                 edges {
                   node {
-                    ...WebsiteSectionScheduleList
+                    ...CommonWebsiteSection
                     children(input: $childSectionInput) {
                       edges {
                         node {
-                          ...WebsiteSectionScheduleList
+                          ...CommonWebsiteSection
                           children(input: $childSectionInput) {
                             edges {
                               node {
-                                ...WebsiteSectionScheduleList
+                                ...CommonWebsiteSection
                                 children(input: $childSectionInput) {
                                   edges {
                                     node {
-                                      ...WebsiteSectionScheduleList
+                                      ...CommonWebsiteSection
                                     }
                                   }
                                 }

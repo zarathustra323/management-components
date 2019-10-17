@@ -3,11 +3,11 @@ import publicationFragment from './magazine-publication';
 
 export default gql`
 
-fragment MagazineIssueScheduleList on MagazineIssue {
+fragment CommonMagazineIssue on MagazineIssue {
   id
   name
   publication {
-    ...MagazinePublicationScheduleList
+    ...CommonMagazinePublication
   }
 }
 

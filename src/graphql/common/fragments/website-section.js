@@ -3,12 +3,12 @@ import siteFragment from './website-site';
 
 export default gql`
 
-fragment WebsiteSectionScheduleList on WebsiteSection {
+fragment CommonWebsiteSection on WebsiteSection {
   id
   name
   fullName
   site {
-    ...WebsiteSiteScheduleList
+    ...CommonWebsiteSite
   }
 }
 

@@ -2,11 +2,10 @@ import gql from 'graphql-tag';
 
 export default gql`
 
-fragment WebsiteSiteScheduleList on WebsiteSite {
+fragment CommonMagazineSection on MagazineSection {
   id
-  title
   name
-  shortName
+  isGlobal
 }
 
 `;

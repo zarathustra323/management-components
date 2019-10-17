@@ -2,10 +2,9 @@ import gql from 'graphql-tag';
 
 export default gql`
 
-fragment MagazineSectionScheduleList on MagazineSection {
+fragment CommonEmailNewsletter on EmailNewsletter {
   id
   name
-  isGlobal
 }
 
 `;
