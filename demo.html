@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>bmc demo</title>
+    <script async src="./dist/0.4.0/bmc.umd.min.js"></script>
     <script>
       (function(w, f) {
         var l = f + 'Queue'; w[l] = w[l] || [];
@@ -12,8 +13,6 @@
     <link rel="stylesheet" href="./dist/0.4.0/bmc.css">
   </head>
   <body>
-      <script src="./dist/0.4.0/bmc.umd.min.js"></script>
-
     <script>
       bmc('configure', {
         graphqlUri: 'https://caprica.graphql-staging.base-cms.io',
