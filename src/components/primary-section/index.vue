@@ -1,7 +1,13 @@
 <template>
   <div class="bmc-primary-section-component">
-    <label>{{ label }}</label>
-    <website-section-field :section="section" :disabled="isLoading" @change="setSection" />
+    <label class="bmc-primary-section-component__label">{{ label }}</label>
+    <loading-spinner v-if="isLoading" color="primary" size="small" />
+    <website-section-field
+      v-else-if="!error"
+      :section="section"
+      :disabled="isLoading"
+      @change="setSection"
+    />
     <operation-error
       :error="error"
       :can-cancel="false"
@@ -14,12 +20,16 @@
 import gql from 'graphql-tag';
 import sectionFragment from '../../graphql/common/fragments/website-section';
 import WebsiteSectionField from '../common/fields/website/section.vue';
+import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
 
 const query = gql`
   query LoadPrimarySection($input: WebsiteSectionQueryInput!) {
     websiteSection(input: $input) {
       ...CommonWebsiteSection
+      hierarchy {
+        id
+      }
     }
   }
 
@@ -48,7 +58,7 @@ export default {
     error: null,
   }),
 
-  components: { WebsiteSectionField, OperationError },
+  components: { WebsiteSectionField, OperationError, LoadingSpinner },
 
   mounted() {
     this.loadSection();
@@ -56,7 +66,6 @@ export default {
 
   methods: {
     setSection(section) {
-      console.log('set section', section);
       this.section = section;
       this.$emit('change', section);
     },
@@ -87,5 +96,8 @@ export default {
 
 .bmc-primary-section-component {
   @include bmc-base();
+  &__label {
+    display: block;
+  }
 }
 </style>
