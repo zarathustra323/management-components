@@ -34,7 +34,7 @@
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 import query from '../../../graphql/scheduling/queries/load-magazine-publication-issues';
-import mapNodes from '../../../utils/map-nodes';
+import mapNodes from '../../utils/map-nodes';
 
 const createIssueNode = (issue) => {
   if (!issue) return null;

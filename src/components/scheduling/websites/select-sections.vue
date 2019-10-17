@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import TreeSelect from '@riophae/vue-treeselect';
-import sectionOptions from './treeselect/section-options';
+import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
+import loadChoices from '../../utils/website-section/load-site-choices';
 
 export default {
   /**
@@ -109,7 +109,9 @@ export default {
      *
      */
     async loadOptions({ action }) {
-      this.options = await sectionOptions(this.$apollo, { action });
+      if (action === LOAD_ROOT_OPTIONS) {
+        this.options = await loadChoices(this.$apollo);
+      }
     },
   },
 };

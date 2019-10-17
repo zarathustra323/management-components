@@ -1,5 +1,5 @@
 import query from '../../../../graphql/scheduling/queries/load-email-newsletter-sections';
-import mapNodes from '../../../../utils/map-nodes';
+import mapNodes from '../../../utils/map-nodes';
 import mapSections from './map-sections';
 
 export default async (apollo, { selectedNewsletterId, withNewsletterName } = {}) => {

@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import TreeSelect from '@riophae/vue-treeselect';
-import sectionTitle from './treeselect/section-title';
-import sectionOptions from './treeselect/section-options';
+import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
+import loadChoices from '../../utils/website-section/load-site-choices';
+import createSectionNode from '../../utils/website-section/create-node';
 
 export default {
   props: {
@@ -58,12 +58,7 @@ export default {
     },
 
     selected() {
-      const { section } = this;
-      return {
-        id: section.id,
-        label: section.name,
-        title: sectionTitle({ site: section.site, section, useSiteInTitle: false }),
-      };
+      return createSectionNode(this.section, { withSiteName: false });
     },
   },
 
@@ -90,11 +85,9 @@ export default {
     async loadOptions({ action }) {
       const expandedIds = this.section.hierarchy.map(s => s.id);
       expandedIds.push(this.site.id);
-      this.options = await sectionOptions(this.$apollo, {
-        action,
-        expandedIds,
-        useSiteInTitle: false,
-      });
+      if (action === LOAD_ROOT_OPTIONS) {
+        this.options = await loadChoices(this.$apollo, { expandedIds, withSiteName: false });
+      }
     },
   },
 };

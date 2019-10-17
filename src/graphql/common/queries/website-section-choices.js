@@ -1,13 +1,13 @@
 import gql from 'graphql-tag';
-import siteFragment from '../../common/fragments/website-site';
-import sectionFragment from '../../common/fragments/website-section';
+import siteFragment from '../fragments/website-site';
+import sectionFragment from '../fragments/website-section';
 
 export default gql`
 
-query LoadWebsiteSections(
-  $siteInput: WebsiteSitesQueryInput!,
-  $rootSectionInput: WebsiteSiteRootSectionsInput!,
-  $childSectionInput: WebsiteSectionChildrenInput!,
+query WebsiteSectionChoices(
+  $siteInput: WebsiteSitesQueryInput = { sort: { field: name, order: asc }, pagination: { limit: 0 } },
+  $rootSectionInput: WebsiteSiteRootSectionsInput = { sort: { field: name, order: asc }, pagination: { limit: 0 } },
+  $childSectionInput: WebsiteSectionChildrenInput = { sort: { field: name, order: asc }, pagination: { limit: 0 } },
 ) {
   websiteSites(input: $siteInput) {
     edges {
