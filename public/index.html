@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>BaseCMS Management Components</title>
+    <script>
+      (function(w, f) {
+        var l = f + 'Queue'; w[l] = w[l] || [];
+        w[f] = w[f] || function() { w[l].push(arguments); };
+      })(window, 'bmc');
+    </script>
+
     <style>
       /* example styles */
       *,
@@ -14,42 +21,89 @@
         box-sizing: border-box;
       }
       html {
-        font-family: sans-serif;
+        font-family: serif;
         line-height: 1.15;
       }
       body {
         margin: 0;
         text-align: left;
       }
-      .example-container {
+      .container {
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
       }
-      .example-row {
+      .row {
         display: flex;
         flex-wrap: wrap;
         margin-right: -15px;
         margin-left: -15px;
       }
-      .example-col {
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
+      .col {
+        flex: 0 0 100%;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
       }
     </style>
   </head>
   <body>
+    <script>
+      bmc('configure', {
+        graphqlUri: 'https://caprica.graphql-staging.base-cms.io',
+        tenantKey: 'acbm_fcp',
+        baseApiUri: 'https://manage.forconstructionpros.com',
+        debug: true,
+      });
+
+      bmc('loadComponent', {
+        name: 'scheduling',
+        el: '#component-scheduling',
+        props: { contentId: 21091788 },
+      });
+
+      bmc('loadComponent', {
+        name: 'primary-section',
+        el: '#component-primary-section-empty',
+        on: { change: (section) => console.log('primary-section change', section) }
+      });
+
+      bmc('loadComponent', {
+        name: 'primary-section',
+        el: '#component-primary-section-preselected',
+        props: { sectionId: 54320 },
+        on: { change: (section) => console.log('primary-section change', section) }
+      });
+
+
+    </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
     <noscript>
       <strong>We're sorry but this page doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div class="example-container">
-      <div class="example-row">
-        <div id="app"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col" style="max-width: 380px;">
+          <h4>Scheduling</h4>
+          <div id="component-scheduling"></div>
+        </div>
       </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 500px;">
+          <h4>Primary Section (Empty)</h4>
+          <div id="component-primary-section-empty"></div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col" style="max-width: 500px;">
+            <h4>Primary Section (Pre-Selected)</h4>
+            <div id="component-primary-section-preselected"></div>
+          </div>
+        </div>
     </div>
   </body>
 </html>

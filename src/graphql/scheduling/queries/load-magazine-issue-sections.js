@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import sectionFragment from '../fragments/magazine-section';
+import sectionFragment from '../../common/fragments/magazine-section';
 
 export default gql`
 
@@ -12,7 +12,7 @@ query LoadMagazineIssueSections($input: MagazineIssueQueryInput!) {
     }) {
       edges {
         node {
-          ...MagazineSectionScheduleList
+          ...CommonMagazineSection
         }
       }
     }

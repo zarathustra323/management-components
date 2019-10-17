@@ -5,6 +5,15 @@
     border-radius: 0;
   }
 
+  &__input {
+    font-family: $bmc-input-font-family;
+    font-size: $bmc-input-font-size;
+    font-weight: $bmc-input-font-weight;
+    line-height: $bmc-input-line-height;
+    color: $bmc-input-color;
+    letter-spacing: $bmc-base-letter-spacing;
+  }
+
   &__option--disabled {
     #{ $self } {
       &__checkbox-container {

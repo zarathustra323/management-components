@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import publicationFragment from '../fragments/magazine-publication';
-import issueFragment from '../fragments/magazine-issue';
+import publicationFragment from '../../common/fragments/magazine-publication';
+import issueFragment from '../../common/fragments/magazine-issue';
 
 export default gql`
 
@@ -11,14 +11,14 @@ query LoadMagazinePublicationIssues {
   }) {
     edges {
       node {
-        ...MagazinePublicationScheduleList
+        ...CommonMagazinePublication
         issues(input: {
           pagination: { limit: 0 },
           sort: { field: mailDate, order: desc },
         }) {
           edges {
             node {
-              ...MagazineIssueScheduleList
+              ...CommonMagazineIssue
             }
           }
         }

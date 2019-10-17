@@ -9,7 +9,8 @@ vue-cli-service build \
   --no-clean \
   --target lib \
   --inline-vue \
-  --name bmc \
+  --name BMCObject \
+  --filename bmc \
   --dest dist/$1 \
   --formats umd-min \
   src/lib.js

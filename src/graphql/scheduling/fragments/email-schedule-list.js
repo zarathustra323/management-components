@@ -1,16 +1,16 @@
 import gql from 'graphql-tag';
-import newsletterFragment from './email-newsletter';
-import sectionFragment from './email-section';
+import newsletterFragment from '../../common/fragments/email-newsletter';
+import sectionFragment from '../../common/fragments/email-section';
 
 export default gql`
 
 fragment EmailScheduleList on EmailSchedule {
   id
   newsletter {
-    ...EmailNewsletterScheduleList
+    ...CommonEmailNewsletter
   }
   section {
-    ...EmailSectionScheduleList
+    ...CommonEmailSection
   }
   deploymentDate
   sequence

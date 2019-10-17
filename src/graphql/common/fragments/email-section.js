@@ -3,11 +3,11 @@ import newsletterFragment from './email-newsletter';
 
 export default gql`
 
-fragment EmailSectionScheduleList on EmailSection {
+fragment CommonEmailSection on EmailSection {
   id
   name
   newsletter {
-    ...EmailNewsletterScheduleList
+    ...CommonEmailNewsletter
   }
 }
 

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import newsletterFragment from '../fragments/email-newsletter';
-import sectionFragment from '../fragments/email-section';
+import newsletterFragment from '../../common/fragments/email-newsletter';
+import sectionFragment from '../../common/fragments/email-section';
 
 export default gql`
 
@@ -11,14 +11,14 @@ query LoadEmailNewsletterSections {
   }) {
     edges {
       node {
-        ...EmailNewsletterScheduleList
+        ...CommonEmailNewsletter
         sections(input: {
           pagination: { limit: 0 },
           sort: { field: name, order: asc },
         }) {
           edges {
             node {
-              ...EmailSectionScheduleList
+              ...CommonEmailSection
             }
           }
         }
