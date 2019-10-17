@@ -6,6 +6,26 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>BaseCMS Management Components</title>
+    <script>
+      (function(w, f) {
+        var l = f + 'Queue'; w[l] = w[l] || [];
+        w[f] = w[f] || function() { w[l].push(arguments); };
+      })(window, 'bmc');
+
+      bmc('configure', {
+        graphqlUri: 'https://caprica.graphql-staging.base-cms.io',
+        tenantKey: 'acbm_fcp',
+        baseApiUri: 'https://manage.forconstructionpros.com',
+        debug: true,
+      });
+
+      bmc('loadComponent', {
+        name: 'scheduling',
+        el: '#component-scheduling',
+        props: { contentId: 21091788 },
+      });
+    </script>
+
     <style>
       /* example styles */
       *,
@@ -14,7 +34,7 @@
         box-sizing: border-box;
       }
       html {
-        font-family: sans-serif;
+        font-family: serif;
         line-height: 1.15;
       }
       body {
@@ -35,9 +55,10 @@
         margin-left: -15px;
       }
       .example-col {
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
+        flex: 0 0 100%;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
       }
     </style>
   </head>
@@ -48,7 +69,10 @@
     </noscript>
     <div class="example-container">
       <div class="example-row">
-        <div id="app"></div>
+        <div class="example-col" style="max-width: 380px;">
+          <h4>Scheduling</h4>
+          <div id="component-scheduling"></div>
+        </div>
       </div>
     </div>
   </body>

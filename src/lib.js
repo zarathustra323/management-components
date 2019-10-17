@@ -27,19 +27,35 @@ const loadComponent = async ({
   if (!hasConfigured()) throw new Error('BaseCMS Management Components have not been configured. Run `bmc.configure()` before loading components.');
   if (!components[name]) throw new Error(`No BaseCMS Management Component found for '${name}'`);
   const { default: Component } = await components[name]();
-  const vm = new Vue({
+  new Vue({
     el,
     apolloProvider: getApolloProvider(),
     render: h => h(Component, { props, on }),
   });
   if (debug()) console.info(`Component ${name} mounted.`, { el, props, on });
-  return vm;
 };
 
-const info = () => ({ version, config: getConfig(), components: Object.keys(components) });
+const info = () => {
+  console.info({ version, config: getConfig(), components: Object.keys(components) });
+};
 
-export default {
+const fns = {
   configure,
   loadComponent,
   info,
 };
+
+const bmc = (fn, ...args) => {
+  if (typeof fns[fn] === 'function') return fns[fn](...args);
+  throw new Error(`No BaseCMS command exists for '${fn}'`);
+};
+
+const { isArray } = Array;
+const { bmcQueue } = window;
+
+if (isArray(bmcQueue)) {
+  bmcQueue.forEach((args) => {
+    bmc(...args);
+  });
+}
+window.bmc = bmc;
