@@ -19,6 +19,10 @@
 @import "components/treeselect";
 @import "components/vdatetime";
 
+.bmc-portal {
+  @include bmc-base();
+}
+
 .bmc-hide {
   display: none;
 }
