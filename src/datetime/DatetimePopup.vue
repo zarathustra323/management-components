@@ -276,27 +276,27 @@ export default {
 }
 </script>
 
-<style>
-.vdatetime-popup {
-  box-sizing: border-box;
-  z-index: 1000;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 340px;
-  max-width: calc(100% - 30px);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-  color: #444;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  line-height: 1.18;
-  background: #fff;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-  & * {
+<style lang="scss">
+  .vdatetime-popup {
     box-sizing: border-box;
+    z-index: 1000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    max-width: calc(100% - 30px);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    color: #444;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    line-height: 1.18;
+    background: #fff;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    & * {
+      box-sizing: border-box;
+    }
   }
-}
 
 .vdatetime-popup__header {
   padding: 18px 30px;

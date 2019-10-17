@@ -248,7 +248,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .vdatetime-fade-enter-active,
 .vdatetime-fade-leave-active {
   transition: opacity .4s;
