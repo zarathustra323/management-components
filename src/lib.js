@@ -2,8 +2,6 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 
-import './styles';
-
 import {
   configure,
   debug,
@@ -12,6 +10,7 @@ import {
   hasConfigured,
 } from './config';
 import { version } from '../package.json';
+import './styles';
 
 Vue.use(VueApollo);
 

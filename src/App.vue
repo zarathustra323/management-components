@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import './styles';
 import Scheduling from './components/scheduling/index.vue';
+import './styles';
 
 export default {
   /**
