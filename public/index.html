@@ -63,6 +63,21 @@
         el: '#component-scheduling',
         props: { contentId: 21091788 },
       });
+
+      bmc('loadComponent', {
+        name: 'primary-section',
+        el: '#component-primary-section-empty',
+        on: { change: (section) => console.log('primary-section change', section) }
+      });
+
+      bmc('loadComponent', {
+        name: 'primary-section',
+        el: '#component-primary-section-preselected',
+        props: { sectionId: 54320 },
+        on: { change: (section) => console.log('primary-section change', section) }
+      });
+
+
     </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
     <noscript>
@@ -75,6 +90,20 @@
           <div id="component-scheduling"></div>
         </div>
       </div>
+
+      <div class="example-row">
+        <div class="example-col" style="max-width: 500px;">
+          <h4>Primary Section (Empty)</h4>
+          <div id="component-primary-section-empty"></div>
+        </div>
+      </div>
+
+      <div class="example-row">
+          <div class="example-col" style="max-width: 500px;">
+            <h4>Primary Section (Pre-Selected)</h4>
+            <div id="component-primary-section-preselected"></div>
+          </div>
+        </div>
     </div>
   </body>
 </html>
