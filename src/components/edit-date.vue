@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { Datetime } from 'vue-datetime';
+import { Datetime } from '../datetime';
 import ActionButton from './action-button.vue';
 import CheckIcon from './icons/check.vue';
 import XIcon from './icons/x.vue';
