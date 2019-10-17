@@ -1,6 +1,5 @@
 <template>
   <div class="bmc-primary-section-component">
-    <label class="bmc-primary-section-component__label">{{ label }}</label>
     <loading-spinner v-if="isLoading" color="primary" size="small" />
     <website-section-field
       v-else-if="!error"
@@ -41,10 +40,6 @@ export default {
     sectionId: {
       type: Number,
       default: null,
-    },
-    label: {
-      type: String,
-      default: 'Primary Section',
     },
     disabled: {
       type: Boolean,
@@ -96,8 +91,5 @@ export default {
 
 .bmc-primary-section-component {
   @include bmc-base();
-  &__label {
-    display: block;
-  }
 }
 </style>
