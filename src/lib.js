@@ -17,6 +17,7 @@ Vue.use(VueApollo);
 const components = {
   scheduling: () => import(/* webpackChunkName: "scheduling" */ './components/scheduling/index.vue'),
   'primary-section': () => import(/* webpackChunkName: "primary-section" */ './components/primary-section/index.vue'),
+  'primary-category': () => import(/* webpackChunkName: "primary-category" */ './components/primary-category/index.vue'),
 };
 
 const loadComponent = async ({

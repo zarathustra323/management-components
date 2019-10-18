@@ -77,6 +77,19 @@
         on: { change: (section) => console.log('primary-section change', section) }
       });
 
+      bmc('loadComponent', {
+        name: 'primary-category',
+        el: '#component-primary-category-empty',
+        on: { change: (taxonomy) => console.log('primary-category change', taxonomy) }
+      });
+
+      bmc('loadComponent', {
+        name: 'primary-category',
+        el: '#component-primary-category-preselected',
+        props: { categoryId: 3147 },
+        on: { change: (taxonomy) => console.log('primary-category change', taxonomy) }
+      });
+
 
     </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
@@ -99,11 +112,25 @@
       </div>
 
       <div class="row">
-          <div class="col" style="max-width: 500px;">
-            <h4>Primary Section (Pre-Selected)</h4>
-            <div id="component-primary-section-preselected"></div>
-          </div>
+        <div class="col" style="max-width: 500px;">
+          <h4>Primary Section (Pre-Selected)</h4>
+          <div id="component-primary-section-preselected"></div>
         </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 500px;">
+          <h4>Primary Category (Empty)</h4>
+          <div id="component-primary-category-empty"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 500px;">
+          <h4>Primary Category (Pre-Selected)</h4>
+          <div id="component-primary-category-preselected"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
