@@ -10,7 +10,7 @@
     <operation-error
       :error="error"
       :can-cancel="false"
-      @retry="loadSection"
+      @retry="load"
     />
   </div>
 </template>
@@ -56,7 +56,7 @@ export default {
   components: { WebsiteSectionField, OperationError, LoadingSpinner },
 
   mounted() {
-    this.loadSection();
+    this.load();
   },
 
   methods: {
@@ -65,7 +65,7 @@ export default {
       this.$emit('change', section);
     },
 
-    async loadSection() {
+    async load() {
       const { sectionId } = this;
       if (sectionId && !this.isLoading) {
         this.isLoading = true;
