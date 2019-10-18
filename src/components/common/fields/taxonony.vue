@@ -22,8 +22,8 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import loadChoices from '../../../utils/taxonomy/load-choices';
-import createTaxonomyNode from '../../../utils/taxonomy/create-node';
+import loadChoices from '../../utils/taxonomy/load-choices';
+import createTaxonomyNode from '../../utils/taxonomy/create-node';
 
 export default {
   props: {
