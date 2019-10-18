@@ -1,11 +1,12 @@
 <template>
-  <div class="bmc-primary-section-component">
+  <div class="bmc-primary-category-component">
     <loading-spinner v-if="isLoading" color="primary" size="small" />
-    <website-section-field
+    <taxonomy-field
       v-else-if="!error"
-      :section="section"
+      type="Category"
+      :taxonomy="taxonomy"
       :disabled="isLoading"
-      @change="setSection"
+      @change="setTaxonomy"
     />
     <operation-error
       :error="error"
@@ -17,27 +18,23 @@
 
 <script>
 import gql from 'graphql-tag';
-import sectionFragment from '../../graphql/common/fragments/website-section';
-import WebsiteSectionField from '../common/fields/website/section.vue';
+import taxonomyFragment from '../../graphql/common/fragments/taxonomy';
+import TaxonomyField from '../common/fields/taxonony.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
 
 const query = gql`
-  query LoadPrimarySection($input: WebsiteSectionQueryInput!) {
-    websiteSection(input: $input) {
-      ...CommonWebsiteSection
-      hierarchy {
-        id
-      }
+  query LoadPrimaryCategory($input: TaxonomyQueryInput!) {
+    taxonomy(input: $input) {
+      ...CommonTaxonomy
     }
   }
-
-  ${sectionFragment}
+  ${taxonomyFragment}
 `;
 
 export default {
   props: {
-    sectionId: {
+    categoryId: {
       type: Number,
       default: null,
     },
@@ -48,32 +45,32 @@ export default {
   },
 
   data: () => ({
-    section: null,
+    taxonomy: null,
     isLoading: false,
     error: null,
   }),
 
-  components: { WebsiteSectionField, OperationError, LoadingSpinner },
+  components: { TaxonomyField, OperationError, LoadingSpinner },
 
   mounted() {
     this.load();
   },
 
   methods: {
-    setSection(section) {
-      this.section = section;
-      this.$emit('change', section);
+    setTaxonomy(taxonomy) {
+      this.taxonomy = taxonomy;
+      this.$emit('change', taxonomy);
     },
 
     async load() {
-      const { sectionId } = this;
-      if (sectionId && !this.isLoading) {
+      const { categoryId } = this;
+      if (categoryId && !this.isLoading) {
         this.isLoading = true;
         this.error = null;
-        const input = { id: sectionId };
+        const input = { id: categoryId };
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
-          this.section = data.websiteSection;
+          this.taxonomy = data.taxonomy;
         } catch (e) {
           this.error = e;
         } finally {
@@ -89,7 +86,7 @@ export default {
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
-.bmc-primary-section-component {
+.bmc-primary-category-component {
   @include bmc-base();
 }
 </style>
