@@ -7,6 +7,7 @@ const createNode = (taxonomy, { expandedIds = [] } = {}) => {
   return {
     id: taxonomy.id,
     label: taxonomy.name,
+    title: taxonomy.fullName,
     model: taxonomy,
     ...(isActive && { isDefaultExpanded: true }),
     ...(children.length && { children }),

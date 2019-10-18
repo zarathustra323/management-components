@@ -17,7 +17,17 @@
     @close="$emit('close')"
     @input="emitChange"
     search-nested
-  />
+  >
+    <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+    <label
+      slot="option-label"
+      slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
+      :class="labelClassName"
+    >
+      {{ node.label }}
+      <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
+    </label>
+  </tree-select>
 </template>
 
 <script>
