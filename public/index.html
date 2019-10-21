@@ -90,6 +90,20 @@
         on: { change: (taxonomy) => console.log('primary-category change', taxonomy) }
       });
 
+      bmc('loadComponent', {
+        name: 'related-taxonomies',
+        el: '#component-related-taxonomies-empty',
+        props: { type: 'Category' },
+        on: { change: (taxonomy) => console.log('related-taxonomies change', taxonomy) }
+      });
+
+      bmc('loadComponent', {
+        name: 'related-taxonomies',
+        el: '#component-related-taxonomies-preselected',
+        props: { type: 'Category', ids: [3115, 3132] },
+        on: { change: (taxonomy) => console.log('related-taxonomies change', taxonomy) }
+      });
+
 
     </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
@@ -129,6 +143,20 @@
         <div class="col" style="max-width: 500px;">
           <h4>Primary Category (Pre-Selected)</h4>
           <div id="component-primary-category-preselected"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 500px;">
+          <h4>Related Taxonomies (Empty)</h4>
+          <div id="component-related-taxonomies-empty"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 500px;">
+          <h4>Related Taxonomies (Pre-Selected)</h4>
+          <div id="component-related-taxonomies-preselected"></div>
         </div>
       </div>
     </div>

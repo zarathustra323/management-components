@@ -6,7 +6,7 @@ const createNode = (taxonomy, { expandedIds = [] } = {}) => {
   const isActive = expandedIds.includes(taxonomy.id);
   return {
     id: taxonomy.id,
-    label: taxonomy.name,
+    label: `${taxonomy.name} ${taxonomy.id}`,
     title: taxonomy.fullName,
     model: taxonomy,
     ...(isActive && { isDefaultExpanded: true }),

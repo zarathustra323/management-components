@@ -1,12 +1,12 @@
 <template>
-  <div class="bmc-primary-category-component">
+  <div class="bmc-related-taxonomies-component">
     <loading-spinner v-if="isLoading" color="primary" size="small" />
-    <taxonomy-field
+    <taxonomies-field
       v-else-if="!error"
-      type="Category"
-      :taxonomy="taxonomy"
+      :type="type"
+      :taxonomies="taxonomies"
       :disabled="isLoading"
-      @change="setTaxonomy"
+      @change="setTaxonomies"
     />
     <operation-error
       :error="error"
@@ -18,17 +18,22 @@
 
 <script>
 import gql from 'graphql-tag';
+import mapNodes from '../utils/map-nodes';
 import taxonomyFragment from '../../graphql/common/fragments/taxonomy';
-import TaxonomyField from '../common/fields/taxonony.vue';
+import TaxonomiesField from '../common/fields/taxonomies.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
 
 const query = gql`
-  query LoadPrimaryCategory($input: TaxonomyQueryInput!) {
-    taxonomy(input: $input) {
-      ...CommonTaxonomy
-      hierarchy {
-        id
+  query LoadSelectedTaxonomies($input: TaxonomiesQueryInput!) {
+    taxonomies(input: $input) {
+      edges {
+        node {
+          ...CommonTaxonomy
+          hierarchy {
+            id
+          }
+        }
       }
     }
   }
@@ -37,9 +42,13 @@ const query = gql`
 
 export default {
   props: {
-    categoryId: {
-      type: Number,
-      default: null,
+    type: {
+      type: String,
+      required: true,
+    },
+    ids: {
+      type: Array,
+      default: () => [],
     },
     disabled: {
       type: Boolean,
@@ -48,32 +57,32 @@ export default {
   },
 
   data: () => ({
-    taxonomy: null,
+    taxonomies: [],
     isLoading: false,
     error: null,
   }),
 
-  components: { TaxonomyField, OperationError, LoadingSpinner },
+  components: { TaxonomiesField, OperationError, LoadingSpinner },
 
   mounted() {
     this.load();
   },
 
   methods: {
-    setTaxonomy(taxonomy) {
-      this.taxonomy = taxonomy;
-      this.$emit('change', taxonomy);
+    setTaxonomies(taxonomies) {
+      this.taxonomies = taxonomies;
+      this.$emit('change', taxonomies);
     },
 
     async load() {
-      const { categoryId } = this;
-      if (categoryId && !this.isLoading) {
+      const { ids } = this;
+      if (ids && ids.length && !this.isLoading) {
         this.isLoading = true;
         this.error = null;
-        const input = { id: categoryId };
+        const input = { includeIds: ids, includeTypes: [this.type] };
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
-          this.taxonomy = data.taxonomy;
+          this.taxonomies = mapNodes(data.taxonomies);
         } catch (e) {
           this.error = e;
         } finally {
@@ -89,7 +98,7 @@ export default {
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
-.bmc-primary-category-component {
+.bmc-related-taxonomies-component {
   @include bmc-base();
 }
 </style>

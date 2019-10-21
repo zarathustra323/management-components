@@ -5,7 +5,7 @@ export default gql`
 fragment CommonTaxonomy on Taxonomy {
   id
   name
-  fullName
+  fullName(input: { suppressType: true, suppressId: true })
 }
 
 `;

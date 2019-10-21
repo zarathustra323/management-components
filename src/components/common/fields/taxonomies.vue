@@ -1,6 +1,6 @@
 <template>
   <tree-select
-    v-model="currentTaxonomy"
+    v-model="currentTaxonomies"
     value-format="object"
     :auto-load-root-options="false"
     :backspace-removes="false"
@@ -8,7 +8,7 @@
     :disabled="disabled"
     :flat="true"
     :load-options="loadChoices"
-    :multiple="false"
+    :multiple="true"
     :options="choices"
     :placeholder="placeholder"
     :required="required"
@@ -36,19 +36,21 @@ import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 import loadChoices from '../../utils/taxonomy/load-choices';
 import createTaxonomyNode from '../../utils/taxonomy/create-node';
 
+const { isArray } = Array;
+
 export default {
   props: {
     type: {
       type: String,
       required: true,
     },
-    taxonomy: {
-      type: Object,
-      default: null,
+    taxonomies: {
+      type: Array,
+      default: () => [],
     },
     placeholder: {
       type: String,
-      default: 'Select taxonomy; type to filter...',
+      default: 'Select taxomomies; type to filter...',
     },
     disabled: {
       type: Boolean,
@@ -81,9 +83,11 @@ export default {
   },
 
   computed: {
-    currentTaxonomy: {
+    currentTaxonomies: {
       get() {
-        return createTaxonomyNode(this.taxonomy, this.nodeOptions);
+        const { taxonomies } = this;
+        if (!isArray(taxonomies)) return [];
+        return taxonomies.map(taxonomy => createTaxonomyNode(taxonomy, this.nodeOptions));
       },
       set() {
       },
@@ -91,21 +95,23 @@ export default {
   },
 
   methods: {
-    emitChange(choice) {
-      const taxonomy = choice ? choice.model : null;
-      this.$emit('change', taxonomy);
+    emitChange(choices) {
+      const taxonomies = choices.map(choice => choice.model);
+      this.$emit('change', taxonomies);
     },
 
     async loadChoices({ action }) {
       if (action === LOAD_ROOT_OPTIONS) {
-        const { taxonomy } = this;
+        const { taxonomies } = this;
         const expandedIds = [];
-        if (taxonomy && taxonomy.hierarchy) {
-          expandedIds.push(...taxonomy.hierarchy.map(t => t.id));
+        if (isArray(taxonomies)) {
+          taxonomies.forEach((taxonomy) => {
+            if (taxonomy.hierarchy) expandedIds.push(...taxonomy.hierarchy.map(t => t.id));
+          });
         }
         this.choices = await loadChoices(this.$apollo, this.type, {
           ...this.nodeOptions,
-          expandedIds,
+          expandedIds: [...new Set(expandedIds)],
         });
       }
     },
