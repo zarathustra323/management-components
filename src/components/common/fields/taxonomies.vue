@@ -18,13 +18,14 @@
     @input="emitChange"
     search-nested
   >
-    <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+    <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }} [{{ node.id }}]</div>
     <label
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
     >
-      {{ node.label }}
+      {{ node.raw.model.name }}
+      <span class="bmc-taxonomy-choice-id">[{{ node.id }}]</span>
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
     </label>
   </tree-select>
