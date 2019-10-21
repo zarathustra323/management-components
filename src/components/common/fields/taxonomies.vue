@@ -49,7 +49,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Select values; type to filter...',
+      default: 'Select taxomomies; type to filter...',
     },
     disabled: {
       type: Boolean,
