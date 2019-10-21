@@ -27,6 +27,9 @@ const query = gql`
   query LoadPrimaryCategory($input: TaxonomyQueryInput!) {
     taxonomy(input: $input) {
       ...CommonTaxonomy
+      hierarchy {
+        id
+      }
     }
   }
   ${taxonomyFragment}

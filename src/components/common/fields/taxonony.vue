@@ -97,7 +97,11 @@ export default {
 
     async loadChoices({ action }) {
       if (action === LOAD_ROOT_OPTIONS) {
+        const { taxonomy } = this;
         const expandedIds = [];
+        if (taxonomy && taxonomy.hierarchy) {
+          expandedIds.push(...taxonomy.hierarchy.map(t => t.id));
+        }
         this.choices = await loadChoices(this.$apollo, this.type, {
           ...this.nodeOptions,
           expandedIds,
