@@ -156,8 +156,8 @@ export default {
         // Return valid node object.
         return selected;
       },
-      set(value) {
-        this.previousValue = value;
+      set() {
+        this.previousValue = this.currentValue;
       },
     },
 
