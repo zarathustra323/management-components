@@ -34,6 +34,12 @@ import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 
 const { isArray } = Array;
 
+const checkNodeValidity = (node) => {
+  if (!node) return false;
+  if (typeof node !== 'object') return false;
+  return node.id && node.label && node.title && node.name;
+};
+
 /**
  * Emits the following events:
  * - close: when the option menu is closed
@@ -63,8 +69,8 @@ export default {
       default: null,
       validator(value) {
         if (!value) return true;
-        if (isArray(value)) return value.every(v => this.checkNodeValidity(v));
-        return this.checkNodeValidity(value);
+        if (isArray(value)) return value.every(v => checkNodeValidity(v));
+        return checkNodeValidity(value);
       },
     },
 
@@ -141,7 +147,7 @@ export default {
         // If array, pass through and filter invalid items.
         if (isArray(selected)) return this.filterNodes(selected);
         // If not a valid node object, return null.
-        if (!this.checkNodeValidity(selected)) return null;
+        if (!checkNodeValidity(selected)) return null;
         // Return valid node object.
         return selected;
       },
@@ -164,15 +170,9 @@ export default {
   },
 
   methods: {
-    checkNodeValidity(node) {
-      if (!node) return false;
-      if (typeof node !== 'object') return false;
-      return node.id && node.label && node.title && node.name;
-    },
-
     filterNodes(nodes) {
       if (!isArray(nodes)) return [];
-      return nodes.filter(node => this.checkNodeValidity(node));
+      return nodes.filter(node => checkNodeValidity(node));
     },
 
     emitChange(value) {
