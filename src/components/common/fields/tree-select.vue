@@ -21,7 +21,7 @@
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
-      @click="$emit('optionClick', node)"
+      @click="$emit('choiceClick', node)"
     >
       {{ node.raw.name }}
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
@@ -34,6 +34,14 @@ import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 
 const { isArray } = Array;
 
+/**
+ * Emits the following events:
+ * - close: when the option menu is closed
+ * - open: when the option menu is opened
+ * - change: when the current value changes
+ * - choice-click: when an option choice is clicked
+ * - load-error: when there is an error loading the option choices
+ */
 export default {
   props: {
     /**
@@ -172,7 +180,15 @@ export default {
     },
 
     async loadChoices({ action }) {
-      if (action === LOAD_ROOT_OPTIONS) this.choices = await this.choiceLoader();
+      if (action === LOAD_ROOT_OPTIONS) {
+        try {
+          this.choices = await this.choiceLoader();
+        } catch (e) {
+          this.$emit('loadError', e);
+          console.error(e);
+          throw e;
+        }
+      }
     },
   },
 };
