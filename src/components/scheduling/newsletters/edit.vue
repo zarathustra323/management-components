@@ -5,7 +5,7 @@
     </div>
     <div class="bmc-schedule-edit">
       <div class="bmc-schedule-field">
-        <select-section
+        <newsletter-section-field
           :section="currentSection"
           :disabled="isSaving"
           @change="setSection"
@@ -38,7 +38,7 @@
 
 <script>
 import mutation from '../../../graphql/scheduling/mutations/update-email-schedule';
-import SelectSection from './select-section.vue';
+import NewsletterSectionField from '../../common/fields/newsletter/section.vue';
 import EditSequence from './edit-sequence.vue';
 import EditDate from '../../edit-date.vue';
 import CancelButton from '../buttons/cancel.vue';
@@ -75,7 +75,7 @@ export default {
 
   components: {
     EditSequence,
-    SelectSection,
+    NewsletterSectionField,
     CancelButton,
     SaveButton,
     EditDate,
