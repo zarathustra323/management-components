@@ -19,6 +19,7 @@ const components = {
   'primary-section': () => import(/* webpackChunkName: "primary-section" */ './components/primary-section/index.vue'),
   'primary-category': () => import(/* webpackChunkName: "primary-category" */ './components/primary-category/index.vue'),
   'related-taxonomies': () => import(/* webpackChunkName: "related-taxonomies" */ './components/related-taxonomies/index.vue'),
+  'scheduling-filter': () => import(/* webpackChunkName: "scheduling-filter" */ './components/scheduling-filter/index.vue'),
 };
 
 const loadComponent = async ({

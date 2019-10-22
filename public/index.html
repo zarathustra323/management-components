@@ -104,6 +104,11 @@
         on: { change: (taxonomy) => console.log('related-taxonomies change', taxonomy) }
       });
 
+      bmc('loadComponent', {
+        name: 'scheduling-filter',
+        el: '#component-scheduling-filter',
+      });
+
 
     </script>
     <div id="bmc-datetime-portal" class="bmc-portal"></div>
@@ -115,6 +120,13 @@
         <div class="col" style="max-width: 380px;">
           <h4>Scheduling</h4>
           <div id="component-scheduling"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="max-width: 380px;">
+          <h4>Scheduling Filter</h4>
+          <div id="component-scheduling-filter"></div>
         </div>
       </div>
 
