@@ -21,8 +21,6 @@
     @open="$emit('open')"
     @close="$emit('close')"
     @input="emitChange"
-    @select="emitSelect"
-    @deselect="emitDeselect"
     search-nested
   >
     <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }} [{{ node.id }}]</div>
