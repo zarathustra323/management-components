@@ -1,6 +1,6 @@
 <template>
   <div class="bmc-scheduling-filter-component">
-    <schedule-types-field
+    <mutation-types-field
       :clearable="false"
       :type="scheduleType"
       @change="setScheduleType"
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ScheduleTypesField from '../common/fields/schedule-types.vue';
+import MutationTypesField from '../common/fields/mutation-types.vue';
 import EmailFilters from './email/index.vue';
 import MagazineFilters from './magazine/index.vue';
 import WebsiteFilters from './website/index.vue';
@@ -21,7 +21,7 @@ export default {
   }),
 
   components: {
-    ScheduleTypesField,
+    MutationTypesField,
     EmailFilters,
     MagazineFilters,
     WebsiteFilters,
