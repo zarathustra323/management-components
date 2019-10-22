@@ -2,9 +2,11 @@
   <tree-select
     v-model="currentNodes"
     value-format="object"
+    :auto-load-root-options="autoLoadChoices"
     :clearable="clearable"
     :disabled="disabled"
     :multiple="multiple"
+    :options="choices"
     :placeholder="defaultPlaceholder"
     :required="required"
     :searchable="searchable"
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-import TreeSelect from '@riophae/vue-treeselect';
+import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
 
 const { isArray } = Array;
 
@@ -38,7 +40,7 @@ export default {
      * Must be null, a node, an array of nodes, or an empty array.
      * Array values will automatically place this component into multiple mode.
      *
-     * Each selected node _must_ have the following shape:
+     * Each node _must_ have the following shape:
      * ```
      * {
      *  id: 'some-unique-id',
@@ -58,6 +60,27 @@ export default {
       },
     },
 
+    /**
+     * A _required_ async function to load the menu choices.
+     * Must return an array of valid nodes (see above).
+     * Additional properties can be added to each node.
+     * Will be invoked when the LOAD_ROOT_OPTIONS action is true.
+     * @see methods.loadChoices()
+     */
+    choiceLoader: {
+      type: Function,
+      required: true,
+    },
+
+    /**
+     * By default, the choiceLoader function will be called when
+     * the tree menu is expanded. Set this to true to force the choices
+     * to be loaded on-mount.
+     */
+    autoLoadChoices: {
+      type: Boolean,
+      default: false,
+    },
     placeholder: {
       type: String,
       default: null,
@@ -142,9 +165,13 @@ export default {
     },
 
     emitChange(node) {
-      // @todo emit `add` and `remove` events when in multi-mode.
+      // @todo emit `add` and `remove` events when multiple.
       const n = node || null;
       this.$emit('change', n);
+    },
+
+    async loadChoices({ action }) {
+      if (action === LOAD_ROOT_OPTIONS) this.choices = await this.choiceLoader();
     },
   },
 };
