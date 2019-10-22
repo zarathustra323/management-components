@@ -17,7 +17,10 @@
     @open="$emit('open')"
     search-nested
   >
-    <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
+    <div slot="value-label" slot-scope="{ node }">
+      {{ node.raw.title }}
+      <span class="bmc-tree-view-id bmc-tree-view-id--value">[{{ node.id }}]</span>
+    </div>
     <label
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
@@ -25,6 +28,7 @@
       @click="$emit('choiceClick', node)"
     >
       {{ node.raw.name }}
+      <span class="bmc-tree-view-id bmc-tree-view-id--option">[{{ node.id }}]</span>
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
     </label>
   </tree-select>
@@ -209,5 +213,10 @@ export default {
   &:not(&--searchable) {
     cursor: pointer;
   }
+}
+
+.bmc-tree-view-id {
+  font-size: $bmc-font-size-sm;
+  color: $bmc-gray-500;
 }
 </style>
