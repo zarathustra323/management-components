@@ -196,7 +196,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 .vue-treeselect {
   font-family: $bmc-base-font-family;
