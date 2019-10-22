@@ -1,11 +1,11 @@
 <template>
   <div class="bmc-primary-category-component">
     <loading-spinner v-if="isLoading" color="primary" size="small" />
-    <taxonomy-field
+    <taxonomy-tree-select
       v-else-if="!error"
       type="Category"
-      :taxonomy="taxonomy"
       :disabled="isLoading"
+      :selected="taxonomy"
       @change="setTaxonomy"
     />
     <operation-error
@@ -19,7 +19,7 @@
 <script>
 import gql from 'graphql-tag';
 import taxonomyFragment from '../../graphql/common/fragments/taxonomy';
-import TaxonomyField from '../common/fields/taxonony.vue';
+import TaxonomyTreeSelect from '../common/tree-select/taxonomy.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
 
@@ -53,7 +53,7 @@ export default {
     error: null,
   }),
 
-  components: { TaxonomyField, OperationError, LoadingSpinner },
+  components: { TaxonomyTreeSelect, OperationError, LoadingSpinner },
 
   mounted() {
     this.load();
