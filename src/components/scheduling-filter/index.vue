@@ -1,6 +1,7 @@
 <template>
   <div class="bmc-scheduling-filter-component">
     <schedule-types-field
+      :clearable="false"
       :type="scheduleType"
       @change="setScheduleType"
     />
