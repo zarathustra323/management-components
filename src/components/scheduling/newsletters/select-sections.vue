@@ -32,8 +32,8 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import loadChoices from './utils/load-newsletter-section-choices';
-import createSectionNode from './utils/create-section-node';
+import loadChoices from '../../utils/newsletter-section/load-deployment-choices';
+import createNode from '../../utils/newsletter-section/create-node';
 
 export default {
   /**
@@ -67,7 +67,7 @@ export default {
       get() {
         const { sections } = this;
         if (!sections) return [];
-        return sections.map(section => createSectionNode(section));
+        return sections.map(section => createNode(section));
       },
       set() {
       },
