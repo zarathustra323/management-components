@@ -1,4 +1,4 @@
-import query from './choices-query';
+import query from './query-choices';
 import mapNodes from '../../../utils/map-nodes';
 import createNode from './create-node';
 
