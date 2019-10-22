@@ -109,7 +109,7 @@ export default {
 
   data: () => ({
     originalValue: null,
-    lastValue: null,
+    previousValue: null,
   }),
 
   components: { TreeSelect },
@@ -137,7 +137,7 @@ export default {
         return selected;
       },
       set(value) {
-        this.lastValue = value;
+        this.previousValue = value;
       },
     },
 
