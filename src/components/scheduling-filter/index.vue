@@ -4,18 +4,35 @@
       :type="scheduleType"
       @change="setScheduleType"
     />
+    <component :is="selectedFilters" />
   </div>
 </template>
 
 <script>
 import ScheduleTypesField from '../common/fields/schedule-types.vue';
+import EmailFilters from './email/index.vue';
+import MagazineFilters from './magazine/index.vue';
+import WebsiteFilters from './website/index.vue';
 
 export default {
-  components: { ScheduleTypesField },
-
   data: () => ({
     scheduleType: null,
   }),
+
+  components: {
+    ScheduleTypesField,
+    EmailFilters,
+    MagazineFilters,
+    WebsiteFilters,
+  },
+
+  computed: {
+    selectedFilters() {
+      const { scheduleType } = this;
+      if (!scheduleType) return null;
+      return `${scheduleType}-filters`;
+    },
+  },
 
   methods: {
     setScheduleType(scheduleType) {
