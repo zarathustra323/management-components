@@ -1,8 +1,13 @@
 <template>
+  <!--
+    Note: `auto-load-root-options` should be false. Due to a bug in treeselect,
+    removing an item before the options are loaded actually fires the _select_ event,
+    not the _deselect_ event. This, then, causes a duplicate ID error.
+  -->
   <tree-select
     v-model="currentTaxonomies"
     value-format="object"
-    :auto-load-root-options="false"
+    :auto-load-root-options="true"
     :backspace-removes="false"
     :clearable="clearable"
     :disabled="disabled"

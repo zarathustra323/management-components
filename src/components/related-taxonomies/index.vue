@@ -58,6 +58,7 @@ export default {
 
   data: () => ({
     taxonomies: [],
+    original: [],
     isLoading: false,
     error: null,
   }),
@@ -69,9 +70,32 @@ export default {
   },
 
   methods: {
+    getChangedTaxonomy(toMap, toFilter) {
+      const ids = toMap.map(t => t.id);
+      return toFilter.filter(t => !ids.includes(t.id))[0];
+    },
+
     setTaxonomies(taxonomies) {
+      const { original } = this;
+      const previous = this.taxonomies.slice();
+      const current = taxonomies.slice();
       this.taxonomies = taxonomies;
-      this.$emit('change', taxonomies);
+      if (current.length > previous.length) {
+        this.$emit('add', {
+          taxonomy: this.getChangedTaxonomy(previous, current),
+          current,
+          previous,
+          original,
+        });
+      } else if (current.length < previous.length) {
+        this.$emit('remove', {
+          taxonomy: this.getChangedTaxonomy(current, previous),
+          current,
+          previous,
+          original,
+        });
+      }
+      this.$emit('change', { taxonomies, previous, original });
     },
 
     async load() {
@@ -83,6 +107,7 @@ export default {
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
           this.taxonomies = mapNodes(data.taxonomies);
+          this.original = this.taxonomies.slice();
         } catch (e) {
           this.error = e;
         } finally {
