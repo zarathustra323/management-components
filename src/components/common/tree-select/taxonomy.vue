@@ -2,7 +2,7 @@
   <tree-select
     :choice-loader="loadChoices"
     :disabled="disabled"
-    :selected="currentModel"
+    :selected="node"
     @change="emitChange"
   />
 </template>
@@ -57,7 +57,7 @@ export default {
   components: { TreeSelect },
 
   computed: {
-    currentModel: {
+    node: {
       get() {
         const { selected } = this;
         if (isArray(selected)) return selected.map(model => createNode(model, this.nodeOptions));
