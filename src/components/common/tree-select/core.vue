@@ -5,6 +5,7 @@
     :auto-load-root-options="autoLoadChoices"
     :clearable="clearable"
     :disabled="disabled"
+    :load-options="choiceLoader"
     :multiple="multiple"
     :options="choices"
     :placeholder="defaultPlaceholder"
