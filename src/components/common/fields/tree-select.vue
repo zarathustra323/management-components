@@ -1,5 +1,6 @@
 <template>
   <tree-select
+    v-model="currentNodes"
     value-format="object"
     :clearable="clearable"
     :disabled="disabled"
@@ -29,15 +30,32 @@
 <script>
 import TreeSelect from '@riophae/vue-treeselect';
 
+const { isArray } = Array;
+
 export default {
   props: {
+    /**
+     * Must be null, a node, an array of nodes, or an empty array.
+     * Array values will automatically place this component into multiple mode.
+     *
+     * Each selected node _must_ have the following shape:
+     * ```
+     * {
+     *  id: 'some-unique-id',
+     *  label: 'The value that will be searched/filtered against',
+     *  title: 'The value to display when selected',
+     *  name: 'The value to display when shown in the list',
+     * }
+     * ```
+     */
     nodes: {
       type: [Object, Array],
       default: null,
-    },
-    multiple: {
-      type: Boolean,
-      required: true,
+      validator(value) {
+        if (!value) return true;
+        if (isArray(value)) return value.every(v => this.checkNodeValidity(v));
+        return this.checkNodeValidity(value);
+      },
     },
 
     placeholder: {
@@ -64,22 +82,69 @@ export default {
       type: Boolean,
       default: true,
     },
-
-    nodeOptions: {
-      type: Object,
-      default: () => ({}),
-    },
   },
+
+  data: () => ({
+    originalNodes: null,
+  }),
 
   components: { TreeSelect },
 
+  created() {
+    const { currentNodes, multiple } = this;
+    if (multiple) {
+      // Clone the current node array.
+      this.originalNodes = currentNodes.slice();
+    } else if (currentNodes) {
+      // Spread/clone the current node object (shallow).
+      this.originalNodes = { ...currentNodes };
+    }
+  },
+
   computed: {
+    currentNodes: {
+      get() {
+        const { nodes } = this;
+        // If array, pass through and filter invalid items.
+        if (isArray(nodes)) return this.filterNodes(nodes);
+        // If not a valid node object, return null.
+        if (!this.checkNodeValidity(nodes)) return null;
+        // Return valid node object.
+        return nodes;
+      },
+      set() {
+      },
+    },
+
+    multiple() {
+      return isArray(this.currentNodes);
+    },
+
     defaultPlaceholder() {
       const { placeholder } = this;
       if (placeholder) return placeholder;
       let value = `Select value${this.multiple ? '(s)' : ''}`;
       if (this.searchable) value = `${value}; type to filter`;
       return `${value}...`;
+    },
+  },
+
+  methods: {
+    checkNodeValidity(node) {
+      if (!node) return false;
+      if (typeof node !== 'object') return false;
+      return node.id && node.label && node.title && node.name;
+    },
+
+    filterNodes(nodes) {
+      if (!isArray(nodes)) return [];
+      return nodes.filter(node => this.checkNodeValidity(node));
+    },
+
+    emitChange(node) {
+      // @todo emit `add` and `remove` events when in multi-mode.
+      const n = node || null;
+      this.$emit('change', n);
     },
   },
 };
