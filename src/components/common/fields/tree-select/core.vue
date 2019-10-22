@@ -118,6 +118,7 @@ export default {
   data: () => ({
     originalValue: null,
     previousValue: null,
+    choices: null,
   }),
 
   components: { TreeSelect },
