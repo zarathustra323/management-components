@@ -25,7 +25,7 @@ export default {
       default: null,
       validator(value) {
         if (!value) return true;
-        return this.choices.map(choice => choice.id).includes(value);
+        return ['website', 'magazine', 'email'].includes(value);
       },
     },
     placeholder: {
@@ -64,7 +64,8 @@ export default {
 
   methods: {
     emitChange(choice) {
-      this.$emit('change', choice);
+      const id = choice ? choice.id : null;
+      this.$emit('change', id);
     },
   },
 };

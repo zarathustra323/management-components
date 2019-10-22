@@ -1,6 +1,9 @@
 <template>
   <div class="bmc-scheduling-filter-component">
-    <schedule-types-field @change="setScheduleType" />
+    <schedule-types-field
+      :type="scheduleType"
+      @change="setScheduleType"
+    />
   </div>
 </template>
 
@@ -10,9 +13,13 @@ import ScheduleTypesField from '../common/fields/schedule-types.vue';
 export default {
   components: { ScheduleTypesField },
 
+  data: () => ({
+    scheduleType: null,
+  }),
+
   methods: {
-    setScheduleType(type) {
-      console.log('setScheduleType', type);
+    setScheduleType(scheduleType) {
+      this.scheduleType = scheduleType;
     },
   },
 };
