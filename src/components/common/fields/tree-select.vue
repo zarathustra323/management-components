@@ -1,6 +1,6 @@
 <template>
   <tree-select
-    v-model="currentNodes"
+    v-model="currentValue"
     value-format="object"
     :auto-load-root-options="autoLoadChoices"
     :clearable="clearable"
@@ -50,7 +50,7 @@ export default {
      * }
      * ```
      */
-    nodes: {
+    selected: {
       type: [Object, Array],
       default: null,
       validator(value) {
@@ -108,39 +108,41 @@ export default {
   },
 
   data: () => ({
-    originalNodes: null,
+    originalValue: null,
+    lastValue: null,
   }),
 
   components: { TreeSelect },
 
   created() {
-    const { currentNodes, multiple } = this;
+    const { currentValue, multiple } = this;
     if (multiple) {
       // Clone the current node array.
-      this.originalNodes = currentNodes.slice();
-    } else if (currentNodes) {
+      this.originalValue = currentValue.slice();
+    } else if (currentValue) {
       // Spread/clone the current node object (shallow).
-      this.originalNodes = { ...currentNodes };
+      this.originalValue = { ...currentValue };
     }
   },
 
   computed: {
-    currentNodes: {
+    currentValue: {
       get() {
-        const { nodes } = this;
+        const { selected } = this;
         // If array, pass through and filter invalid items.
-        if (isArray(nodes)) return this.filterNodes(nodes);
+        if (isArray(selected)) return this.filterNodes(selected);
         // If not a valid node object, return null.
-        if (!this.checkNodeValidity(nodes)) return null;
+        if (!this.checkNodeValidity(selected)) return null;
         // Return valid node object.
-        return nodes;
+        return selected;
       },
-      set() {
+      set(value) {
+        this.lastValue = value;
       },
     },
 
     multiple() {
-      return isArray(this.currentNodes);
+      return isArray(this.currentValue);
     },
 
     defaultPlaceholder() {
@@ -164,10 +166,9 @@ export default {
       return nodes.filter(node => this.checkNodeValidity(node));
     },
 
-    emitChange(node) {
+    emitChange(value) {
       // @todo emit `add` and `remove` events when multiple.
-      const n = node || null;
-      this.$emit('change', n);
+      this.$emit('change', { value: value || null, original: this.originalValue });
     },
 
     async loadChoices({ action }) {
