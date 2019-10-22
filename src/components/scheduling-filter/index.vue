@@ -46,7 +46,18 @@ export default {
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
-.bmc-scheduling-filter-component{
+.bmc-scheduling-filter-component {
   @include bmc-base();
+
+  &__filters {
+    margin-top: map-get($bmc-spacers, 1);
+  }
+
+  &__field {
+    margin-top: map-get($bmc-spacers, 1);
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }
 </style>
