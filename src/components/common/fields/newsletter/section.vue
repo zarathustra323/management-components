@@ -15,7 +15,8 @@
     :required="required"
     :show-count="showCount"
     @input="emitChange"
-    @close="emitClose"
+    @open="$emit('open')"
+    @close="$emit('close')"
     search-nested
   >
     <div slot="value-label" slot-scope="{ node }">{{ node.raw.title }}</div>
@@ -33,12 +34,9 @@
 
 <script>
 import TreeSelect, { LOAD_ROOT_OPTIONS } from '@riophae/vue-treeselect';
-import loadChoices from '../../../scheduling/newsletters/utils/load-newsletter-section-choices';
-import createSectionNode from '../../../scheduling/newsletters/utils/create-section-node';
+import loadChoices from '../../../utils/newsletter-section/load-deployment-choices';
+import createNode from '../../../utils/newsletter-section/create-node';
 
-/**
- * @todo this should be used by the normal scheduling component
- */
 export default {
   /**
    *
@@ -90,7 +88,7 @@ export default {
     currentSection: {
       get() {
         if (!this.section) return null;
-        return createSectionNode(this.section, { withNewsletterName: false });
+        return createNode(this.section, { withNewsletterName: false });
       },
       set() {
       },
@@ -123,13 +121,6 @@ export default {
     emitChange(choice) {
       const section = choice ? choice.model : null;
       this.$emit('change', section);
-    },
-
-    /**
-     *
-     */
-    emitClose() {
-      this.$emit('close');
     },
 
     /**
