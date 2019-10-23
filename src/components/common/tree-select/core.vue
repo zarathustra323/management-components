@@ -157,25 +157,12 @@ export default {
   },
 
   data: () => ({
-    originalValue: null,
-    previousValue: null,
     choices: null,
     choicesLoaded: false,
     isPreloading: false,
   }),
 
   components: { TreeSelect },
-
-  created() {
-    const { currentValue, multiple } = this;
-    if (multiple) {
-      // Clone the current node array.
-      this.originalValue = currentValue.slice();
-    } else if (currentValue) {
-      // Spread/clone the current node object (shallow).
-      this.originalValue = { ...currentValue };
-    }
-  },
 
   computed: {
     currentValue: {
@@ -188,9 +175,7 @@ export default {
         // Return valid node object.
         return selected;
       },
-      set() {
-        this.previousValue = this.currentValue;
-      },
+      set() {},
     },
 
     multiple() {
@@ -219,12 +204,7 @@ export default {
     },
 
     emitChange(value) {
-      // @todo emit `add` and `remove` events when multiple.
-      this.$emit('change', {
-        value: value || null,
-        originalValue: this.originalValue,
-        previousValue: this.previousValue,
-      });
+      this.$emit('change', value || null);
     },
 
     async preloadChoices() {

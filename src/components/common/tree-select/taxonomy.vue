@@ -82,12 +82,8 @@ export default {
   },
 
   methods: {
-    emitChange({ value, previousValue, originalValue }) {
-      this.$emit('change', {
-        value: this.convertValueToModel(value),
-        previousValue: this.convertValueToModel(previousValue),
-        originalValue: this.convertValueToModel(originalValue),
-      });
+    emitChange(value) {
+      this.$emit('change', this.convertValueToModel(value));
     },
 
     convertValueToModel(value) {

@@ -50,10 +50,9 @@ export default {
   },
 
   methods: {
-    setTaxonomy(data) {
-      const { value } = data;
-      this.taxonomy = value;
-      this.$emit('change', data);
+    setTaxonomy(taxonomy) {
+      this.taxonomy = taxonomy;
+      this.$emit('change', taxonomy);
     },
 
     async load() {
