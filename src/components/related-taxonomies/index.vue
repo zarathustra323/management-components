@@ -1,11 +1,11 @@
 <template>
   <div class="bmc-related-taxonomies-component">
     <loading-spinner v-if="isLoading" color="primary" size="small" />
-    <taxonomies-field
+    <taxonomy-tree-select
       v-else-if="!error"
       :type="type"
-      :taxonomies="taxonomies"
       :disabled="isLoading"
+      :selected="taxonomies"
       @change="setTaxonomies"
     />
     <operation-error
@@ -17,28 +17,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import query from '../common/tree-select/taxonomy/query-selected';
 import mapNodes from '../utils/map-nodes';
-import taxonomyFragment from '../../graphql/common/fragments/taxonomy';
-import TaxonomiesField from '../common/fields/taxonomies.vue';
+import TaxonomyTreeSelect from '../common/tree-select/taxonomy.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
-
-const query = gql`
-  query LoadSelectedTaxonomies($input: TaxonomiesQueryInput!) {
-    taxonomies(input: $input) {
-      edges {
-        node {
-          ...CommonTaxonomy
-          hierarchy {
-            id
-          }
-        }
-      }
-    }
-  }
-  ${taxonomyFragment}
-`;
 
 export default {
   props: {
@@ -63,7 +46,7 @@ export default {
     error: null,
   }),
 
-  components: { TaxonomiesField, OperationError, LoadingSpinner },
+  components: { TaxonomyTreeSelect, OperationError, LoadingSpinner },
 
   mounted() {
     this.load();
@@ -103,7 +86,11 @@ export default {
       if (ids && ids.length && !this.isLoading) {
         this.isLoading = true;
         this.error = null;
-        const input = { includeIds: ids, includeTypes: [this.type] };
+        const input = {
+          includeIds: ids,
+          includeTypes: [this.type],
+          sort: { field: 'fullName', order: 'asc' },
+        };
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
           this.taxonomies = mapNodes(data.taxonomies);
