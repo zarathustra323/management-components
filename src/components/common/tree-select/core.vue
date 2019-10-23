@@ -182,7 +182,11 @@ export default {
 
     emitChange(value) {
       // @todo emit `add` and `remove` events when multiple.
-      this.$emit('change', { value: value || null, original: this.originalValue });
+      this.$emit('change', {
+        value: value || null,
+        originalValue: this.originalValue,
+        previousValue: this.previousValue,
+      });
     },
 
     async loadChoices({ action }) {
