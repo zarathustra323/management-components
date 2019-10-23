@@ -6,6 +6,7 @@
     :backspace-removes="backspaceRemoves"
     :clearable="clearable"
     :disabled="disabled"
+    :flat="isFlat"
     :load-options="loadChoices"
     :multiple="multiple"
     :options="choices"
@@ -132,6 +133,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    flat: {
+      type: Boolean,
+      default: true,
+    },
     placeholder: {
       type: String,
       default: null,
@@ -187,6 +192,11 @@ export default {
 
     multiple() {
       return isArray(this.currentValue);
+    },
+
+    isFlat() {
+      if (this.multiple) return this.flat;
+      return false;
     },
 
     defaultPlaceholder() {
