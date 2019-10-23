@@ -1,9 +1,8 @@
 <template>
   <tree-select
+    v-bind="$attrs"
     :choice-loader="loadChoices"
-    :disabled="disabled"
     :name="name"
-    :searchable="searchable"
     :plural-name="pluralName"
     :selected="node"
     @change="emitChange"
@@ -56,16 +55,6 @@ export default {
     pluralName: {
       type: String,
       default: 'taxonomies',
-    },
-
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-
-    searchable: {
-      type: Boolean,
-      default: true,
     },
 
     /**
