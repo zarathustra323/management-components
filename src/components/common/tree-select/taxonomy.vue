@@ -3,8 +3,8 @@
     :choice-loader="loadChoices"
     :disabled="disabled"
     :name="name"
-    :plural-name="namePlural"
     :searchable="searchable"
+    :plural-name="pluralName"
     :selected="node"
     @change="emitChange"
   />
@@ -53,7 +53,7 @@ export default {
     /**
      * The plural name of the field. Used when generating placeholders.
      */
-    namePlural: {
+    pluralName: {
       type: String,
       default: 'taxonomies',
     },

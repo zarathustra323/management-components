@@ -114,7 +114,7 @@ export default {
      * The plural name of the field. Used when generating placeholders.
      * Only used when the placeholder prop is empty.
      */
-    namePlural: {
+    pluralName: {
       type: String,
       default: 'values',
     },
@@ -187,7 +187,7 @@ export default {
     defaultPlaceholder() {
       const { placeholder } = this;
       if (placeholder) return placeholder;
-      const name = this.multiple ? this.namePlural : this.name;
+      const name = this.multiple ? this.pluralName : this.name;
       let value = `Select ${name}`;
       if (this.searchable) value = `${value}; type to filter`;
       return `${value}...`;
