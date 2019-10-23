@@ -3,7 +3,7 @@
     <loading-spinner v-if="isLoading" color="primary" size="small" />
     <taxonomy-tree-select
       v-else-if="!error"
-      type="Category"
+      :type="type"
       :disabled="isLoading"
       :selected="taxonomy"
       @change="setTaxonomy"
@@ -17,23 +17,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-import taxonomyFragment from '../../graphql/common/fragments/taxonomy';
+import query from '../common/tree-select/taxonomy/query-selected';
+import mapNodes from '../utils/map-nodes';
 import TaxonomyTreeSelect from '../common/tree-select/taxonomy.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
-
-const query = gql`
-  query LoadPrimaryCategory($input: TaxonomyQueryInput!) {
-    taxonomy(input: $input) {
-      ...CommonTaxonomy
-      hierarchy {
-        id
-      }
-    }
-  }
-  ${taxonomyFragment}
-`;
 
 export default {
   props: {
@@ -49,6 +37,7 @@ export default {
 
   data: () => ({
     taxonomy: null,
+    type: 'Category',
     isLoading: false,
     error: null,
   }),
@@ -70,10 +59,13 @@ export default {
       if (categoryId && !this.isLoading) {
         this.isLoading = true;
         this.error = null;
-        const input = { id: categoryId };
+        const input = {
+          includeTypes: [this.type],
+          includeIds: [categoryId],
+        };
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
-          this.taxonomy = data.taxonomy;
+          this.taxonomy = mapNodes(data.taxonomies).shift() || null;
         } catch (e) {
           this.error = e;
         } finally {
