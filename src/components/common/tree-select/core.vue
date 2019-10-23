@@ -14,6 +14,7 @@
     :required="required"
     :searchable="searchable"
     :show-count="showCount"
+    @mouseenter.native="preloadChoices"
     @close="$emit('close')"
     @input="emitChange"
     @open="$emit('open')"
@@ -159,6 +160,7 @@ export default {
     originalValue: null,
     previousValue: null,
     choices: null,
+    choicesLoaded: false,
   }),
 
   components: { TreeSelect },
@@ -224,15 +226,23 @@ export default {
       });
     },
 
+    async preloadChoices() {
+      // @todo This should also fire on touch events.
+      if (!this.choicesLoaded) await this.load();
+    },
+
     async loadChoices({ action }) {
-      if (action === LOAD_ROOT_OPTIONS) {
-        try {
-          this.choices = await this.choiceLoader();
-        } catch (e) {
-          this.$emit('loadError', e);
-          console.error(e);
-          throw e;
-        }
+      if (action === LOAD_ROOT_OPTIONS) await this.load();
+    },
+
+    async load() {
+      try {
+        this.choices = await this.choiceLoader();
+        this.choicesLoaded = true;
+      } catch (e) {
+        this.$emit('loadError', e);
+        console.error(e);
+        throw e;
       }
     },
   },
