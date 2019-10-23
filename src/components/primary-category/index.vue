@@ -49,9 +49,10 @@ export default {
   },
 
   methods: {
-    setTaxonomy(taxonomy) {
-      this.taxonomy = taxonomy;
-      this.$emit('change', taxonomy);
+    setTaxonomy(data) {
+      const { value } = data;
+      this.taxonomy = value;
+      this.$emit('change', data);
     },
 
     async load() {

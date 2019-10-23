@@ -69,16 +69,20 @@ export default {
   },
 
   methods: {
-    emitChange({ value }) {
-      if (isArray(value)) {
-        this.$emit('change', value.map(v => v.model));
-      } else {
-        this.$emit('change', value ? value.model : null);
-      }
+    emitChange({ value, previousValue, originalValue }) {
+      this.$emit('change', {
+        value: this.convertValueToModel(value),
+        previousValue: this.convertValueToModel(previousValue),
+        originalValue: this.convertValueToModel(originalValue),
+      });
+    },
+
+    convertValueToModel(value) {
+      if (isArray(value)) return value.map(v => v.model);
+      return value ? value.model : null;
     },
 
     async loadChoices() {
-      // @todo handle expandedIds
       const choices = await loadChoices(this.$apollo, this.type, {
         ...this.nodeOptions,
         expandedIds: this.getExpandedIds(),
