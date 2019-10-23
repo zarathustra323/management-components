@@ -161,6 +161,7 @@ export default {
     previousValue: null,
     choices: null,
     choicesLoaded: false,
+    isPreloading: false,
   }),
 
   components: { TreeSelect },
@@ -228,7 +229,14 @@ export default {
 
     async preloadChoices() {
       // @todo This should also fire on touch events.
-      if (!this.choicesLoaded) await this.load();
+      if (!this.choicesLoaded) {
+        this.isPreloading = true;
+        try {
+          await this.load();
+        } finally {
+          this.isPreloading = false;
+        }
+      }
     },
 
     async loadChoices({ action }) {
