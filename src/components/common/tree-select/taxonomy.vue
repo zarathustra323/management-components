@@ -78,22 +78,25 @@ export default {
     },
 
     async loadChoices() {
-      const expandedIds = [];
       // @todo handle expandedIds
       const choices = await loadChoices(this.$apollo, this.type, {
         ...this.nodeOptions,
-        expandedIds: [...new Set(expandedIds)],
+        expandedIds: this.getExpandedIds(),
       });
       return choices;
+    },
 
-      // const { taxonomy } = this;
-      // if (taxonomy && taxonomy.hierarchy) {
-      //   expandedIds.push(...taxonomy.hierarchy.map(t => t.id));
-      // }
-      // this.choices = await loadChoices(this.$apollo, this.type, {
-      //   ...this.nodeOptions,
-      //   expandedIds,
-      // });
+    getExpandedIds() {
+      const expandedIds = [];
+      const { selected } = this;
+      if (isArray(selected)) {
+        selected.forEach((taxonomy) => {
+          if (taxonomy.hierarchy) expandedIds.push(...taxonomy.hierarchy.map(t => t.id));
+        });
+      } else if (selected && selected.hierarchy) {
+        expandedIds.push(...selected.hierarchy.map(t => t.id));
+      }
+      return [...new Set(expandedIds)];
     },
   },
 };
