@@ -3,6 +3,7 @@
     v-model="currentValue"
     value-format="object"
     :auto-load-root-options="autoLoadChoices"
+    :backspace-removes="backspaceRemoves"
     :clearable="clearable"
     :disabled="disabled"
     :load-options="loadChoices"
@@ -119,6 +120,10 @@ export default {
       default: 'values',
     },
 
+    backspaceRemoves: {
+      type: Boolean,
+      default: false,
+    },
     clearable: {
       type: Boolean,
       default: false,
