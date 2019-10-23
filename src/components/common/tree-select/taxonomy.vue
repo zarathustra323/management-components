@@ -2,6 +2,9 @@
   <tree-select
     :choice-loader="loadChoices"
     :disabled="disabled"
+    :name="name"
+    :plural-name="namePlural"
+    :searchable="searchable"
     :selected="node"
     @change="emitChange"
   />
@@ -39,9 +42,30 @@ export default {
       },
     },
 
+    /**
+     * The name of the field. Used when generating placeholders.
+     */
+    name: {
+      type: String,
+      default: 'taxonomy',
+    },
+
+    /**
+     * The plural name of the field. Used when generating placeholders.
+     */
+    namePlural: {
+      type: String,
+      default: 'taxonomies',
+    },
+
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    searchable: {
+      type: Boolean,
+      default: true,
     },
 
     /**

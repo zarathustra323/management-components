@@ -3,6 +3,7 @@
     <loading-spinner v-if="isLoading" color="primary" size="small" />
     <taxonomy-tree-select
       v-else-if="!error"
+      name="category"
       :type="type"
       :disabled="isLoading"
       :selected="taxonomy"

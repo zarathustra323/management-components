@@ -100,6 +100,25 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * The name of the field. Used when generating placeholders.
+     * Only used when the placeholder prop is empty.
+     */
+    name: {
+      type: String,
+      default: 'value',
+    },
+
+    /**
+     * The plural name of the field. Used when generating placeholders.
+     * Only used when the placeholder prop is empty.
+     */
+    namePlural: {
+      type: String,
+      default: 'values',
+    },
+
     placeholder: {
       type: String,
       default: null,
@@ -168,7 +187,8 @@ export default {
     defaultPlaceholder() {
       const { placeholder } = this;
       if (placeholder) return placeholder;
-      let value = `Select value${this.multiple ? '(s)' : ''}`;
+      const name = this.multiple ? this.namePlural : this.name;
+      let value = `Select ${name}`;
       if (this.searchable) value = `${value}; type to filter`;
       return `${value}...`;
     },
