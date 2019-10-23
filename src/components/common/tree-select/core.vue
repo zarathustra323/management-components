@@ -237,6 +237,10 @@ export default {
   &:not(&--searchable) {
     cursor: pointer;
   }
+
+  &__multi-value-label {
+    white-space: normal;
+  }
 }
 
 .bmc-tree-view-id {
