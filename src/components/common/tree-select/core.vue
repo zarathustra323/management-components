@@ -119,27 +119,27 @@ export default {
       default: 'values',
     },
 
-    placeholder: {
-      type: String,
-      default: null,
+    clearable: {
+      type: Boolean,
+      default: false,
     },
     disabled: {
       type: Boolean,
       default: false,
     },
-    clearable: {
-      type: Boolean,
-      default: false,
-    },
-    showCount: {
-      type: Boolean,
-      default: true,
+    placeholder: {
+      type: String,
+      default: null,
     },
     required: {
       type: Boolean,
       default: true,
     },
     searchable: {
+      type: Boolean,
+      default: true,
+    },
+    showCount: {
       type: Boolean,
       default: true,
     },
