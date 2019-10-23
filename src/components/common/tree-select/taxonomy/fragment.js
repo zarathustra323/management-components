@@ -6,9 +6,6 @@ fragment TreeSelectTaxonomyNode on Taxonomy {
   id
   name
   fullName
-  hierarchy {
-    id
-  }
 }
 
 `;

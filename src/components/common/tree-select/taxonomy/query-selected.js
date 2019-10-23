@@ -3,13 +3,16 @@ import taxonomyFragment from './fragment';
 
 export default gql`
 
-query TreeSelectTaxonomyChoices(
+query TreeSelectSelectedTaxonomies(
   $input: TaxonomiesQueryInput!,
 ) {
   taxonomies(input: $input) {
     edges {
       node {
         ...TreeSelectTaxonomyNode
+        hierarchy {
+          id
+        }
       }
     }
   }
