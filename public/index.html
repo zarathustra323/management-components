@@ -94,14 +94,22 @@
         name: 'related-taxonomies',
         el: '#component-related-taxonomies-empty',
         props: { type: 'Category' },
-        on: { change: (taxonomy) => console.log('related-taxonomies change', taxonomy) }
+        on: {
+          change: (value) => console.log('related-taxonomies change', value),
+          add: (value) => console.log('related-taxonomies add', value),
+          remove: (value) => console.log('related-taxonomies remove', value),
+        }
       });
 
       bmc('loadComponent', {
         name: 'related-taxonomies',
         el: '#component-related-taxonomies-preselected',
         props: { type: 'Category', ids: [3115, 3132] },
-        on: { change: (taxonomy) => console.log('related-taxonomies change', taxonomy) }
+        on: {
+          change: (value) => console.log('related-taxonomies change', value),
+          add: (value) => console.log('related-taxonomies add', value),
+          remove: (value) => console.log('related-taxonomies remove', value),
+        }
       });
 
       bmc('loadComponent', {
