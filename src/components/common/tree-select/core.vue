@@ -23,7 +23,9 @@
   >
     <div slot="value-label" slot-scope="{ node }">
       {{ node.raw.title }}
-      <span class="bmc-tree-view-id bmc-tree-view-id--value">[{{ node.id }}]</span>
+      <span class="bmc-tree-view-id bmc-tree-view-id--value" :title="`ID: ${node.id}`">
+        [{{ formatId(node.id) }}]
+      </span>
     </div>
     <label
       slot="option-label"
@@ -32,7 +34,9 @@
       @click="$emit('choiceclick', node)"
     >
       {{ node.raw.name }}
-      <span class="bmc-tree-view-id bmc-tree-view-id--option">[{{ node.id }}]</span>
+      <span class="bmc-tree-view-id bmc-tree-view-id--option" :title="`ID: ${node.id}`">
+        [{{ formatId(node.id) }}]
+      </span>
       <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
     </label>
   </tree-select>
@@ -210,6 +214,12 @@ export default {
 
     emitChange(value) {
       this.$emit('change', value || null);
+    },
+
+    formatId(id) {
+      if (typeof id !== 'string' && !/[a-f0-9]{24}/.test(id)) return id;
+      const matches = /(^[a-f0-9]{4})[a-f0-9]+?([a-f0-9]{4}$)/.exec(id);
+      return `${matches[1]}...${matches[2]}`;
     },
 
     async preloadChoices() {
