@@ -1,10 +1,10 @@
 <template>
   <div class="bmc-primary-section-component">
     <loading-spinner v-if="isLoading" color="primary" size="small" />
-    <website-section-field
+    <website-section-tree-select
       v-else-if="!error"
-      :section="section"
       :disabled="isLoading"
+      :selected="section"
       @change="setSection"
     />
     <operation-error
@@ -16,24 +16,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-import sectionFragment from '../../graphql/common/fragments/website-section';
-import WebsiteSectionField from '../common/fields/website/section.vue';
+import query from '../common/tree-select/website-section/query-selected';
+import mapNodes from '../utils/map-nodes';
+import WebsiteSectionTreeSelect from '../common/tree-select/website-section.vue';
 import LoadingSpinner from '../loading-spinner.vue';
 import OperationError from '../operation-error.vue';
-
-const query = gql`
-  query LoadPrimarySection($input: WebsiteSectionQueryInput!) {
-    websiteSection(input: $input) {
-      ...CommonWebsiteSection
-      hierarchy {
-        id
-      }
-    }
-  }
-
-  ${sectionFragment}
-`;
 
 export default {
   props: {
@@ -53,7 +40,7 @@ export default {
     error: null,
   }),
 
-  components: { WebsiteSectionField, OperationError, LoadingSpinner },
+  components: { WebsiteSectionTreeSelect, OperationError, LoadingSpinner },
 
   mounted() {
     this.load();
@@ -70,10 +57,10 @@ export default {
       if (sectionId && !this.isLoading) {
         this.isLoading = true;
         this.error = null;
-        const input = { id: sectionId };
+        const input = { includeIds: [sectionId] };
         try {
           const { data } = await this.$apollo.query({ query, variables: { input } });
-          this.section = data.websiteSection;
+          this.section = mapNodes(data.websiteSections).shift() || null;
         } catch (e) {
           this.error = e;
         } finally {
