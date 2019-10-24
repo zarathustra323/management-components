@@ -29,7 +29,7 @@
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
-      @click="$emit('choiceClick', node)"
+      @click="$emit('choiceclick', node)"
     >
       {{ node.raw.name }}
       <span class="bmc-tree-view-id bmc-tree-view-id--option">[{{ node.id }}]</span>
