@@ -2,10 +2,12 @@
   <tree-select
     v-bind="$attrs"
     :choice-loader="loadChoices"
+    :flat="true"
     :name="name"
     :plural-name="pluralName"
     :selected="node"
     @change="emitChange"
+    @choiceclick="toggleExpanded"
   />
 </template>
 
@@ -81,6 +83,12 @@ export default {
     convertValueToModel(value) {
       if (isArray(value)) return value.map(v => v.model);
       return value ? value.model : null;
+    },
+
+    toggleExpanded(node) {
+      const { isSite } = (node || {}).raw;
+      // eslint-disable-next-line no-param-reassign
+      if (isSite) node.isExpanded = !node.isExpanded;
     },
 
     async loadChoices() {
