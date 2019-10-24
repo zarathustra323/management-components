@@ -137,7 +137,7 @@ export default {
     },
     flat: {
       type: Boolean,
-      default: true,
+      default: null,
     },
     placeholder: {
       type: String,
@@ -184,8 +184,8 @@ export default {
     },
 
     isFlat() {
-      if (this.multiple) return this.flat;
-      return false;
+      if (this.flat == null) return false;
+      return this.flat;
     },
 
     defaultExpandLevel() {
