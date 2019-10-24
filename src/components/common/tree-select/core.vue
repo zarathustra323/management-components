@@ -5,6 +5,7 @@
     :auto-load-root-options="autoLoadChoices"
     :backspace-removes="backspaceRemoves"
     :clearable="clearable"
+    :default-expand-level="defaultExpandLevel"
     :disabled="disabled"
     :flat="isFlat"
     :load-options="loadChoices"
@@ -185,6 +186,10 @@ export default {
     isFlat() {
       if (this.multiple) return this.flat;
       return false;
+    },
+
+    defaultExpandLevel() {
+      return this.choices && this.choices.length === 1 ? 1 : 0;
     },
 
     defaultPlaceholder() {
