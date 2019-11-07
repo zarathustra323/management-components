@@ -13,14 +13,14 @@
       />
     </div>
     <div class="bmc-schedule-tab__body">
-      <select-sections
+      <website-section-tree-select
         :disabled="isSaving"
-        :section-ids="sectionIds"
-        @change="setSelected"
+        :selected="sections"
+        @change="setSections"
         @close="setButtonFocus"
       />
       <!-- Hidden tab stop for proper button focus -->
-      <span v-if="sectionIds.length" tabindex="0" />
+      <span v-if="sections.length" tabindex="0" />
       <operation-error
         :error="error"
         wrapper-class="bmc-operation-error--margin-top"
@@ -33,7 +33,7 @@
 
 <script>
 import mutation from '../../../graphql/scheduling/mutations/create-website-schedules';
-import SelectSections from './select-sections.vue';
+import WebsiteSectionTreeSelect from '../../common/tree-select/website-section.vue';
 import AddButton from '../buttons/add.vue';
 import OperationError from '../../operation-error.vue';
 
@@ -50,18 +50,18 @@ export default {
 
   data: () => ({
     isSaving: false,
-    sectionIds: [],
+    sections: [],
     error: null,
   }),
 
   /**
    *
    */
-  components: { SelectSections, OperationError, AddButton },
+  components: { WebsiteSectionTreeSelect, OperationError, AddButton },
 
   computed: {
     canSave() {
-      return this.sectionIds.length;
+      return this.sections.length;
     },
     saveDisabled() {
       if (!this.canSave) return true;
@@ -70,8 +70,8 @@ export default {
   },
 
   methods: {
-    setSelected(ids) {
-      this.sectionIds = ids;
+    setSections(sections) {
+      this.sections = sections;
     },
 
     setButtonFocus() {
@@ -80,16 +80,17 @@ export default {
 
     cancel() {
       this.error = null;
-      this.sectionIds = [];
+      this.sections = [];
     },
 
     async save() {
       this.error = null;
       this.isSaving = true;
-      const input = { contentId: this.contentId, sectionIds: this.sectionIds };
+      const sectionIds = this.sections.map(section => section.id);
+      const input = { contentId: this.contentId, sectionIds };
       try {
         await this.$apollo.mutate({ mutation, variables: { input }, refetchQueries: ['ListWebsiteSchedules'] });
-        this.sectionIds = [];
+        this.sections = [];
       } catch (e) {
         this.error = e;
       } finally {
