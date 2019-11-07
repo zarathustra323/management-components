@@ -7,7 +7,7 @@
     :plural-name="pluralName"
     :selected="node"
     @change="emitChange"
-    @choiceclick="toggleExpanded"
+    @choice-click="toggleExpanded"
   />
 </template>
 

@@ -31,7 +31,7 @@
       slot="option-label"
       slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
       :class="labelClassName"
-      @click="$emit('choiceclick', node)"
+      @click="$emit('choice-click', node)"
     >
       {{ node.raw.name }}
       <span class="bmc-tree-view-id bmc-tree-view-id--option" :title="`ID: ${node.id}`">
@@ -243,7 +243,7 @@ export default {
         this.choices = await this.choiceLoader();
         this.choicesLoaded = true;
       } catch (e) {
-        this.$emit('loadError', e);
+        this.$emit('load-error', e);
         console.error(e);
         throw e;
       }
