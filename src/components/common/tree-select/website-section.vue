@@ -6,6 +6,7 @@
     :name="name"
     :plural-name="pluralName"
     :selected="node"
+    @close="$emit('close')"
     @change="emitChange"
     @choice-click="toggleExpanded"
   />
